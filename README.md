@@ -1,8 +1,10 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Customizable beatsheet 
 
-In the project directory, you can run:
+Drag and drop virtual index cards for organizing your plot outlines. 
+
+
 
 ### `npm start`
 
