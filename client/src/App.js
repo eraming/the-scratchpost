@@ -20,19 +20,19 @@ class App extends Component {
         <nav className="App-navigation">
           <h1 className="App-title">the scratchPost</h1>
 
-          <Link to="/">
+          <Link to="/profile/">
           <Button onClick={() => console.log('Hello world!')}>
                 home
              </Button>
           </Link>
 
-          <Link to="/profile/">
+          <Link to="/">
           <Button onClick={() => console.log('Hello world!')}>
                 account
              </Button>
           </Link>
 
-          <Link to="/write/">
+          <Link to="/add/">
           <Button onClick={() => console.log('Hello world!')}>
                 new outline
              </Button>
@@ -46,7 +46,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={LandingPage} />
             <Route exact path='/profile/' component={Profile} />
-            <Route exact path='/write/' component={AddCard} />
+            <Route exact path='/add/' component={AddCard} />
           </Switch>
         </div>
 
