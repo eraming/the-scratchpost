@@ -6,13 +6,12 @@ import './App.css';
 
 import LandingPage from './components/pages/LandingPage/LandingPage.js';
 import Profile from './components/pages/Profile/Profile.js';
-import WriteArticle from './components/pages/WriteArticle/WriteArticle.js';
+import AddCard from './components/pages/AddCard/AddCard.js';
 
 class App extends Component {
           state = {
             cards: [],
           }
-
 
   render() {
     return (

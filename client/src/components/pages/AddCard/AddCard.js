@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './WriteArticle.css';
+import './AddCard.css';
 
-class WriteArticle extends Component {
+class AddCard extends Component {
   state = {
     title: '',
     text: '',
@@ -42,11 +42,11 @@ class WriteArticle extends Component {
 
   render() {
     return (
-      <div className="WriteArticle">
+      <div className="AddCard">
         <h1>Write an article</h1>
         <input
             name="title"
-            placeholder="Title"
+            placeholder="slugline"
             value={this.state.title}
             onChange={this.onChangeTitle}
           />
@@ -54,18 +54,18 @@ class WriteArticle extends Component {
 
         <textarea
             name="content"
-            placeholder="Contents"
+            placeholder="content"
             value={this.state.details}
             onChange={this.onChangeContent}
           />
 
         <br />
 
-        <button onClick={this.submit}>Add to blog</button>
+        <button onClick={this.submit}>Add to project</button>
       </div>
 
     );
   }
 }
 
-export default WriteArticle;
+export default AddCard;

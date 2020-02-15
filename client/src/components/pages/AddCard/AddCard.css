@@ -1,6 +1,6 @@
-.WriteArticle input,
-.WriteArticle textarea,
-.WriteArticle button {
+.AddCard input,
+.AddCard textarea,
+.AddCard button {
   font-size: 24pt;
   background: none;
   color: white;
@@ -10,7 +10,7 @@
   border: 2px solid white;
 }
 
-.WriteArticle button {
+.AddCard button {
   color: black;
   background: #61dafb;
 }
