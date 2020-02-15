@@ -5,7 +5,7 @@ import {Button} from 'kc-react-widgets';
 import './App.css';
 
 import LandingPage from './components/pages/LandingPage/LandingPage.js';
-import Profile from './components/pages/Profile/Profile.js';
+import Project from './components/pages/Project/Project.js';
 import AddCard from './components/pages/AddCard/AddCard.js';
 
 class App extends Component {
@@ -34,7 +34,7 @@ class App extends Component {
 
           <Link to="/add/">
           <Button onClick={() => console.log('Hello world!')}>
-                new outline
+                add beat
              </Button>
           </Link>
         </nav>
@@ -45,7 +45,7 @@ class App extends Component {
 
           <Switch>
             <Route exact path='/' component={LandingPage} />
-            <Route exact path='/profile/' component={Profile} />
+            <Route exact path='/profile/' component={Project} />
             <Route exact path='/add/' component={AddCard} />
           </Switch>
         </div>
