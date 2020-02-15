@@ -46,7 +46,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={LandingPage} />
             <Route exact path='/profile/' component={Profile} />
-            <Route exact path='/write/' component={WriteArticle} />
+            <Route exact path='/write/' component={AddCard} />
           </Switch>
         </div>
 

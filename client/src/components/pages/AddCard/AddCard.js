@@ -43,7 +43,7 @@ class AddCard extends Component {
   render() {
     return (
       <div className="AddCard">
-        <h1>Write an article</h1>
+        <h1>add a beat</h1>
         <input
             name="title"
             placeholder="slugline"
