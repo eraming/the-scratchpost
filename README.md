@@ -1,9 +1,17 @@
 ![Kickstart Coding Logo](./client/public/kickstart_coding_logo.png)
 
+<<<<<<< HEAD
 # MERN Prototyping Starter
 
 This is an example start project for [Kickstart Coding](http://kickstartcoding.com/)
 MERN MVP projects.
+=======
+## Customizable beatsheet 
+
+Drag and drop virtual index cards for organizing your plot outlines. 
+
+
+>>>>>>> 01fe26d6ab93c7ffed06083042a8397677bc6d03
 
 It provides a solid foundation for building a MERN project that's ready to
 launch to Heroku or similar web-hosting service.
