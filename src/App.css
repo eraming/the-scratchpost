@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+    font-family: sans-serif;
+    line-height: 1.5;
+    font: #000000;
+    background-color: #e3c4a8;
+}
+
+.Container {
+  display: grid;
+  grid-template-columns: 1fr minmax(auto, 600px) 1fr;
+  grid-template-rows: auto auto 2em;
+}

@@ -1,68 +1,180 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Kickstart Coding Logo](./client/public/kickstart_coding_logo.png)
 
-## Available Scripts
+# MERN Prototyping Starter
 
-In the project directory, you can run:
+This is an example start project for [Kickstart Coding](http://kickstartcoding.com/)
+MERN MVP projects.
 
-### `npm start`
+It provides a solid foundation for building a MERN project that's ready to
+launch to Heroku or similar web-hosting service.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**DO NOT** use this project as-is in production. It exposes an API to MongoDB
+without any sort of security. The only purpose of the API is to allow rapid
+front-end prototyping without much (or any) backend modifications. See the
+"Securing the backend" section below for more info.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## About
 
-### `npm test`
+### Features
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* `react` and `react-router` are set-up in a normal, `create-react-app` layout
+    * Does NOT use Redux, to keep things simpler
 
-### `npm run build`
+* Example blogging single page app App that does all four CRUD operation in a
+  heavily commented way, for examples to do everything
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+* MongoDB, Express, and Node.js are set-up
+    * Does NOT use Mongoose, to keep things simpler
+    * Purposefully exposes the MongoDB API to the front-end for
+      rapid-prototyping without the need of doing any back-end coding
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* Handy `run.sh` script that brings in a `.env.local` file for configuration
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* Ready-to-go to launch to Heroku
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Who is this for
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+* This is for **new JavaScript/Reeact programmers**, including **coding class
+  students** who want a solid start for a React project and want to create
+  application prototypes without having to touch any backend coding, while
+  keeping the option open to transition to a secure MERN stack.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+* The documentation assumes you already have fundamental JavaScript, React, Bash
+  and Heroku knowledge. If you are new to Heroku, read our [Heroku Getting
+  Started guide](http://github.com/kickstartcoding/heroku-getting-started/).
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+* The documentation *does not* explicitly support Windows. It assumes you use
+  either **macOS** or a **GNU/Linux** distribution such as Ubuntu. That said,
+  it might work.
 
-## Learn More
+> This was original created for Kickstart Coding, the affordable,
+> inclusive, and intensive coding course teaching cutting-edge Python /
+> Django and JavaScript / React web development in Oakland, CA.
+> [Learn more and enroll here.](http://kickstartcoding.com/?utm_source=github&utm_campaign=cheatsheets)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Usage
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Set-up
 
-### Code Splitting
+1. Get the code. You can either download this repo as a tar.gz or zip file,
+then extract, do a git pull and copy over the files into your project, or fork
+this project.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+2. Set-up your MongoDB database.
 
-### Analyzing the Bundle Size
+    - Either set-up a [MongoDB Atlas](https://cloud.mongodb.com) database
+      testing purposes with your team (easiest). A full guide for this is
+      included here, in the included
+      [`mongodb_atlas_guide.md`](./mongodb_atlas_guide.md)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+    - Or install and configure a local DB for testing
 
-### Making a Progressive Web App
+3. Create a ".env.local" file, that contains your credentials. If you followed
+the [`mongodb_atlas_guide.md`](./mongodb_atlas_guide.md) tutorial, you will
+have already done this.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+    - This file WILL NOT go into your git repo (because it is in .gitignore).
+      If you will be using the supplied run.sh, it should be in the following
+      format:
 
-### Advanced Configuration
+        <!-- export MONGODB_URI='mongodb://USERNAME:PASSWORD@something.com:1234/DB_NAME' -->
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+    - Where USERNAME and PASSWORD is replaced with an actual username and
+      password on the MongoDB. In the case of MongoDB Atlas, you will have to
+      create a username and password as a separate step (see the
+      [`mongodb_atlas_guide.md`](./mongodb_atlas_guide.md))
 
-### Deployment
+4. NPM install (this will install for both backend and frontend, and may take a
+while):
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+    npm install
 
-### `npm run build` fails to minify
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### Running
+
+You have two options for running local development, either manually starting
+the server using two terminals, or using the included `run.sh` which does that
+for you in a single terminal.
+
+#### Two terminals
+
+Open up two terminals, one for the backend, the other for the front-end. The
+backend server will run using Node Monitor ("nodemon") which will auto-restart
+when you make changes.
+
+**Backend terminal:**
+
+    source .env.local
+    ./node_modules/.bin/nodemon server.js
+
+**Frontend terminal:**
+
+    cd client
+    npm run start
+
+
+
+#### One terminal: `run.sh`
+
+For local development, use the included "run.sh" Bash script:
+
+    bash run.sh
+
+Look inside the script. Can you understand what it is doing?  It does the same
+thing as the previous instructions, but saved into a script form, so you won't
+have to open multiple terminals or tabs.
+
+
+### Heroku
+
+The `.env.local` file does not get copied over to Heroku.  If you want to use
+your MongoDB Atlas database on Heroku, you will need to configure it with
+Heroku. Use a command like below, except with the same string you did in the
+previous steps (`.env.local`):
+
+    heroku config:set MONGODB_URI='mongodb://someUser:...'
+
+
+To ensure Heroku has the right configuration values set (which should occur
+after you have done `heroku create` to make a new Heroku app), do a command
+like the following:
+
+
+    heroku config
+
+You should see your `MONGODB_URI` specified, something like:
+
+    MONGODB_URI  mongodb://someUser:somePassword@something.com:1234/someDatabaseName 
+
+Launching to Heroku is like any other app:
+
+    git push heroku master
+
+
+# Understanding the code
+
+Once you have it locally running, try the following:
+
+1. Create an article
+
+2. View the articles API using localhost:8080/api/mongodb/blogposts/
+
+
+# Securing the backend
+
+After the prototype is built, the backend can be incrementally secured by
+creating custom routes that do the logic required for your application, and
+delete each generic / insecure route. For example, instead of allowing deletion
+of ANY documents, it could only allow queries in a certain format to only
+delete from a certain collection, relevant to your application. Also, you may
+consider using an authentication framework for Express.js, such as Passport.
+
+Once you replace a given insecure route, and make the front-end use the new
+route, you can delete the old route.
+
+Once you have deleted ALL of the generic / in-secure routes, and only have
+custom and securely written routes, then this prototyping set-up will be as
+secure as any other typical MERN-backend.
+
+
