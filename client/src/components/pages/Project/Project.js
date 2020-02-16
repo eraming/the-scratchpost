@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './Project.css';
 import starEmpty from './star_empty.svg';
+import starFilled from './star_filled.svg';
 
 
 class Project extends Component {
   state = {
     blogPosts: [],
+    isStarred: true,
   }
 
   componentDidMount() {
@@ -39,14 +41,22 @@ class Project extends Component {
       });
   }
 
+  toggleStar = (indexOfpost) => {
+    const postToStar = this.state.blogPosts[indexOfpost]
+    postToStar.isStarred = !postToStar.isStarred
+
+    this.setState({
+      isStarred: '',
+     })
+  }
 
 
   render() {
 
-    {/*let starIcon = starEmpty;
-    if (this.props.isStarred) {
-      starIcon = ⭐;
-    }*/}
+    let starIcon = starEmpty;
+      if (this.props.isStarred) {
+        starIcon = starFilled;
+      }
 
 
     return (
@@ -57,7 +67,7 @@ class Project extends Component {
           this.state.blogPosts.map((post, index) => (
             <div className="Project-card" key={post._id}>
 
-              <h1>{post.title}</h1>
+              <h3>{post.title}</h3>
               <p>{post.text}</p>
 
               <div className="Project-CardActions">
@@ -66,7 +76,7 @@ class Project extends Component {
                 </div>
 
                 <div onClick={() => this.toggleStar(post._id)}>
-                  <span alt="starred">⭐</span>
+                  <img src={starIcon} className="starEmpty" alt="star" />
                 </div>
 
 

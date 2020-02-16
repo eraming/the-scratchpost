@@ -1,7 +1,3 @@
-.Project {
-  grid-template-columns: 1 / 3;
-}
-
 
 .Project-board {
   display: flex;
@@ -33,4 +29,8 @@
 
 .Project-CardActions > div:last-child {
   left: 10px;
+}
+
+.starEmpty {
+  width: 20px;
 }
