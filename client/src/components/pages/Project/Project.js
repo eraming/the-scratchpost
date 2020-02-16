@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Project.css';
+import starEmpty from './star_empty.svg';
 
 
 class Project extends Component {
@@ -23,7 +24,7 @@ class Project extends Component {
       });
   }
 
-  deleteArticle(documentId) {
+  deleteCard(documentId) {
     console.log('Sending DELETE for', documentId);
     // Do the DELETE, using "?_id=" to specify which document we are deleting
     fetch('/api/mongodb/blogposts/?_id=' + documentId, {
@@ -41,9 +42,17 @@ class Project extends Component {
 
 
   render() {
+
+    {/*let starIcon = starEmpty;
+    if (this.props.isStarred) {
+      starIcon = ⭐;
+    }*/}
+
+
     return (
       <div className="Project">
-        <h1>my script project</h1>
+        <h1>east bay scenes project</h1>
+        <div className="Project-board">
         {
           this.state.blogPosts.map((post, index) => (
             <div className="Project-card" key={post._id}>
@@ -51,14 +60,21 @@ class Project extends Component {
               <h1>{post.title}</h1>
               <p>{post.text}</p>
 
-              <div className="Project-articleActions">
-                <div onClick={() => this.deleteArticle(post._id)}>
+              <div className="Project-CardActions">
+                <div onClick={() => this.deleteCard(post._id)}>
                   <span alt="delete this">🗑</span>
                 </div>
+
+                <div onClick={() => this.toggleStar(post._id)}>
+                  <span alt="starred">⭐</span>
+                </div>
+
+
               </div>
             </div>
           ))
         }
+        </div>
       </div>
     );
   }
