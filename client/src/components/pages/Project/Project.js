@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import './Project.css';
+import { RIEToggle, RIEInput, RIETextArea, RIENumber, RIETags, RIESelect } from 'riek'
+import Highlight from 'react-highlight';
+import _ from 'lodash'
 import starEmpty from './star_empty.svg';
 import starFilled from './star_filled.svg';
 
@@ -8,6 +11,8 @@ class Project extends Component {
   state = {
     blogPosts: [],
     isStarred: true,
+    highlight: false,
+    textarea: '',
   }
 
   componentDidMount() {
@@ -50,6 +55,23 @@ class Project extends Component {
      })
   }
 
+  virtualServerCallback = (newState) => {
+   if (this.state.simulateXHR) {
+   window.setTimeout(function() {
+     this.changeState(newState);
+   }.bind(this), this.state.XHRDelay);
+   } else {
+   this.changeState(newState);
+   }
+ };
+
+isStringAcceptable = (string) => {
+return (string.length >= 1);  // Minimum 4 letters long
+};
+
+changeState = (newState) => {
+this.setState(newState);
+};
 
   render() {
 
@@ -58,8 +80,8 @@ class Project extends Component {
         starIcon = starFilled;
       }
 
-
     return (
+
       <div className="Project">
         <h1>east bay scenes project</h1>
         <div className="Project-board">
@@ -68,7 +90,19 @@ class Project extends Component {
             <div className="Project-card" key={post._id}>
 
               <h3>{post.title}</h3>
-              <p>{post.text}</p>
+              <p>{post.text}
+              
+              <RIETextArea
+         value={this.state.textarea}
+         change={this.virtualServerCallback}
+         propName="textarea"
+         className={this.state.highlight ? "editable" : ""}
+         validate={this.isStringAcceptable}
+         classLoading="loading"
+         classInvalid="invalid"
+         isDisabled={this.state.isDisabled} />
+
+              </p>
 
               <div className="Project-CardActions">
                 <div onClick={() => this.deleteCard(post._id)}>

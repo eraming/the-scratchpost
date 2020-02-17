@@ -11,7 +11,26 @@ import AddCard from './components/pages/AddCard/AddCard.js';
 class App extends Component {
           state = {
             cards: [],
+            newCards: [],
+            availableCards: [], 
           }
+
+onNewCard = (title, index) => {
+  const newCards = this.state.newCards.slice();
+  const availableCards = this.state.availableCards.slice();
+  const newCard = availableCards[index];
+
+  newCards.push(newCard);
+  availableCards.splice(index, 1)
+  console.log('new card', index, title)
+  this.setState({
+    newCards: newCards,
+    availableCards: availableCards,
+  });
+
+};
+
+
 
   render() {
     return (
@@ -21,27 +40,30 @@ class App extends Component {
           <h1 className="App-title">the scratchPost</h1>
 
           <Link to="/profile/">
-          <Button onClick={() => console.log('Hello world!')}>
+          <Button>
                 home
              </Button>
           </Link>
 
           <Link to="/">
-          <Button onClick={() => console.log('Hello world!')}>
+          <Button>
                 account
              </Button>
           </Link>
 
           <Link to="/add/">
-          <Button onClick={() => console.log('Hello world!')}>
+          <Button>
                 add beat
              </Button>
           </Link>
+
+          <Button onClick={this.onNewCard}>
+              new card
+           </Button>
+
         </nav>
 
         <div className="App-mainContent">
-
-
 
           <Switch>
             <Route exact path='/' component={LandingPage} />
