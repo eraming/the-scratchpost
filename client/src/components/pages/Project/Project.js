@@ -9,7 +9,7 @@ import starFilled from './star_filled.svg';
 
 class Project extends Component {
   state = {
-    blogPosts: [],
+    cards: [],
     isStarred: true,
     highlight: false,
     textarea: '',
@@ -21,12 +21,12 @@ class Project extends Component {
 
   fetchPosts() {
     console.log('Fetching data from API');
-    fetch('/api/mongodb/blogposts/')
+    fetch('/api/mongodb/projects/')
       .then(response => response.json())
       .then(data => {
         console.log('Got data back', data);
         this.setState({
-          blogPosts: data,
+          cards: data,
         });
       });
   }
@@ -34,7 +34,7 @@ class Project extends Component {
   deleteCard(documentId) {
     console.log('Sending DELETE for', documentId);
     // Do the DELETE, using "?_id=" to specify which document we are deleting
-    fetch('/api/mongodb/blogposts/?_id=' + documentId, {
+    fetch('/api/mongodb/projects/?_id=' + documentId, {
         method: 'DELETE',
       })
       .then(response => response.json())
@@ -47,7 +47,7 @@ class Project extends Component {
   }
 
   toggleStar = (indexOfpost) => {
-    const postToStar = this.state.blogPosts[indexOfpost]
+    const postToStar = this.state.cards[indexOfpost]
     postToStar.isStarred = !postToStar.isStarred
 
     this.setState({
@@ -86,7 +86,7 @@ this.setState(newState);
         <h1>east bay scenes project</h1>
         <div className="Project-board">
         {
-          this.state.blogPosts.map((post, index) => (
+          this.state.cards.map((post, index) => (
             <div className="Project-card" key={post._id}>
 
               <h3>{post.title}</h3>
