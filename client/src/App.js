@@ -10,9 +10,11 @@ import AddCard from './components/pages/AddCard/AddCard.js';
 
 class App extends Component {
           state = {
-            cards: [],
             newCards: [],
             availableCards: [], 
+            isStarred: true,
+            highlight: false,
+            textarea: '',
           }
 
 onNewCard = (title, index) => {

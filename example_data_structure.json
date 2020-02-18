@@ -1,0 +1,62 @@
+project = {
+	"_id": "<integer>",
+	"title": "<string>",
+	"acts": [
+		{
+			"act": 1,
+			"cards": [
+			  {
+			    "card_id": "<integer>",
+			    "slug": "<string>",
+			    "content": "<string>",
+			    "isStarred": "<boolean>"
+			  },
+			  {
+			    "card_id": "<integer>",
+			    "slug": "<string>",
+			    "content": "<string>",
+			    "isStarred": "<boolean>"
+			  }
+	  	]
+		},
+	  {
+		  "act": 2,
+			"cards": [
+			  {
+			    "card_id": "<integer>",
+			    "slug": "<string>",
+			    "content": "<string>",
+			    "isStarred": "<boolean>"
+			  },
+			  {
+			    "card_id": "<integer>",
+			    "slug": "<string>",
+			    "content": "<string>",
+			    "isStarred": "<boolean>"
+			  }
+	  	]
+		},
+		{
+		  "act": 3, 
+			"cards": [
+			  {
+			    "card_id": "<integer>",
+			    "slug": "<string>",
+			    "content": "<string>",
+			    "isStarred": "<boolean>"
+			  },
+			  {
+			    "card_id": "<integer>",
+			    "slug": "<string>",
+			    "content": "<string>",
+			    "isStarred": "<boolean>"
+			  }
+	  	]
+		}
+	]
+}
+
+
+
+// to access a single card:
+// project.acts[actIndex].cards[cardIndex]

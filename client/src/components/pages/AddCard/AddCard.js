@@ -25,7 +25,7 @@ class AddCard extends Component {
       text: this.state.text,
     };
 
-    fetch('/api/mongodb/blogposts/', {
+    fetch('/api/mongodb/projects/', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(formData),
@@ -34,7 +34,7 @@ class AddCard extends Component {
       .then(data => {
         console.log('Got this back', data);
 
-        // Redirect to blog
+        // Redirect to profile
         this.props.history.push('/profile/');
       });
   }
