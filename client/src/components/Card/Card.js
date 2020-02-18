@@ -6,6 +6,13 @@ import starEmpty from './star_empty.svg';
 import starFilled from './star_filled.svg';
 
 class Card extends Component {
+  state = {
+    cards: [],
+    isStarred: true,
+    highlight: true,
+    textarea: `Multiline example
+    text value`,
+  }
 
 
 virtualServerCallback = (newState) => {
@@ -37,13 +44,13 @@ render() {
 
 return (
 
-  <div className="Project-card" key={card._id}>
+  <div className="Project-card" key={this.props.cardId}>
 
-    <h3>{card.title}</h3>
-    <p>{card.text}
+    <h3>{this.props.cardSlug}</h3>
+    <p>{this.props.cardText}
 
     <RIETextArea
-value={card.text}
+value={this.props.cardText}
 change={this.virtualServerCallback}
 propName="textarea"
 className={this.state.highlight ? "editable" : ""}
@@ -55,11 +62,11 @@ isDisabled={this.state.isDisabled} />
     </p>
 
     <div className="Project-CardActions">
-      <div onClick={() => this.deleteCard(card._id)}>
+      <div onClick={this.props.deleteCard}>
         <span alt="delete this">🗑</span>
       </div>
 
-      <div onClick={() => this.toggleStar(card._id)}>
+      <div onClick={this.props.toggleStar}>
         <img src={starIcon} className="starEmpty" alt="star" />
       </div>
 

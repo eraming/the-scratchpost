@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import './Project.css';
-import { RIEToggle, RIEInput, RIETextArea, RIENumber, RIETags, RIESelect } from 'riek'
-import Highlight from 'react-highlight';
-import _ from 'lodash'
 import Card from '../../Card/Card.js'
 
 
@@ -76,10 +73,7 @@ this.setState(newState);
 
   render() {
 
-    let starIcon = starEmpty;
-      if (this.props.isStarred) {
-        starIcon = starFilled;
-      }
+
 
     return (
 
@@ -88,36 +82,14 @@ this.setState(newState);
         <div className="Project-board">
         {
           this.state.cards.map((card, index) => (
+            <Card
+            cardId={card._id}
+            cardSlug={card.title}
+            cardText={card.text}
+            deleteCard={() => this.deleteCard(card._id)}
+            toggleStar={() => this.toggleStar(card._id)}
+            />
 
-            <div className="Project-card" key={card._id}>
-
-              <h3>{card.title}</h3>
-              <p>{card.text}
-
-              <RIETextArea
-         value={card.text}
-         change={this.virtualServerCallback}
-         propName="textarea"
-         className={this.state.highlight ? "editable" : ""}
-         validate={this.isStringAcceptable}
-         classLoading="loading"
-         classInvalid="invalid"
-         isDisabled={this.state.isDisabled} />
-
-              </p>
-
-              <div className="Project-CardActions">
-                <div onClick={() => this.deleteCard(card._id)}>
-                  <span alt="delete this">🗑</span>
-                </div>
-
-                <div onClick={() => this.toggleStar(card._id)}>
-                  <img src={starIcon} className="starEmpty" alt="star" />
-                </div>
-
-
-              </div>
-            </div>
           ))
         }
 
