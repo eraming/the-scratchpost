@@ -48,8 +48,7 @@ return (
 
     <h3>{this.props.cardSlug}</h3>
     <p>{this.props.cardText}
-
-    <RIETextArea
+    {/*<RIETextArea
 value={this.props.cardText}
 change={this.virtualServerCallback}
 propName="textarea"
@@ -57,9 +56,24 @@ className={this.state.highlight ? "editable" : ""}
 validate={this.isStringAcceptable}
 classLoading="loading"
 classInvalid="invalid"
-isDisabled={this.state.isDisabled} />
-
+isDisabled={this.state.isDisabled} />*/}
     </p>
+
+    <input
+      className="Slug"
+      value={this.props.cardSlug}
+      onChangeSlug={this.props.onChangeSlug}
+      placeholder="INT/EXT LOCATION" />
+
+
+      <div className="NewMessage">
+        <input
+          className="content"
+          value={this.props.content}
+          onChange={this.props.onChangeContent}
+          placeholder="scene descrip"
+        />
+      </div>
 
     <div className="Project-CardActions">
       <div onClick={this.props.deleteCard}>

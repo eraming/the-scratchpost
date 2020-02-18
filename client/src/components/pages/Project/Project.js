@@ -11,6 +11,8 @@ class Project extends Component {
     highlight: true,
     textarea: `Multiline example
     text value`,
+    slug: '',
+    content: '',
   }
 
   componentDidMount() {
@@ -18,11 +20,11 @@ class Project extends Component {
   }
 
   fetchCards() {
-    console.log('Fetching data from API');
+    console.log('(log) Fetching data from API');
     fetch('/api/mongodb/projects/')
       .then(response => response.json())
       .then(data => {
-        console.log('Got data back', data);
+        console.log('(log) Got data back', data);
         this.setState({
           cards: data,
         });
@@ -54,25 +56,42 @@ class Project extends Component {
   }
 
   virtualServerCallback = (newState) => {
-   if (this.state.simulateXHR) {
-   window.setTimeout(function() {
+     if (this.state.simulateXHR) {
+     window.setTimeout(function() {
+       this.changeState(newState);
+     }.bind(this), this.state.XHRDelay);
+     } else {
      this.changeState(newState);
-   }.bind(this), this.state.XHRDelay);
-   } else {
-   this.changeState(newState);
-   }
- };
+     }
+   };
 
-isStringAcceptable = (string) => {
-return (string.length >= 1);  // Minimum 4 letters long
-};
+  isStringAcceptable = (string) => {
+  return (string.length >= 1);  // Minimum 4 letters long
+  };
 
 changeState = (newState) => {
 this.setState(newState);
 };
 
-  render() {
+onChangeSlug = (ev) => {
+  let value = ev.target.value;
+  console.log('getting a new title', value);
+  this.setState({
+    slug: value,
+  });
 
+}
+
+onChangeContent = (ev) => {
+  let value = ev.target.value;
+  console.log('getting a new value!', value);
+  this.setState({
+    content: value,
+  });
+
+}
+
+  render() {
 
 
     return (
@@ -80,6 +99,7 @@ this.setState(newState);
       <div className="Project">
         <h1>east bay scenes project</h1>
         <div className="Project-board">
+
         {
           this.state.cards.map((card, index) => (
             <Card
@@ -88,6 +108,11 @@ this.setState(newState);
             cardText={card.text}
             deleteCard={() => this.deleteCard(card._id)}
             toggleStar={() => this.toggleStar(card._id)}
+
+            onChangeContent={this.onChangeContent}
+            onChangeSlug={this.onChangeSlug}
+            value={this.state.slug}
+            content={this.state.content}
             />
 
           ))
