@@ -16,10 +16,10 @@ class Project extends Component {
   }
 
   componentDidMount() {
-    this.fetchcards();
+    this.fetchCards();
   }
 
-  fetchcards() {
+  fetchCards() {
     console.log('Fetching data from API');
     fetch('/api/mongodb/projects/')
       .then(response => response.json())
@@ -40,12 +40,10 @@ class Project extends Component {
       .then(response => response.json())
       .then(data => {
         console.log('Got this back', data);
-
         // Call method to refresh data
         this.fetchCards();
       });
   }
-
 
 
   toggleStar = (indexOfCard) => {
@@ -93,7 +91,7 @@ this.setState(newState);
 
               <h3>{card.title}</h3>
               <p>{card.text}
-              
+
               <RIETextArea
          value={this.state.textarea}
          change={this.virtualServerCallback}
