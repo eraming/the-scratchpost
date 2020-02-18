@@ -16,10 +16,10 @@ class Project extends Component {
   }
 
   componentDidMount() {
-    this.fetchcards();
+    this.fetchCards();
   }
 
-  fetchcards() {
+  fetchCards() {
     console.log('Fetching data from API');
     fetch('/api/mongodb/projects/')
       .then(response => response.json())
