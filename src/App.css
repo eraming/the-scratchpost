@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  display: grid;
+  grid-template-columns: 100px minmax(auto, 1200px) 100px;
+  grid-template-rows: auto auto 2em;
 }
 
 .App-logo {
@@ -46,6 +49,6 @@ body {
 
 .Container {
   display: grid;
-  grid-template-columns: 1fr minmax(auto, 600px) 1fr;
+  grid-template-columns: 100px minmax(auto, 1200px) 100px;
   grid-template-rows: auto auto 2em;
 }

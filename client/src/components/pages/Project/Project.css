@@ -1,14 +1,21 @@
-.Project {
+
+.Project-board {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
 }
 
 .Project-card {
   background: white;
+  border-radius: 15px 15px 15px 15px;
   padding: 10px;
   margin: 10px;
   position: relative;
+  font-family: "Courier";
+  max-width: 150px;
 }
 
-.Project-articleActions > div {
+.Project-CardActions > div {
   display: inline-block;
   position: absolute;
   top: 10px;
@@ -16,10 +23,14 @@
   user-select: none;
 }
 
-.Project-articleActions > div:first-child {
+.Project-CardActions > div:first-child {
   right: 10px;
 }
 
-.Project-articleActions > div:last-child {
+.Project-CardActions > div:last-child {
   left: 10px;
+}
+
+.starEmpty {
+  width: 20px;
 }

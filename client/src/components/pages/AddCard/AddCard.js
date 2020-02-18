@@ -35,7 +35,7 @@ class AddCard extends Component {
         console.log('Got this back', data);
 
         // Redirect to blog
-        this.props.history.push('/blog/');
+        this.props.history.push('/profile/');
       });
   }
 
