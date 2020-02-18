@@ -16,10 +16,10 @@ class Project extends Component {
   }
 
   componentDidMount() {
-    this.fetchPosts();
+    this.fetchcards();
   }
 
-  fetchPosts() {
+  fetchcards() {
     console.log('Fetching data from API');
     fetch('/api/mongodb/projects/')
       .then(response => response.json())
@@ -42,13 +42,15 @@ class Project extends Component {
         console.log('Got this back', data);
 
         // Call method to refresh data
-        this.fetchPosts();
+        this.fetchCards();
       });
   }
 
-  toggleStar = (indexOfpost) => {
-    const postToStar = this.state.cards[indexOfpost]
-    postToStar.isStarred = !postToStar.isStarred
+
+
+  toggleStar = (indexOfCard) => {
+    const cardToStar = this.state.cards[indexOfCard]
+    cardToStar.isStarred = !cardToStar.isStarred
 
     this.setState({
       isStarred: '',
@@ -86,11 +88,11 @@ this.setState(newState);
         <h1>east bay scenes project</h1>
         <div className="Project-board">
         {
-          this.state.cards.map((post, index) => (
-            <div className="Project-card" key={post._id}>
+          this.state.cards.map((card, index) => (
+            <div className="Project-card" key={card._id}>
 
-              <h3>{post.title}</h3>
-              <p>{post.text}
+              <h3>{card.title}</h3>
+              <p>{card.text}
               
               <RIETextArea
          value={this.state.textarea}
@@ -105,11 +107,11 @@ this.setState(newState);
               </p>
 
               <div className="Project-CardActions">
-                <div onClick={() => this.deleteCard(post._id)}>
+                <div onClick={() => this.deleteCard(card._id)}>
                   <span alt="delete this">🗑</span>
                 </div>
 
-                <div onClick={() => this.toggleStar(post._id)}>
+                <div onClick={() => this.toggleStar(card._id)}>
                   <img src={starIcon} className="starEmpty" alt="star" />
                 </div>
 
