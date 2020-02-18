@@ -3,16 +3,17 @@ import './Project.css';
 import { RIEToggle, RIEInput, RIETextArea, RIENumber, RIETags, RIESelect } from 'riek'
 import Highlight from 'react-highlight';
 import _ from 'lodash'
-import starEmpty from './star_empty.svg';
-import starFilled from './star_filled.svg';
+import Card from '../../Card/Card.js'
+
 
 
 class Project extends Component {
   state = {
     cards: [],
     isStarred: true,
-    highlight: false,
-    textarea: '',
+    highlight: true,
+    textarea: `Multiline example
+    text value`,
   }
 
   componentDidMount() {
@@ -87,13 +88,14 @@ this.setState(newState);
         <div className="Project-board">
         {
           this.state.cards.map((card, index) => (
+
             <div className="Project-card" key={card._id}>
 
               <h3>{card.title}</h3>
               <p>{card.text}
 
               <RIETextArea
-         value={this.state.textarea}
+         value={card.text}
          change={this.virtualServerCallback}
          propName="textarea"
          className={this.state.highlight ? "editable" : ""}
@@ -118,6 +120,9 @@ this.setState(newState);
             </div>
           ))
         }
+
+
+
         </div>
       </div>
     );
