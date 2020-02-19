@@ -7,7 +7,7 @@ import {Button} from 'kc-react-widgets';
 class Project extends Component {
   state = {
     cards: [],
-    isStarred: true,
+    isStarred: false,
     highlight: true,
     textarea: `Multiline example
     text value`,
@@ -48,20 +48,24 @@ class Project extends Component {
   }
 
 
-  toggleStar = (documentId) => {
-    console.log('Sending PUT for', documentId);
-    // Do the DELETE, using "?_id=" to specify which document we are deleting
-    fetch('/api/mongodb/projects/?_id=' + documentId, {
+  toggleStar = (card) => {
+    console.log('Sending PUT for', card._id);
+      card.isStarred = !card.isStarred
+
+    fetch('/api/mongodb/projects/?_id=' + card._id, {
         method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+          },
+        body: JSON.stringify({isStarred: !card.isStarred})
+
       })
       .then(response => response.json())
       .then(data => {
         console.log('Got this back', data);
-        const cardToStar = this.state.card._id;
-        cardToStar.isStarred = !cardToStar.isStarred;
 
         this.setState({
-          isStarred: cardToStar.isStarred,
+          cards: this.state.cards
          })
       });
   };
@@ -157,17 +161,44 @@ removeCard = (title, index) => {
             cardSlug={card.title}
             cardText={card.text}
             deleteCard={() => this.deleteCard(card._id)}
-            toggleStar={() => this.toggleStar(card._id)}
+            toggleStar={() => this.toggleStar(card)}
 
             onChangeContent={this.onChangeContent}
             onChangeSlug={this.onChangeSlug}
             value={this.state.slug}
             content={this.state.content}
-            isStarred={this.state.isStarred}
+            isStarred={card.isStarred}
             />
 
           ))
         }
+
+        {this.state.newCards.map((index) => (
+              <Card
+                className="card--show card"
+
+
+                contents={this.state.contents}
+                value={this.state.content}
+                onChangeContent={this.onChangeContent}
+                onChangeTitle={this.onChangeTitle}
+                onClickSend={this.sendContent}
+                >
+
+
+                   {/* <Star>
+                  onClick={() => this.Toggle}
+                  stars={this.state.stars}
+                  onStarToggle={this.toggleStar}
+                  </Star> */}
+
+
+
+
+
+              </Card>
+              ))
+            }
 
 
 

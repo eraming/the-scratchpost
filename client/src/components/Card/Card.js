@@ -7,6 +7,8 @@ import starFilled from './star_filled.svg';
 
 class Card extends Component {
   state = {
+    id: 1,
+    title: 'cover with tests',
     cards: [],
     isStarred: true,
     highlight: true,
@@ -61,14 +63,13 @@ isDisabled={this.state.isDisabled} />*/}
 
     <input
       className="Slug"
-      value={this.props.cardSlug}
-      onChangeSlug={this.props.onChangeSlug}
+      value={this.props.slug}
+      onChange={this.props.onChangeSlug}
       placeholder="INT/EXT LOCATION" />
 
 
-      <div className="NewMessage">
+      <div className="content">
         <input
-          className="content"
           value={this.props.content}
           onChange={this.props.onChangeContent}
           placeholder="scene descrip"
