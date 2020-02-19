@@ -6,6 +6,8 @@ import _ from 'lodash'
 import starEmpty from './star_empty.svg';
 import starFilled from './star_filled.svg';
 
+const arrayMove = require('array-move');
+
 
 class Project extends Component {
   state = {
@@ -46,6 +48,26 @@ class Project extends Component {
       });
   }
 
+// use arrayMove
+  moveCardLeft(documentId) {
+    const cards = this.state.cards;
+    const fromIndex = cards.findIndex(card => card._id === documentId);
+    const toIndex = Number(fromIndex) - 1;
+    const newCards = arrayMove(cards, fromIndex, toIndex);
+    this.setState({
+      cards: newCards,
+    });
+  }
+
+  moveCardRight(documentId) {
+    const cards = this.state.cards;
+    const fromIndex = cards.findIndex(card => card._id === documentId);
+    const toIndex = Number(fromIndex) + 1;
+    const newCards = arrayMove(cards, fromIndex, toIndex);
+    this.setState({
+      cards: newCards,
+    });
+  }
 
 
   toggleStar = (indexOfCard) => {
@@ -110,7 +132,9 @@ this.setState(newState);
                 <div onClick={() => this.deleteCard(card._id)}>
                   <span alt="delete this">🗑</span>
                 </div>
-
+                  <span alt="move left"><button onClick={() => this.moveCardLeft(card._id)}>&larr;</button></span>
+                  <span alt="move right"><button onClick={() => this.moveCardRight(card._id)}>&rarr;</button></span>
+                
                 <div onClick={() => this.toggleStar(card._id)}>
                   <img src={starIcon} className="starEmpty" alt="star" />
                 </div>

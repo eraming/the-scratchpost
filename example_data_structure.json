@@ -1,60 +1,24 @@
 project = {
 	"_id": "<integer>",
 	"title": "<string>",
-	"acts": [
-		{
-			"act": 1,
-			"cards": [
-			  {
-			    "card_id": "<integer>",
-			    "slug": "<string>",
-			    "content": "<string>",
-			    "isStarred": "<boolean>"
-			  },
-			  {
-			    "card_id": "<integer>",
-			    "slug": "<string>",
-			    "content": "<string>",
-			    "isStarred": "<boolean>"
-			  }
-	  	]
-		},
+	"cards": [
 	  {
-		  "act": 2,
-			"cards": [
-			  {
-			    "card_id": "<integer>",
-			    "slug": "<string>",
-			    "content": "<string>",
-			    "isStarred": "<boolean>"
-			  },
-			  {
-			    "card_id": "<integer>",
-			    "slug": "<string>",
-			    "content": "<string>",
-			    "isStarred": "<boolean>"
-			  }
-	  	]
-		},
-		{
-		  "act": 3, 
-			"cards": [
-			  {
-			    "card_id": "<integer>",
-			    "slug": "<string>",
-			    "content": "<string>",
-			    "isStarred": "<boolean>"
-			  },
-			  {
-			    "card_id": "<integer>",
-			    "slug": "<string>",
-			    "content": "<string>",
-			    "isStarred": "<boolean>"
-			  }
-	  	]
-		}
+	    "slug": "<string>",
+	    "content": "<string>",
+	    "position": "<integer>",
+	    "isStarred": "<boolean>",
+	    "act": 1, // optional
+	  },
+	  {
+	    "card_id": "<integer>",
+	    "slug": "<string>",
+	    "content": "<string>",
+	    "position": "<integer>",
+	    "isStarred": "<boolean>"
+	  }
 	]
 }
+
 
 
 
