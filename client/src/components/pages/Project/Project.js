@@ -57,6 +57,7 @@ class Project extends Component {
     this.setState({
       cards: newCards,
     });
+
   }
 
   moveCardRight(documentId) {
