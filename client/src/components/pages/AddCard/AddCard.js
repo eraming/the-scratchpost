@@ -5,6 +5,7 @@ class AddCard extends Component {
   state = {
     title: '',
     text: '',
+    isStarred: false,
   }
 
   onChangeContent = (ev) => {
@@ -23,6 +24,7 @@ class AddCard extends Component {
     const formData = {
       title: this.state.title,
       text: this.state.text,
+      isStarred: this.state.isStarred,
     };
 
     fetch('/api/mongodb/projects/', {

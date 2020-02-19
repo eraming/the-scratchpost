@@ -1,0 +1,33 @@
+.Project-card {
+  background: white;
+  border-radius: 15px 15px 15px 15px;
+  padding: 10px;
+  margin: 10px;
+  position: relative;
+  font-family: "Courier";
+  max-width: 150px;
+}
+
+.Project-CardActions > div {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.Project-CardActions > div:first-child {
+  right: 10px;
+}
+
+.Project-CardActions > div:last-child {
+  left: 10px;
+}
+
+.starEmpty {
+  width: 20px;
+}
+
+.starFilled {
+  width: 20px;
+}
