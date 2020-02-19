@@ -18,7 +18,7 @@ class App extends Component {
           }
 
 onNewCard = (title, index) => {
-  console.log('onNewCard')
+  console.log('')
   const newCards = this.state.newCards.slice();
   const availableCards = this.state.availableCards.slice();
   const newCard = availableCards[index];
@@ -60,9 +60,6 @@ onNewCard = (title, index) => {
              </Button>
           </Link>
 
-          <Button onClick={this.onNewCard}>
-              new card
-           </Button>
 
         </nav>
 
