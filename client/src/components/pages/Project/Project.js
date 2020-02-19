@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import './Project.css';
-import { RIEToggle, RIEInput, RIETextArea, RIENumber, RIETags, RIESelect } from 'riek'
-import Highlight from 'react-highlight';
-import _ from 'lodash'
-import starEmpty from './star_empty.svg';
-import starFilled from './star_filled.svg';
+import Card from '../../Card/Card.js'
+import {Button} from 'kc-react-widgets';
 
 
 class Project extends Component {
   state = {
     cards: [],
-    isStarred: true,
-    highlight: false,
-    textarea: '',
+    isStarred: false,
+    highlight: true,
+    textarea: `Multiline example
+    text value`,
+    slug: '',
+    content: '',
+    newCards: [],
+    availableCards: [],
   }
 
   componentDidMount() {
@@ -20,11 +22,11 @@ class Project extends Component {
   }
 
   fetchCards() {
-    console.log('Fetching data from API');
+    console.log('(log) Fetching data from API');
     fetch('/api/mongodb/projects/')
       .then(response => response.json())
       .then(data => {
-        console.log('Got data back', data);
+        console.log('(log) Got data back', data);
         this.setState({
           cards: data,
         });
@@ -46,78 +48,160 @@ class Project extends Component {
   }
 
 
-  toggleStar = (indexOfCard) => {
-    const cardToStar = this.state.cards[indexOfCard]
-    cardToStar.isStarred = !cardToStar.isStarred
+  toggleStar = (card) => {
+    console.log('Sending PUT for', card._id);
+      card.isStarred = !card.isStarred
 
-    this.setState({
-      isStarred: '',
-     })
-  }
+    fetch('/api/mongodb/projects/?_id=' + card._id, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+          },
+        body: JSON.stringify({isStarred: !card.isStarred})
+
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Got this back', data);
+
+        this.setState({
+          cards: this.state.cards
+         })
+      });
+  };
+
 
   virtualServerCallback = (newState) => {
-   if (this.state.simulateXHR) {
-   window.setTimeout(function() {
+     if (this.state.simulateXHR) {
+     window.setTimeout(function() {
+       this.changeState(newState);
+     }.bind(this), this.state.XHRDelay);
+     } else {
      this.changeState(newState);
-   }.bind(this), this.state.XHRDelay);
-   } else {
-   this.changeState(newState);
-   }
- };
+     }
+   };
 
-isStringAcceptable = (string) => {
-return (string.length >= 1);  // Minimum 4 letters long
-};
+  isStringAcceptable = (string) => {
+  return (string.length >= 1);  // Minimum 4 letters long
+  };
 
 changeState = (newState) => {
 this.setState(newState);
 };
 
-  render() {
+onChangeSlug = (ev) => {
+  let value = ev.target.value;
+  console.log('getting a new title', value);
+  this.setState({
+    slug: value,
+  });
+}
 
-    let starIcon = starEmpty;
-      if (this.props.isStarred) {
-        starIcon = starFilled;
-      }
+onChangeContent = (ev) => {
+  let value = ev.target.value;
+  console.log('getting a new value!', value);
+  this.setState({
+    content: value,
+  });
+}
+
+onNewCard = (title, index) => {
+  const newCards = this.state.newCards.slice();
+  const availableCards = this.state.availableCards.slice();
+  const newCard = availableCards[index];
+
+  newCards.push(newCard);
+  availableCards.splice(index, 1)
+
+  // console.log('new card', index, title)
+  console.log('new card', newCards)
+  this.setState({
+    newCards: newCards,
+    availableCards: availableCards,
+  });
+};
+
+removeCard = (title, index) => {
+  const newCards = this.state.newCards.slice();
+  const availableCards = this.state.availableCards.slice();
+  const newCard = newCards[index];
+
+  availableCards.push(newCard);
+  newCards.splice(index, 1);
+
+  console.log('new card', newCards)
+  this.setState({
+    availableCards: availableCards,
+    newCards: newCards
+  });
+};
+
+
+
+
+  render() {
 
     return (
 
       <div className="Project">
+
         <h1>east bay scenes project</h1>
+
+        <Button onClick={this.onNewCard}>
+              new card
+        </Button>
+
+
         <div className="Project-board">
+
         {
           this.state.cards.map((card, index) => (
-            <div className="Project-card" key={card._id}>
+            <Card
+            cardId={card._id}
+            cardSlug={card.title}
+            cardText={card.text}
+            deleteCard={() => this.deleteCard(card._id)}
+            toggleStar={() => this.toggleStar(card)}
 
-              <h3>{card.title}</h3>
-              <p>{card.text}
+            onChangeContent={this.onChangeContent}
+            onChangeSlug={this.onChangeSlug}
+            value={this.state.slug}
+            content={this.state.content}
+            isStarred={card.isStarred}
+            />
 
-              <RIETextArea
-         value={this.state.textarea}
-         change={this.virtualServerCallback}
-         propName="textarea"
-         className={this.state.highlight ? "editable" : ""}
-         validate={this.isStringAcceptable}
-         classLoading="loading"
-         classInvalid="invalid"
-         isDisabled={this.state.isDisabled} />
-
-              </p>
-
-              <div className="Project-CardActions">
-                <div onClick={() => this.deleteCard(card._id)}>
-                  <span alt="delete this">🗑</span>
-                </div>
-
-                <div onClick={() => this.toggleStar(card._id)}>
-                  <img src={starIcon} className="starEmpty" alt="star" />
-                </div>
-
-
-              </div>
-            </div>
           ))
         }
+
+        {this.state.newCards.map((index) => (
+              <Card
+                className="card--show card"
+
+
+                contents={this.state.contents}
+                value={this.state.content}
+                onChangeContent={this.onChangeContent}
+                onChangeTitle={this.onChangeTitle}
+                onClickSend={this.sendContent}
+                >
+
+
+                   {/* <Star>
+                  onClick={() => this.Toggle}
+                  stars={this.state.stars}
+                  onStarToggle={this.toggleStar}
+                  </Star> */}
+
+
+
+
+
+              </Card>
+              ))
+            }
+
+
+
         </div>
       </div>
     );
