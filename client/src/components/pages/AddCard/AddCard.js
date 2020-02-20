@@ -6,6 +6,19 @@ class AddCard extends Component {
     title: '',
     text: '',
     isStarred: false,
+    position: null
+  }
+
+  fetchCardsLength(callback) {
+    console.log('Fetching data from API');
+    fetch('/api/mongodb/projects/')
+      .then(response => response.json())
+      .then(data => {
+        console.log('Got data back', data);
+        console.log('array length:', data.length);
+        callback(data.length);
+        // return data.length;
+      });
   }
 
   onChangeContent = (ev) => {
@@ -21,11 +34,15 @@ class AddCard extends Component {
   }
 
   submit = () => {
+    this.fetchCardsLength((position) => {
+
     const formData = {
       title: this.state.title,
       text: this.state.text,
       isStarred: this.state.isStarred,
-    };
+      position: position
+    };    
+
 
     fetch('/api/mongodb/projects/', {
         method: 'POST',
@@ -39,6 +56,8 @@ class AddCard extends Component {
         // Redirect to profile
         this.props.history.push('/profile/');
       });
+
+    });
   }
 
 

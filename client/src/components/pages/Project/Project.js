@@ -3,6 +3,8 @@ import './Project.css';
 import Card from '../../Card/Card.js'
 import {Button} from 'kc-react-widgets';
 
+const arrayMove = require('array-move');
+
 
 class Project extends Component {
   state = {
@@ -22,6 +24,7 @@ class Project extends Component {
   }
 
   fetchCards() {
+
     console.log('(log) Fetching data from API');
     fetch('/api/mongodb/projects/')
       .then(response => response.json())
@@ -47,6 +50,27 @@ class Project extends Component {
       });
   }
 
+// use arrayMove
+  moveCardLeft(documentId) {
+    const cards = this.state.cards;
+    const fromIndex = cards.findIndex(card => card._id === documentId);
+    const toIndex = Number(fromIndex) - 1;
+    const newCards = arrayMove(cards, fromIndex, toIndex);
+    this.setState({
+      cards: newCards,
+    });
+
+  }
+
+  moveCardRight(documentId) {
+    const cards = this.state.cards;
+    const fromIndex = cards.findIndex(card => card._id === documentId);
+    const toIndex = Number(fromIndex) + 1;
+    const newCards = arrayMove(cards, fromIndex, toIndex);
+    this.setState({
+      cards: newCards,
+    });
+  }
 
   toggleStar = (card) => {
     console.log('Sending PUT for', card._id);
@@ -156,6 +180,7 @@ removeCard = (title, index) => {
 
         {
           this.state.cards.map((card, index) => (
+
             <Card
             cardId={card._id}
             cardSlug={card.title}
@@ -199,6 +224,8 @@ removeCard = (title, index) => {
               </Card>
               ))
             }
+
+
 
 
 
