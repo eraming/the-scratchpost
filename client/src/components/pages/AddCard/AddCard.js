@@ -17,7 +17,6 @@ class AddCard extends Component {
         console.log('Got data back', data);
         console.log('array length:', data.length);
         callback(data.length);
-        // return data.length;
       });
   }
 
@@ -34,29 +33,29 @@ class AddCard extends Component {
   }
 
   submit = () => {
+    // get the data.length (position) from the callback above and put it in the form
     this.fetchCardsLength((position) => {
 
-    const formData = {
-      title: this.state.title,
-      text: this.state.text,
-      isStarred: this.state.isStarred,
-      position: position
-    };    
+      const formData = {
+        title: this.state.title,
+        text: this.state.text,
+        isStarred: this.state.isStarred,
+        position: position
+      };    
 
 
-    fetch('/api/mongodb/projects/', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(formData),
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Got this back', data);
+      fetch('/api/mongodb/projects/', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(formData),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Got this back', data);
 
-        // Redirect to profile
-        this.props.history.push('/profile/');
-      });
-
+          // Redirect to profile
+          this.props.history.push('/profile/');
+        });
     });
   }
 
