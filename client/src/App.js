@@ -10,12 +10,15 @@ import AddCard from './components/pages/AddCard/AddCard.js';
 
 class App extends Component {
           state = {
-            cards: [],
             newCards: [],
-            availableCards: [], 
+            availableCards: [],
+            isStarred: true,
+            highlight: false,
+            textarea: '',
           }
 
 onNewCard = (title, index) => {
+  console.log('')
   const newCards = this.state.newCards.slice();
   const availableCards = this.state.availableCards.slice();
   const newCard = availableCards[index];
@@ -57,9 +60,6 @@ onNewCard = (title, index) => {
              </Button>
           </Link>
 
-          <Button onClick={this.onNewCard}>
-              new card
-           </Button>
 
         </nav>
 

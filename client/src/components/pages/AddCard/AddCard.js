@@ -43,6 +43,7 @@ class AddCard extends Component {
       position: position
     };    
 
+
     fetch('/api/mongodb/projects/', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

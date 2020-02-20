@@ -57,6 +57,7 @@ app.post('/api/mongodb/:collectionName/', (request, response) => {
 // PUT endpoint for modifying an existing item
 app.put('/api/mongodb/:collectionName/', (request, response) => {
   const collectionName = request.params.collectionName;
+  console.log('request dot body', request.body);
   const data = request.body;
   const query = request.query;
 
