@@ -8,9 +8,8 @@ class Card extends Component {
   state = {
     id: 1,
     title: 'cover with tests',
-    cards: [],
-    isStarred: true,
-    highlight: true,
+    slug: '',
+    content: '',
     textarea: `Multiline example
     text value`,
   }

@@ -20,7 +20,6 @@ class Project extends Component {
   //added refreshCards invokation
   componentDidMount() {
     this.fetchCards();
-    this.refreshCards();
   }
 
   fetchCards() {
@@ -35,17 +34,7 @@ class Project extends Component {
       });
   }
 
-  //refresh cards method
-  refreshCards = () => {
-    fetch('/get-contents/')
-      .then(response => response.json())
-      .then(data => {
-        console.log('receiving message data!', data);
-        this.setState({
-          content: data,
-        });
-      });
-  }
+
 
   deleteCard(documentId) {
     console.log('Sending DELETE for', documentId);
@@ -135,6 +124,9 @@ sendContent = () => {
     .then(data => {
       console.log('Got this back', data);
       console.log(formData)
+      this.setState ({
+        cards: this.state.cards
+      })
     });
 }
 
@@ -207,17 +199,25 @@ removeCard = (title, index) => {
           ))
         }
 
-        {this.state.newCards.map((index) => (
+        {this.state.newCards.map((card, index) => (
+          
               <Card
+                // cardId={card._id}
+                // cardSlug={card.slug}
+                // cardText={card.content}
+                deleteCard={() => this.deleteCard(card._id)}
+                toggleStar={() => this.toggleStar(card)}
                 className="card--show card"
-                contents={this.state.contents}
-                value={this.state.content}
+                slugValue={this.state.slug}
+                contentValue={this.state.content}
                 onChangeContent={this.onChangeContent}
-                onChangeTitle={this.onChangeTitle}
+                onChangeSlug={this.onChangeSlug}
                 onClickSend={this.sendContent}
                 >
+                  
               </Card>
               ))
+              
             }
         </div>
       </div>
