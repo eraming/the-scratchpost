@@ -17,8 +17,10 @@ class Project extends Component {
     availableCards: [],
   }
 
+  //added refreshCards invokation
   componentDidMount() {
     this.fetchCards();
+    this.refreshCards();
   }
 
   fetchCards() {
@@ -29,6 +31,18 @@ class Project extends Component {
         console.log('(log) Got data back', data);
         this.setState({
           cards: data,
+        });
+      });
+  }
+
+  //refresh cards method
+  refreshCards = () => {
+    fetch('/get-contents/')
+      .then(response => response.json())
+      .then(data => {
+        console.log('receiving message data!', data);
+        this.setState({
+          content: data,
         });
       });
   }
@@ -105,6 +119,24 @@ onChangeContent = (ev) => {
   });
 }
 
+//added sendContent method for saving
+sendContent = (index) => {
+  const content = this.state.content;
+  const slug = this.state.slug;
+  console.log("slug: ", slug, "content: ", content)
+
+  this.setState({ 
+    content: this.state.content,
+    slug: this.state.slug
+  });
+  
+  fetch('/send-contents/', {method: "POST", body: content})
+    .then(response => response.json())
+    .then(data => {
+      this.refreshCards();
+    });    
+}
+
 onNewCard = (title, index) => {
   const newCards = this.state.newCards.slice();
   const availableCards = this.state.availableCards.slice();
@@ -162,12 +194,12 @@ removeCard = (title, index) => {
             cardText={card.text}
             deleteCard={() => this.deleteCard(card._id)}
             toggleStar={() => this.toggleStar(card)}
-
             onChangeContent={this.onChangeContent}
             onChangeSlug={this.onChangeSlug}
             value={this.state.content}
             content={this.state.contents}
             isStarred={card.isStarred}
+            onClickSend={this.sendContent}
             />
 
           ))
@@ -176,32 +208,15 @@ removeCard = (title, index) => {
         {this.state.newCards.map((index) => (
               <Card
                 className="card--show card"
-              
-
                 contents={this.state.contents}
                 value={this.state.content}
                 onChangeContent={this.onChangeContent}
                 onChangeTitle={this.onChangeTitle}
                 onClickSend={this.sendContent}
                 >
-
-
-                   {/* <Star>
-                  onClick={() => this.Toggle}
-                  stars={this.state.stars}
-                  onStarToggle={this.toggleStar}
-                  </Star> */}
-
-
-
-
-
               </Card>
               ))
             }
-
-
-
         </div>
       </div>
     );
