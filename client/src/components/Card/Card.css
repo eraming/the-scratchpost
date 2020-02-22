@@ -31,3 +31,63 @@
 .starFilled {
   width: 20px;
 }
+
+.save-btn {
+  font-family: 'Roboto', sans-serif;
+  border-style: solid black 1px;
+  font-size: medium;
+  margin-top: 10px;
+  background-color: rgb(255, 252, 252);
+  border-radius: 15px;
+  box-shadow: 0 6px #999;
+  outline:none;
+  transition: all .2s ease-in-out;
+}
+
+.save-btn:active {
+  background-color: rgb(226, 200, 188);
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+  
+}
+
+.save-btn:hover {
+  background-color: rgb(226, 200, 188);
+  transition: .5s;
+  transform: scale(1.05);
+}
+
+.textarea, input{
+  border: none;
+  outline: none;
+  overflow: auto;
+}
+
+
+.Slug {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 14pt;
+  color: black;
+  width: 150px;
+  height: 50px;
+  border: none;
+  outline: none;
+  text-transform: uppercase;
+
+ 
+}
+
+.Content {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12pt;
+  font-weight: semi-bold;
+  color: black;
+  width: 150px;
+  height: 225px;
+  border: none; 
+  outline: none;
+
+}
+
+

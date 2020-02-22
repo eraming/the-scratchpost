@@ -165,8 +165,8 @@ removeCard = (title, index) => {
 
             onChangeContent={this.onChangeContent}
             onChangeSlug={this.onChangeSlug}
-            value={this.state.slug}
-            content={this.state.content}
+            value={this.state.content}
+            content={this.state.contents}
             isStarred={card.isStarred}
             />
 
@@ -176,7 +176,7 @@ removeCard = (title, index) => {
         {this.state.newCards.map((index) => (
               <Card
                 className="card--show card"
-
+              
 
                 contents={this.state.contents}
                 value={this.state.content}

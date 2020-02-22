@@ -61,20 +61,29 @@ classInvalid="invalid"
 isDisabled={this.state.isDisabled} />*/}
     </p>
 
-    <input
+    <textarea
       className="Slug"
       value={this.props.slug}
       onChange={this.props.onChangeSlug}
-      placeholder="INT/EXT LOCATION" />
+      placeholder="INT/EXT LOCATION"
+      cols="20"
+      rows="2"
+      wrap="hard" />
 
 
       <div className="content">
-        <input
+        <textarea
+          className="Content"
           value={this.props.content}
           onChange={this.props.onChangeContent}
           placeholder="scene descrip"
+          cols="20"
+          rows="20"
+          wrap="hard"
         />
       </div>
+
+     
 
     <div className="Project-CardActions">
       <div onClick={this.props.deleteCard}>
@@ -84,6 +93,12 @@ isDisabled={this.state.isDisabled} />*/}
       <div onClick={this.props.toggleStar}>
         <img src={starIcon} className="starEmpty" alt="star" />
       </div>
+
+      <button 
+          className="save-btn" 
+          onClick={this.props.onClickSend}>
+          Save
+      </button>
 
 
     </div>
