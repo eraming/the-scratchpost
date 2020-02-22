@@ -119,23 +119,28 @@ onChangeContent = (ev) => {
   });
 }
 
-//added sendContent method for saving
-sendContent = (index) => {
-  const content = this.state.content;
-  const slug = this.state.slug;
-  console.log("slug: ", slug, "content: ", content)
+sendContent = () => {
+  const formData = {
+    slug: this.state.slug,
+    content: this.state.content,
+    isStarred: this.state.isStarred,
+  };
 
-  this.setState({ 
-    content: content,
-    slug: slug
-  });
-  
-  fetch('/send-contents/', {method: "POST", body: content})
+  fetch('/api/mongodb/projects/', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(formData),
+    })
     .then(response => response.json())
     .then(data => {
-      this.refreshCards();
-    });    
+      console.log('Got this back', data);
+      console.log(formData)
+
+      // Redirect to profile
+      this.props.history.push('/profile/');
+    });
 }
+
 
 onNewCard = (title, index) => {
   const newCards = this.state.newCards.slice();
