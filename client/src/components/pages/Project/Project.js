@@ -56,9 +56,30 @@ class Project extends Component {
     const fromIndex = cards.findIndex(card => card._id === documentId);
     const toIndex = Number(fromIndex) - 1;
     const newCards = arrayMove(cards, fromIndex, toIndex);
+    // setState for visual of cards in new positions
+    //// may not be necessary in conjunction with a sort+map in template?
     this.setState({
       cards: newCards,
     });
+    
+    // update new position/state for current card
+    fetch('/api/mongodb/projects/?_id=' + documentId, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+          },
+        body: JSON.stringify({position: toIndex})
+
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Got this back', data);
+
+        this.setState({
+          cards: newCards
+         })
+      });
+
 
   }
 
