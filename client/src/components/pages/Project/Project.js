@@ -52,18 +52,23 @@ class Project extends Component {
 
 // use arrayMove
   moveCardLeft(documentId) {
+    console.log('left move clicked');
     const cards = this.state.cards;
     const fromIndex = cards.findIndex(card => card._id === documentId);
     const toIndex = Number(fromIndex) - 1;
+    //maybe not necessary with sort+map?
     const newCards = arrayMove(cards, fromIndex, toIndex);
     // setState for visual of cards in new positions
     //// may not be necessary in conjunction with a sort+map in template?
     this.setState({
       cards: newCards,
     });
+
+    const cardToMoveId = cards[fromIndex]._id;
+    const displacedCardId = cards[toIndex]._id;
     
     // update new position/state for current card
-    fetch('/api/mongodb/projects/?_id=' + documentId, {
+    fetch('/api/mongodb/projects/?_id=' + cardToMoveId, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json;charset=utf-8'
@@ -74,16 +79,27 @@ class Project extends Component {
       .then(response => response.json())
       .then(data => {
         console.log('Got this back', data);
+      });
 
-        this.setState({
-          cards: newCards
-         })
+    // update new position/state for displaced card
+    fetch('/api/mongodb/projects/?_id=' + displacedCardId, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+          },
+        body: JSON.stringify({position: fromIndex})
+
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Got this back', data);
       });
 
 
   }
 
   moveCardRight(documentId) {
+    console.log('right move clicked');
     const cards = this.state.cards;
     const fromIndex = cards.findIndex(card => card._id === documentId);
     const toIndex = Number(fromIndex) + 1;
@@ -91,6 +107,38 @@ class Project extends Component {
     this.setState({
       cards: newCards,
     });
+
+    const cardToMoveId = cards[fromIndex]._id;
+    const displacedCardId = cards[toIndex]._id;
+    
+    // update new position/state for current card
+    fetch('/api/mongodb/projects/?_id=' + cardToMoveId, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+          },
+        body: JSON.stringify({position: toIndex})
+
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Got this back', data);
+      });
+
+      // update new position/state for displaced card
+    fetch('/api/mongodb/projects/?_id=' + displacedCardId, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+          },
+        body: JSON.stringify({position: fromIndex})
+
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Got this back', data);
+      });
+
   }
 
   toggleStar = (card) => {
@@ -185,6 +233,9 @@ removeCard = (title, index) => {
 
 
   render() {
+    const copyCards = [].concat(this.state.cards).sort((a, b) => a.position > b.position);
+    console.log('copy of cards:', copyCards);
+    // for some reason, the sort doesn't seem to be working, so positioning is not retained
 
     return (
 
@@ -200,7 +251,8 @@ removeCard = (title, index) => {
         <div className="Project-board">
 
         {
-          this.state.cards.map((card, index) => (
+
+          copyCards.map((card, index) => (
 
             <Card
             cardId={card._id}
@@ -208,6 +260,8 @@ removeCard = (title, index) => {
             cardText={card.text}
             deleteCard={() => this.deleteCard(card._id)}
             toggleStar={() => this.toggleStar(card)}
+            moveLeft={() => this.moveCardLeft(card._id)}
+            moveRight={() => this.moveCardRight(card._id)}
 
             onChangeContent={this.onChangeContent}
             onChangeSlug={this.onChangeSlug}
@@ -229,6 +283,8 @@ removeCard = (title, index) => {
                 onChangeContent={this.onChangeContent}
                 onChangeTitle={this.onChangeTitle}
                 onClickSend={this.sendContent}
+                moveLeft={this.moveCardLeft}
+                moveRight={this.moveCardRight}
                 >
 
 
@@ -257,3 +313,6 @@ removeCard = (title, index) => {
 }
 
 export default Project;
+
+{/*this.state.cards.map((card, index) => (*/}
+          {/*const copyCards = [].concat(this.state.cards)*/}

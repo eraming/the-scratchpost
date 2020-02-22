@@ -85,6 +85,14 @@ isDisabled={this.state.isDisabled} />*/}
         <img src={starIcon} className="starEmpty" alt="star" />
       </div>
 
+      <button onClick={this.props.moveLeft}>
+        <span alt="move left">←</span>
+      </button>
+
+      <button onClick={this.props.moveRight}>
+        <span alt="move right">→</span>
+      </button>
+
 
     </div>
   </div>
