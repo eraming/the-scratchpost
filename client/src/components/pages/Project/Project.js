@@ -126,8 +126,8 @@ sendContent = (index) => {
   console.log("slug: ", slug, "content: ", content)
 
   this.setState({ 
-    content: this.state.content,
-    slug: this.state.slug
+    content: content,
+    slug: slug
   });
   
   fetch('/send-contents/', {method: "POST", body: content})

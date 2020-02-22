@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Card.css';
-import { RIEToggle, RIEInput, RIETextArea, RIENumber, RIETags, RIESelect } from 'riek'
 import Highlight from 'react-highlight';
 import starEmpty from './star_empty.svg';
 import starFilled from './star_filled.svg';
@@ -49,17 +48,7 @@ return (
   <div className="Project-card" key={this.props.cardId}>
 
     <h3>{this.props.cardSlug}</h3>
-    <p>{this.props.cardText}
-    {/*<RIETextArea
-value={this.props.cardText}
-change={this.virtualServerCallback}
-propName="textarea"
-className={this.state.highlight ? "editable" : ""}
-validate={this.isStringAcceptable}
-classLoading="loading"
-classInvalid="invalid"
-isDisabled={this.state.isDisabled} />*/}
-    </p>
+    <p>{this.props.cardText}</p>
 
     <textarea
       className="Slug"
