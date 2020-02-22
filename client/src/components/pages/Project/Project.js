@@ -135,9 +135,6 @@ sendContent = () => {
     .then(data => {
       console.log('Got this back', data);
       console.log(formData)
-
-      // Redirect to profile
-      this.props.history.push('/profile/');
     });
 }
 
