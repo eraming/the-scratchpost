@@ -13,6 +13,7 @@
     "node_modules"
   ],
   "dependencies": {
+    "array-move": "^2.2.1",
     "express": "4.16.3",
     "kc-react-widgets": "^1.0.5",
     "mongodb": "^3.5.3",
