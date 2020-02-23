@@ -142,6 +142,7 @@ sendContent = (index) => {
 
 onNewCard = (card, index, formData) => {
   const documentId = card._id;
+  
   fetch('/api/mongodb/projects/?_id=' + documentId, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -152,7 +153,8 @@ onNewCard = (card, index, formData) => {
     console.log('Got this back', data);
     console.log(formData)
     this.setState ({
-      newCards: this.state.cards
+      newCards: this.state.cards,
+      isStarred: false
     });
     this.fetchCards();
   });

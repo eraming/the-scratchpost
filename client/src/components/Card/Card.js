@@ -66,8 +66,6 @@ return (
           className="Content"
           value={this.props.cardText}
           onChange={this.props.onChangeContent}
-          // toggleEditing = {() => this.toggleItemEditing(index)}
-          // onClick={this.props.toggleEdit}
           placeholder="scene descrip"
           cols="20"
           rows="20"
