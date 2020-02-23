@@ -219,8 +219,6 @@ removeCard = (title, index) => {
 
 
 
-
-
               </Card>
               ))
             }
