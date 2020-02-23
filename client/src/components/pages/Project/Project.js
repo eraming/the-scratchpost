@@ -175,15 +175,15 @@ onNewCard = (card ) => {
   // const newCard = availableCards[index];
 
 
-  newCards.push(newCard);
-  availableCards.splice(index, 1)
+  // newCards.push(newCard);
+  // availableCards.splice(index, 1)
 
-  // console.log('new card', index, title)
-  console.log('new card', newCards)
-  this.setState({
-    newCards: newCards,
-    availableCards: availableCards,
-  });
+  // // console.log('new card', index, title)
+  // console.log('new card', newCards)
+  // this.setState({
+  //   newCards: newCards,
+  //   availableCards: availableCards,
+  // });
 };
 
 removeCard = (title, index) => {
