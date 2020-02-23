@@ -146,6 +146,7 @@ sendContent = (index) => {
     isStarred: cardData.isStarred,
   };
 
+
   const documentId = cardData._id;
   fetch('/api/mongodb/projects/?_id=' + documentId, {
       method: 'PUT',
@@ -164,8 +165,14 @@ sendContent = (index) => {
 }
 
 
-onNewCard = (card, index, formData) => {
+onNewCard = (card ) => {
   const documentId = card._id;
+  const formData = {
+    slug: '',
+    content: '',
+    isStarred: false
+  };
+
   fetch('/api/mongodb/projects/?_id=' + documentId, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -174,10 +181,9 @@ onNewCard = (card, index, formData) => {
   .then(response => response.json())
   .then(data => {
     console.log('Got this back', data);
-    console.log(formData)
+    console.log()
     this.setState ({
-      newCards: this.state.cards,
-      isStarred: false
+      newCards: this.state.cards
     });
     this.fetchCards();
   });
