@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Card.css';
-import Highlight from 'react-highlight';
 import starEmpty from './star_empty.svg';
 import starFilled from './star_filled.svg';
 
@@ -8,6 +7,7 @@ class Card extends Component {
   state = {
     id: 1,
     title: 'cover with tests',
+    cards: [],
     slug: '',
     content: '',
     textarea: `Multiline example
@@ -35,6 +35,7 @@ changeState = (newState) => {
 };
 
 
+
 render() {
 
   let starIcon = starEmpty;
@@ -46,13 +47,14 @@ return (
 
   <div className="Project-card" key={this.props.cardId}>
 
-    <h3>{this.props.cardSlug}</h3>
-    <p>{this.props.cardText}</p>
+    {/* <h3>{this.props.cardSlug}</h3>
+    <p>{this.props.cardText}</p> */}
 
     <textarea
       className="Slug"
-      value={this.props.slug}
+      value={this.props.cardSlug}
       onChange={this.props.onChangeSlug}
+      // toggleEditing = {() => this.toggleItemEditing(index)}
       placeholder="INT/EXT LOCATION"
       cols="20"
       rows="2"
@@ -62,8 +64,10 @@ return (
       <div className="content">
         <textarea
           className="Content"
-          value={this.props.content}
+          value={this.props.cardText}
           onChange={this.props.onChangeContent}
+          // toggleEditing = {() => this.toggleItemEditing(index)}
+          // onClick={this.props.toggleEdit}
           placeholder="scene descrip"
           cols="20"
           rows="20"
@@ -87,7 +91,6 @@ return (
           onClick={this.props.onClickSend}>
           Save
       </button>
-
 
     </div>
   </div>

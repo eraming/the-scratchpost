@@ -8,7 +8,6 @@ class Project extends Component {
   state = {
     cards: [],
     isStarred: false,
-    highlight: true,
     textarea: `Multiline example
     text value`,
     slug: '',
@@ -17,10 +16,11 @@ class Project extends Component {
     availableCards: [],
   }
 
-  //added refreshCards invokation
+
   componentDidMount() {
     this.fetchCards();
   }
+
 
   fetchCards() {
     console.log('(log) Fetching data from API');
@@ -34,8 +34,6 @@ class Project extends Component {
       });
   }
 
-
-
   deleteCard(documentId) {
     console.log('Sending DELETE for', documentId);
     // Do the DELETE, using "?_id=" to specify which document we are deleting
@@ -46,12 +44,15 @@ class Project extends Component {
       .then(data => {
         console.log('Got this back', data);
         // Call method to refresh data
+        this.setState({
+          newCards: this.state.cards
+         })
         this.fetchCards();
       });
   }
 
 
-  toggleStar = (card) => {
+  toggleStar = (card, documentId) => {
     console.log('Sending PUT for', card._id);
       card.isStarred = !card.isStarred
 
@@ -68,55 +69,62 @@ class Project extends Component {
         console.log('Got this back', data);
 
         this.setState({
-          cards: this.state.cards
+          newCards: this.state.cards
          })
+         this.fetchCards();
       });
   };
 
 
-  virtualServerCallback = (newState) => {
-     if (this.state.simulateXHR) {
-     window.setTimeout(function() {
-       this.changeState(newState);
-     }.bind(this), this.state.XHRDelay);
-     } else {
-     this.changeState(newState);
-     }
-   };
+  // virtualServerCallback = (newState) => {
+  //    if (this.state.simulateXHR) {
+  //    window.setTimeout(function() {
+  //      this.changeState(newState);
+  //    }.bind(this), this.state.XHRDelay);
+  //    } else {
+  //    this.changeState(newState);
+  //    }
+  //  };
 
-  isStringAcceptable = (string) => {
-  return (string.length >= 1);  // Minimum 4 letters long
-  };
+  // isStringAcceptable = (string) => {
+  // return (string.length >= 1);  // Minimum 4 letters long
+  // };
 
 changeState = (newState) => {
 this.setState(newState);
 };
 
-onChangeSlug = (ev) => {
+onChangeSlug = (ev, index) => {
   let value = ev.target.value;
   console.log('getting a new title', value);
+  const cardsCopy = this.state.cards.slice();
+  cardsCopy[index].slug = value;
   this.setState({
-    slug: value,
+    cards: cardsCopy,
   });
 }
 
-onChangeContent = (ev) => {
+onChangeContent = (ev, index) => {
   let value = ev.target.value;
   console.log('getting a new value!', value);
+  const cardsCopy = this.state.cards.slice();
+  cardsCopy[index].content = value;
   this.setState({
-    content: value,
+    cards: cardsCopy,
   });
 }
 
-sendContent = () => {
+sendContent = (index) => {
+  const cardData = this.state.cards[index];
   const formData = {
-    slug: this.state.slug,
-    content: this.state.content,
-    isStarred: this.state.isStarred,
+    slug: cardData.slug,
+    content: cardData.content,
+    isStarred: cardData.isStarred,
   };
 
-  fetch('/api/mongodb/projects/', {
-      method: 'POST',
+  const documentId = cardData._id;
+  fetch('/api/mongodb/projects/?_id=' + documentId, {
+      method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(formData),
     })
@@ -125,26 +133,42 @@ sendContent = () => {
       console.log('Got this back', data);
       console.log(formData)
       this.setState ({
-        cards: this.state.cards
+        newCards: this.state.cards
       })
+      
     });
 }
 
 
-onNewCard = (title, index) => {
-  const newCards = this.state.newCards.slice();
-  const availableCards = this.state.availableCards.slice();
-  const newCard = availableCards[index];
+onNewCard = (card, index, formData) => {
+  const documentId = card._id;
+  fetch('/api/mongodb/projects/?_id=' + documentId, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(formData),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Got this back', data);
+    console.log(formData)
+    this.setState ({
+      newCards: this.state.cards
+    });
+    this.fetchCards();
+  });
+  // const newCards = this.state.newCards.slice();
+  // const availableCards = this.state.availableCards.slice();
+  // const newCard = availableCards[index];
 
-  newCards.push(newCard);
-  availableCards.splice(index, 1)
+  // newCards.push(newCard);
+  // availableCards.splice(index, 1)
 
   // console.log('new card', index, title)
-  console.log('new card', newCards)
-  this.setState({
-    newCards: newCards,
-    availableCards: availableCards,
-  });
+  // console.log('new card', newCards)
+  // this.setState({
+  //   newCards: this.state.cards,
+  //   availableCards: availableCards,
+  // });
 };
 
 removeCard = (title, index) => {
@@ -165,6 +189,7 @@ removeCard = (title, index) => {
 
 
 
+
   render() {
 
     return (
@@ -181,38 +206,40 @@ removeCard = (title, index) => {
         <div className="Project-board">
 
         {
-          this.state.cards.map((card, index) => (
-            <Card
-            cardId={card._id}
-            cardSlug={card.title}
-            cardText={card.text}
-            deleteCard={() => this.deleteCard(card._id)}
-            toggleStar={() => this.toggleStar(card)}
-            onChangeContent={this.onChangeContent}
-            onChangeSlug={this.onChangeSlug}
-            value={this.state.content}
-            content={this.state.contents}
-            isStarred={card.isStarred}
-            onClickSend={this.sendContent}
-            />
+          // this.state.cards.map((card, index) => (
+          //   <Card
+          //   cardId={card._id}
+          //   cardSlug={card.title}
+          //   cardText={card.text}
+          //   deleteCard={() => this.deleteCard(card._id)}
+          //   toggleStar={() => this.toggleStar(card)}
+          //   onChangeContent={(ev) => this.onChangeContent(ev, index)}
+          //   onChangeSlug={this.onChangeSlug}
+          //   value={this.state.content}
+          //   content={this.state.contents}
+          //   isStarred={card.isStarred}
+          //   onClickSend={this.sendContent}
+          //   />
 
-          ))
+          // ))
         }
 
-        {this.state.newCards.map((card, index) => (
+        {this.state.cards.map((card, index) => (
           
               <Card
-                // cardId={card._id}
-                // cardSlug={card.slug}
-                // cardText={card.content}
+                cardId={card._id}
+                cardSlug={card.slug}
+                cardText={card.content}
                 deleteCard={() => this.deleteCard(card._id)}
-                toggleStar={() => this.toggleStar(card)}
+                toggleStar={() => this.toggleStar(card, index)}
+                
                 className="card--show card"
                 slugValue={this.state.slug}
                 contentValue={this.state.content}
-                onChangeContent={this.onChangeContent}
-                onChangeSlug={this.onChangeSlug}
-                onClickSend={this.sendContent}
+                
+                onChangeSlug={(ev) => this.onChangeSlug(ev, index)}
+                onClickSend={() => this.sendContent(index)}
+                onChangeContent={(ev) => this.onChangeContent(ev, index)}
                 >
                   
               </Card>
