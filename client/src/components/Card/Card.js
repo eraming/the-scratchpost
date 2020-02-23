@@ -75,7 +75,7 @@ return (
         />
       </div>
 
-     
+
 
     <div className="Project-CardActions">
       <div onClick={this.props.deleteCard}>
@@ -86,8 +86,8 @@ return (
         <img src={starIcon} className="starEmpty" alt="star" />
       </div>
 
-      <button 
-          className="save-btn" 
+      <button
+          className="save-btn"
           onClick={this.props.onClickSend}>
           Save
       </button>

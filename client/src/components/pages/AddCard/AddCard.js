@@ -41,7 +41,7 @@ class AddCard extends Component {
       text: this.state.text,
       isStarred: this.state.isStarred,
       position: position
-    };    
+    };
 
 
     fetch('/api/mongodb/projects/', {
@@ -85,7 +85,7 @@ class AddCard extends Component {
         <button onClick={this.submit}>Add to project</button>
 
       </div>
-      
+
 
     );
   }
