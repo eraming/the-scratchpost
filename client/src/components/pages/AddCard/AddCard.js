@@ -83,7 +83,9 @@ class AddCard extends Component {
         <br />
 
         <button onClick={this.submit}>Add to project</button>
+
       </div>
+      
 
     );
   }

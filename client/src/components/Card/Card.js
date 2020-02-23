@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Card.css';
-
 import starEmpty from './star_empty.svg';
 import starFilled from './starFilled.svg';
 import trashCan from './trash.svg';
@@ -10,8 +9,8 @@ class Card extends Component {
     id: 1,
     title: 'cover with tests',
     cards: [],
-    isStarred: true,
-    highlight: true,
+    slug: '',
+    content: '',
     textarea: `Multiline example
     text value`,
   }
@@ -37,6 +36,7 @@ changeState = (newState) => {
 };
 
 
+
 render() {
 
   let starIcon = starEmpty;
@@ -49,33 +49,33 @@ return (
 
   <div className="Project-card" key={this.props.cardId}>
 
-    <h3>{this.props.cardSlug}</h3>
-    <p>{this.props.cardText}
-    {/*<RIETextArea
-value={this.props.cardText}
-change={this.virtualServerCallback}
-propName="textarea"
-className={this.state.highlight ? "editable" : ""}
-validate={this.isStringAcceptable}
-classLoading="loading"
-classInvalid="invalid"
-isDisabled={this.state.isDisabled} />*/}
-    </p>
+    {/* <h3>{this.props.cardSlug}</h3>
+    <p>{this.props.cardText}</p> */}
 
-    <input
+    <textarea
       className="Slug"
-      value={this.props.slug}
+      value={this.props.cardSlug}
       onChange={this.props.onChangeSlug}
-      placeholder="INT/EXT LOCATION" />
+      // toggleEditing = {() => this.toggleItemEditing(index)}
+      placeholder="INT/EXT LOCATION"
+      cols="20"
+      rows="2"
+      wrap="hard" />
 
 
       <div className="content">
-        <input
-          value={this.props.content}
+        <textarea
+          className="Content"
+          value={this.props.cardText}
           onChange={this.props.onChangeContent}
           placeholder="scene descrip"
+          cols="20"
+          rows="20"
+          wrap="hard"
         />
       </div>
+
+     
 
     <div className="Project-CardActions">
       <div onClick={this.props.deleteCard}>
@@ -86,6 +86,11 @@ isDisabled={this.state.isDisabled} />*/}
         <img src={starIcon} className="starEmpty" alt="star" />
       </div>
 
+      <button 
+          className="save-btn" 
+          onClick={this.props.onClickSend}>
+          Save
+      </button>
 
     </div>
   </div>
