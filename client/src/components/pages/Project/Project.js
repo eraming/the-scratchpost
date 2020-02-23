@@ -3,6 +3,8 @@ import './Project.css';
 import Card from '../../Card/Card.js'
 import {Button} from 'kc-react-widgets';
 
+const arrayMove = require('array-move');
+
 
 class Project extends Component {
   state = {
@@ -23,6 +25,7 @@ class Project extends Component {
 
 
   fetchCards() {
+
     console.log('(log) Fetching data from API');
     fetch('/api/mongodb/projects/')
       .then(response => response.json())
@@ -51,6 +54,27 @@ class Project extends Component {
       });
   }
 
+// use arrayMove
+  moveCardLeft(documentId) {
+    const cards = this.state.cards;
+    const fromIndex = cards.findIndex(card => card._id === documentId);
+    const toIndex = Number(fromIndex) - 1;
+    const newCards = arrayMove(cards, fromIndex, toIndex);
+    this.setState({
+      cards: newCards,
+    });
+
+  }
+
+  moveCardRight(documentId) {
+    const cards = this.state.cards;
+    const fromIndex = cards.findIndex(card => card._id === documentId);
+    const toIndex = Number(fromIndex) + 1;
+    const newCards = arrayMove(cards, fromIndex, toIndex);
+    this.setState({
+      cards: newCards,
+    });
+  }
 
   toggleStar = (card, documentId) => {
     console.log('Sending PUT for', card._id);
@@ -206,24 +230,7 @@ removeCard = (title, index) => {
 
         <div className="Project-board">
 
-        {
-          // this.state.cards.map((card, index) => (
-          //   <Card
-          //   cardId={card._id}
-          //   cardSlug={card.title}
-          //   cardText={card.text}
-          //   deleteCard={() => this.deleteCard(card._id)}
-          //   toggleStar={() => this.toggleStar(card)}
-          //   onChangeContent={(ev) => this.onChangeContent(ev, index)}
-          //   onChangeSlug={this.onChangeSlug}
-          //   value={this.state.content}
-          //   content={this.state.contents}
-          //   isStarred={card.isStarred}
-          //   onClickSend={this.sendContent}
-          //   />
-
-          // ))
-        }
+      
 
         {this.state.cards.map((card, index) => (
           
@@ -242,7 +249,7 @@ removeCard = (title, index) => {
                 onClickSend={() => this.sendContent(index)}
                 onChangeContent={(ev) => this.onChangeContent(ev, index)}
                 >
-                  
+
               </Card>
               ))
               

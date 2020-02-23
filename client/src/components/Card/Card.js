@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './Card.css';
 import starEmpty from './star_empty.svg';
-import starFilled from './star_filled.svg';
+import starFilled from './starFilled.svg';
+import trashCan from './trash.svg';
 
 class Card extends Component {
   state = {
@@ -45,6 +46,7 @@ render() {
 
 return (
 
+
   <div className="Project-card" key={this.props.cardId}>
 
     {/* <h3>{this.props.cardSlug}</h3>
@@ -77,7 +79,7 @@ return (
 
     <div className="Project-CardActions">
       <div onClick={this.props.deleteCard}>
-        <span alt="delete this">🗑</span>
+        <span alt="delete this"> <img src={trashCan} className="trashCan" alt="trash" /> </span>
       </div>
 
       <div onClick={this.props.toggleStar}>
