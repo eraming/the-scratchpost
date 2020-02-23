@@ -1,8 +1,8 @@
 .App {
-    background: #d3d3d3;
+    background-image: url("/crossline-lines.png"); 
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1fr minmax(auto, 800px) 1fr;
+    grid-template-columns: 1 minmax(auto, 800px) 1;
     grid-template-rows: 100px auto;
     grid-row-gap: 10px;
     grid-column-gap: 10px;
@@ -10,7 +10,11 @@
 }
 
 .App-navigation {
+    grid-column: 2;
+    display: flex;
     font-style: normal;
+    justify-content: space-evenly;
+    align-items: center;
     padding: 10px;
     color: white;
 }
