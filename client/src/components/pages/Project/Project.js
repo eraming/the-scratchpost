@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './Project.css';
 import Card from '../../Card/Card.js'
 import {Button} from 'kc-react-widgets';
-
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import 'react-tabs/style/react-tabs.css';
 const arrayMove = require('array-move');
 
 
@@ -10,6 +11,7 @@ class Project extends Component {
   state = {
     cards: [],
     isStarred: false,
+    highlight: true,
     textarea: `Multiline example
     text value`,
     slug: '',
@@ -18,11 +20,9 @@ class Project extends Component {
     availableCards: [],
   }
 
-
   componentDidMount() {
     this.fetchCards();
   }
-
 
   fetchCards() {
 
@@ -47,9 +47,6 @@ class Project extends Component {
       .then(data => {
         console.log('Got this back', data);
         // Call method to refresh data
-        this.setState({
-          newCards: this.state.cards
-         })
         this.fetchCards();
       });
   }
@@ -76,7 +73,7 @@ class Project extends Component {
     });
   }
 
-  toggleStar = (card, documentId) => {
+  toggleStar = (card) => {
     console.log('Sending PUT for', card._id);
       card.isStarred = !card.isStarred
 
@@ -93,107 +90,50 @@ class Project extends Component {
         console.log('Got this back', data);
 
         this.setState({
-          newCards: this.state.cards
+          cards: this.state.cards
          })
-         this.fetchCards();
       });
   };
 
 
-  // virtualServerCallback = (newState) => {
-  //    if (this.state.simulateXHR) {
-  //    window.setTimeout(function() {
-  //      this.changeState(newState);
-  //    }.bind(this), this.state.XHRDelay);
-  //    } else {
-  //    this.changeState(newState);
-  //    }
-  //  };
-
-  // isStringAcceptable = (string) => {
-  // return (string.length >= 1);  // Minimum 4 letters long
-  // };
+  isStringAcceptable = (string) => {
+  return (string.length >= 1);  // Minimum 4 letters long
+  };
 
 changeState = (newState) => {
 this.setState(newState);
 };
 
-onChangeSlug = (ev, index) => {
+onChangeSlug = (ev) => {
   let value = ev.target.value;
   console.log('getting a new title', value);
-  const cardsCopy = this.state.cards.slice();
-  cardsCopy[index].slug = value;
   this.setState({
-    cards: cardsCopy,
+    slug: value,
   });
 }
 
-onChangeContent = (ev, index) => {
+onChangeContent = (ev) => {
   let value = ev.target.value;
   console.log('getting a new value!', value);
-  const cardsCopy = this.state.cards.slice();
-  cardsCopy[index].content = value;
   this.setState({
-    cards: cardsCopy,
+    content: value,
   });
 }
 
-sendContent = (index) => {
-  const cardData = this.state.cards[index];
-  const formData = {
-    slug: cardData.slug,
-    content: cardData.content,
-    isStarred: cardData.isStarred,
-  };
+onNewCard = (title, index) => {
+  const newCards = this.state.newCards.slice();
+  const availableCards = this.state.availableCards.slice();
+  const newCard = availableCards[index];
 
-  const documentId = cardData._id;
-  fetch('/api/mongodb/projects/?_id=' + documentId, {
-      method: 'PUT',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(formData),
-    })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Got this back', data);
-      console.log(formData)
-      this.setState ({
-        newCards: this.state.cards
-      })
-      
-    });
-}
-
-
-onNewCard = (card, index, formData) => {
-  const documentId = card._id;
-  fetch('/api/mongodb/projects/?_id=' + documentId, {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(formData),
-  })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Got this back', data);
-    console.log(formData)
-    this.setState ({
-      newCards: this.state.cards,
-      isStarred: false
-    });
-    this.fetchCards();
-  });
-  // const newCards = this.state.newCards.slice();
-  // const availableCards = this.state.availableCards.slice();
-  // const newCard = availableCards[index];
-
-  // newCards.push(newCard);
-  // availableCards.splice(index, 1)
+  newCards.push(newCard);
+  availableCards.splice(index, 1)
 
   // console.log('new card', index, title)
-  // console.log('new card', newCards)
-  // this.setState({
-  //   newCards: this.state.cards,
-  //   availableCards: availableCards,
-  // });
+  console.log('new card', newCards)
+  this.setState({
+    newCards: newCards,
+    availableCards: availableCards,
+  });
 };
 
 removeCard = (title, index) => {
@@ -214,46 +154,84 @@ removeCard = (title, index) => {
 
 
 
-
   render() {
 
     return (
+<div className="Project">
+      <div className="ProjectNavBar">
 
-      <div className="Project">
 
-        <h1>east bay scenes project</h1>
+
+  <Tabs>
+  <TabList>
+    <Tab>project 1</Tab>
+    <Tab>proj 2</Tab>
+  </TabList>
+
+  <TabPanel>
+    <h2>east bay scenes project</h2>
+  </TabPanel>
+  <TabPanel>
+    <h2>east bay scenes </h2>
+  </TabPanel>
+</Tabs>
 
         <Button onClick={this.onNewCard}>
               new card
         </Button>
-
+      </div>
 
         <div className="Project-board">
 
-      
+        {
+          this.state.cards.map((card, index) => (
 
-        {this.state.cards.map((card, index) => (
-          
+            <Card
+            cardId={card._id}
+            cardSlug={card.title}
+            cardText={card.text}
+            deleteCard={() => this.deleteCard(card._id)}
+            toggleStar={() => this.toggleStar(card)}
+
+            onChangeContent={this.onChangeContent}
+            onChangeSlug={this.onChangeSlug}
+            value={this.state.slug}
+            content={this.state.content}
+            isStarred={card.isStarred}
+            />
+
+          ))
+        }
+
+        {this.state.newCards.map((index) => (
               <Card
-                cardId={card._id}
-                cardSlug={card.slug}
-                cardText={card.content}
-                deleteCard={() => this.deleteCard(card._id)}
-                toggleStar={() => this.toggleStar(card, index)}
-                
                 className="card--show card"
-                slugValue={this.state.slug}
-                contentValue={this.state.content}
-                
-                onChangeSlug={(ev) => this.onChangeSlug(ev, index)}
-                onClickSend={() => this.sendContent(index)}
-                onChangeContent={(ev) => this.onChangeContent(ev, index)}
+
+
+                contents={this.state.contents}
+                value={this.state.content}
+                onChangeContent={this.onChangeContent}
+                onChangeTitle={this.onChangeTitle}
+                onClickSend={this.sendContent}
                 >
+
+
+                   {/* <Star>
+                  onClick={() => this.Toggle}
+                  stars={this.state.stars}
+                  onStarToggle={this.toggleStar}
+                  </Star> */}
+
+
 
               </Card>
               ))
-              
             }
+
+
+
+
+
         </div>
       </div>
     );
