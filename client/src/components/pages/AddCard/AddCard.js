@@ -41,7 +41,7 @@ class AddCard extends Component {
         text: this.state.text,
         isStarred: this.state.isStarred,
         position: position
-      };    
+      };
 
 
       fetch('/api/mongodb/projects/', {
