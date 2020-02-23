@@ -142,7 +142,6 @@ sendContent = (index) => {
 
 onNewCard = (card, index, formData) => {
   const documentId = card._id;
-  
   fetch('/api/mongodb/projects/?_id=' + documentId, {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
