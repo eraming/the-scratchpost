@@ -5,22 +5,32 @@ project = {
 	  {
 	    "slug": "<string>",
 	    "content": "<string>",
-	    "position": "<integer>",
 	    "isStarred": "<boolean>",
-	    "act": 1, // optional
 	  },
 	  {
-	    "card_id": "<integer>",
 	    "slug": "<string>",
 	    "content": "<string>",
-	    "position": "<integer>",
 	    "isStarred": "<boolean>"
 	  }
 	]
 }
 
-
+// {
+// 	"title": "Test Project",
+// 	"cards": [
+// 	  {
+// 	    "slug": "INT. LEILA CAFE - DAY",
+// 	    "content": "Three coders get together for coffee",
+// 	    "isStarred": "False",
+// 	  },
+// 	  {
+// 	    "slug": "EXT. HOUSE - NIGHT",
+// 	    "content": "A cat is sitting on the porch, licking itself by the light of a full moon.",
+// 	    "isStarred": "False"
+// 	  }
+// 	]
+// }
 
 
 // to access a single card:
-// project.acts[actIndex].cards[cardIndex]
+// project.cards[cardIndex]

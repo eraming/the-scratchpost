@@ -16,11 +16,6 @@ class Card extends Component {
   }
 
 
-changeState = (newState) => {
-  this.setState(newState);
-};
-
-
 render() {
 
   let starIcon = starEmpty;
