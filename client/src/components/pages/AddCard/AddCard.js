@@ -36,26 +36,27 @@ class AddCard extends Component {
     // get the data.length (position) from the callback above and put it in the form
     this.fetchCardsLength((position) => {
 
-      const formData = {
-        title: this.state.title,
-        text: this.state.text,
-        isStarred: this.state.isStarred,
-        position: position
-      };
+    const formData = {
+      title: this.state.title,
+      text: this.state.text,
+      isStarred: this.state.isStarred,
+      position: position
+    };
 
 
-      fetch('/api/mongodb/projects/', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(formData),
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Got this back', data);
+    fetch('/api/mongodb/projects/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(formData),
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Got this back', data);
 
-          // Redirect to profile
-          this.props.history.push('/profile/');
-        });
+        // Redirect to profile
+        this.props.history.push('/profile/');
+      });
+
     });
   }
 
@@ -84,7 +85,7 @@ class AddCard extends Component {
         <button onClick={this.submit}>Add to project</button>
 
       </div>
-      
+
 
     );
   }
