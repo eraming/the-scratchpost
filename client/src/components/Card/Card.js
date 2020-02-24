@@ -16,25 +16,9 @@ class Card extends Component {
   }
 
 
-virtualServerCallback = (newState) => {
-    if (this.state.simulateXHR) {
-    window.setTimeout(function() {
-    this.changeState(newState);
-    }.bind(this), this.state.XHRDelay);
-} else {
-this.changeState(newState);
-}
-};
-
-
-isStringAcceptable = (string) => {
-return (string.length >= 1);  // Minimum 4 letters long
-};
-
 changeState = (newState) => {
   this.setState(newState);
 };
-
 
 
 render() {
@@ -56,7 +40,6 @@ return (
       className="Slug"
       value={this.props.cardSlug}
       onChange={this.props.onChangeSlug}
-      // toggleEditing = {() => this.toggleItemEditing(index)}
       placeholder="INT/EXT LOCATION"
       cols="20"
       rows="2"
