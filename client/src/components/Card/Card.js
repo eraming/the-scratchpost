@@ -3,6 +3,8 @@ import './Card.css';
 import starEmpty from './star_empty.svg';
 import starFilled from './starFilled.svg';
 import trashCan from './trash.svg';
+import saveFloppy from './floppy.svg';
+
 
 class Card extends Component {
   state = {
