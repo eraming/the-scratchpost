@@ -62,6 +62,19 @@ return (
             Save
         </button>
 
+        <button
+          className="left-btn"
+          onClick={this.props.onLeftMove}>
+          ←
+        </button>
+
+        <button
+          className="right-btn"
+          onClick={this.props.onRightMove}>
+          →
+        </button>
+
+
       </div>
   </div>
 

@@ -219,7 +219,11 @@ class Project extends Component {
               
               onChangeSlug={(ev) => this.onChangeSlug(ev, index)}
               onClickSend={() => this.sendContent(index)}
-              onChangeContent={(ev) => this.onChangeContent(ev, index)}>                  
+              onChangeContent={(ev) => this.onChangeContent(ev, index)}
+              onLeftMove={() => this.moveCardLeft(card._id)}
+              onRightMove={() => this.moveCardRight(card._id)}
+            >
+              
             </Card>
             ))              
           }
