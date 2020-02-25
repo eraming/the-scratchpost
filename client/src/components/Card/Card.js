@@ -8,7 +8,7 @@ import saveFloppy from './floppy.svg';
 
 
 class Card extends Component {
-  
+
 render() {
 
   let starIcon = starEmpty;
@@ -19,6 +19,7 @@ render() {
 return (
 
   <div className="Project-card" key={this.props.cardId}>
+
     <textarea
       className="Slug"
       value={this.props.cardSlug}
@@ -41,28 +42,27 @@ return (
     </div>
 
       <div className="Project-CardActions">
+
         <div onClick={this.props.deleteCard}>
-          <span alt="delete this"> 
-            <img 
-              src={trashCan} 
-              className="trashCan" 
-              alt="trash" /> 
+          <span alt="delete this">
+            <img
+              src={trashCan}
+              className="trashCan"
+              alt="trash" />
           </span>
-
-
-
-
         </div>
 
+
         <div onClick={this.props.toggleStar}>
-          <img 
-            src={starIcon} 
-            className="starEmpty" 
+          <img
+            src={starIcon}
+            className="starEmpty"
             alt="star" />
 
         </div>
 
 
+        <div className="save-button">
         <Button
             size="small"
             depth="shallow"
@@ -72,6 +72,8 @@ return (
             onClick={this.props.onClickSend}>
             Save
         </Button>
+        </div>
+
 
         <button
           className="left-btn"
@@ -87,9 +89,8 @@ return (
 
 
 
+</div>
       </div>
-
-
 
 
 

@@ -53,7 +53,7 @@
   background-color: rgb(226, 200, 188);
   box-shadow: 0 5px #666;
   transform: translateY(4px);
-  
+
 }
 
 .save-btn:hover {
@@ -66,6 +66,7 @@
   border: none;
   outline: none;
   overflow: auto;
+  resize: none;
 }
 
 
@@ -80,8 +81,9 @@
   outline: none;
   text-transform: uppercase;
   margin-top: 25px;
+  resize: none;
 
- 
+
 }
 
 .Content {
@@ -91,9 +93,7 @@
   color: black;
   width: 150px;
   height: 225px;
-  border: none; 
+  border: none;
   outline: none;
-
+  resize: none;
 }
-
-
