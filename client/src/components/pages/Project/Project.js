@@ -9,12 +9,16 @@ const arrayMove = require('array-move');
 
 class Project extends Component {
   state = {
-    cards: []
+    cards: [],
+    projectNames: [],
   }
 
   componentDidMount() {
     this.fetchCards();
+
   }
+
+
 
   fetchCards() {
    console.log('(log) Fetching data from API');

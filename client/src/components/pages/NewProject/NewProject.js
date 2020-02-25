@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import './AddCard.css';
+import './NewProject.css';
 
-class AddCard extends Component {
+class NewProject extends Component {
   state = {
-    title: '',
-    text: '',
-    isStarred: false,
-    position: null
+    projects: '',
   }
 
-  fetchCardsLength(callback) {
+  fetchProjectLength(callback) {
     console.log('Fetching data from API');
     fetch('/api/mongodb/projects/')
       .then(response => response.json())
@@ -21,37 +18,41 @@ class AddCard extends Component {
       });
   }
 
-  onChangeContent = (ev) => {
+  onChangeProjectNotes = (ev) => {
     this.setState({
-      text: ev.target.value,
+      notes: ev.target.value,
     });
   }
 
-  onChangeTitle = (ev) => {
+  onChangeProjectName = (ev) => {
     this.setState({
       title: ev.target.value,
     });
   }
 
   submit = () => {
-    this.fetchCardsLength((position) => {
+    this.fetchProjectLength((position) => {
 
     const formData = {
       title: this.state.title,
-      text: this.state.text,
-      isStarred: this.state.isStarred,
-      position: position
+      notes: this.state.notes
     };
 
 
-    fetch('/api/mongodb/projects/', {
+    fetch('/api/mongodb/actualprojects/', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(formData),
       })
       .then(response => response.json())
       .then(data => {
+        this.fetchProjects();
         console.log('Got this back', data);
+        this.setState({
+          projects: data
+        });
+
+      
 
         // Redirect to profile
         this.props.history.push('/profile/');
@@ -63,26 +64,26 @@ class AddCard extends Component {
 
   render() {
     return (
-      <div className="AddCard">
-        <h1>add a beat</h1>
+      <div className="NewProject">
+        <h1>new project</h1>
         <input
-            name="title"
-            placeholder="slugline"
-            value={this.state.title}
-            onChange={this.onChangeTitle}
+            name="project name"
+            placeholder="project name"
+            value={this.state.projectName}
+            onChange={this.onChangeProjectName}
           />
         <br />
 
         <textarea
-            name="content"
-            placeholder="content"
-            value={this.state.details}
-            onChange={this.onChangeContent}
+            name="notes"
+            placeholder="project notes"
+            value={this.state.projectNotes}
+            onChange={this.onChangeProjectNotes}
           />
 
         <br />
 
-        <button onClick={this.submit}>Add to project</button>
+        <button onClick={this.submit}>Add project</button>
 
       </div>
 
@@ -91,4 +92,4 @@ class AddCard extends Component {
   }
 }
 
-export default AddCard;
+export default NewProject;

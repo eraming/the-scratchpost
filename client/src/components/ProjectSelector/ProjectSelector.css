@@ -1,0 +1,28 @@
+.ProjectSelector {
+    grid-column: 1;
+    grid-row: 2 / span 2;
+    background: rgb(255, 255, 255);
+    padding-top: 10px;
+    height: calc(100vh - 110px);
+    color: #CAB6A9;
+    user-select: none;
+}
+
+
+.ProjectSelector-projectHeader {
+    font-size: 18pt;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.ProjectSelector-project {
+    font-size: 18pt;
+    cursor: pointer;
+    padding: 5px;
+    margin-top: 10px;
+}
+
+.ProjectSelector-project--selected {
+    background: #4C9689;
+    color: white;
+}
