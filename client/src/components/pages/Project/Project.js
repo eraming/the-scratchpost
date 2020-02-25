@@ -9,7 +9,15 @@ const arrayMove = require('array-move');
 
 class Project extends Component {
   state = {
-    cards: []
+    cards: [],
+    isStarred: false,
+    highlight: true,
+    textarea: `Multiline example
+    text value`,
+    slug: '',
+    content: '',
+    newCards: [],
+    availableCards: [],
   }
 
   componentDidMount() {
@@ -17,7 +25,8 @@ class Project extends Component {
   }
 
   fetchCards() {
-   console.log('(log) Fetching data from API');
+
+    console.log('(log) Fetching data from API');
     fetch('/api/mongodb/projects/')
       .then(response => response.json())
       .then(data => {
@@ -54,7 +63,6 @@ class Project extends Component {
 
   }
 
-// use arrayMove
   moveCardRight(documentId) {
     const cards = this.state.cards;
     const fromIndex = cards.findIndex(card => card._id === documentId);
@@ -65,7 +73,6 @@ class Project extends Component {
     });
   }
 
-  //method to toggle stars
   toggleStar = (card) => {
     console.log('Sending PUT for', card._id);
       card.isStarred = !card.isStarred
@@ -89,140 +96,161 @@ class Project extends Component {
   };
 
 
-//update card title
-  onChangeSlug = (ev, index) => {
-    let value = ev.target.value;
-    console.log('getting a new title', value);
-    const cardsCopy = this.state.cards.slice();
-    cardsCopy[index].slug = value;
-    this.setState({
-      cards: cardsCopy,
-    });
-  }
+isStringAcceptable = (string) => {
+return (string.length >= 1);  // Minimum 4 letters long
+};
 
-//update card content
-  onChangeContent = (ev, index) => {
-    let value = ev.target.value;
-    console.log('getting a new value!', value);
-    const cardsCopy = this.state.cards.slice();
-    cardsCopy[index].content = value;
-    this.setState({
-      cards: cardsCopy,
-    });
-  }
+changeState = (newState) => {
+this.setState(newState);
+};
 
-//save card's title and content
-  sendContent = (index) => {
-    const cardData = this.state.cards[index];
-    const formData = {
-      slug: cardData.slug,
-      content: cardData.content,
-      isStarred: cardData.isStarred,
-    };
+onChangeSlug = (ev, index) => {
+  let value = ev.target.value;
+  console.log('getting a new title', value);
+  const cardsCopy = this.state.cards.slice();
+  cardsCopy[index].slug = value;
+  this.setState({
+    cards: cardsCopy,
+  });
+}
 
-    const documentId = cardData._id;
-    fetch('/api/mongodb/projects/?_id=' + documentId, {
-        method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(formData),
-      })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Got this back', data);
-        console.log(formData)
-        this.setState ({
-          newCards: this.state.cards
-        })      
-      });
-  }
+onChangeContent = (ev, index) => {
+  let value = ev.target.value;
+  console.log('getting a new value!', value);
+  const cardsCopy = this.state.cards.slice();
+  cardsCopy[index].content = value;
+  this.setState({
+    cards: cardsCopy,
+  });
+}
 
 
-//function to generate a new card
-  onNewCard = (card ) => {
-    const documentId = card._id;
-    const formData = {
-      slug: '',
-      content: '',
-      isStarred: false
-    };
+sendContent = (index) => {
+  const cardData = this.state.cards[index];
+  const formData = {
+    slug: cardData.slug,
+    content: cardData.content,
+    isStarred: cardData.isStarred,
+  };
 
-    fetch('/api/mongodb/projects/?_id=' + documentId, {
-      method: 'POST',
+
+  const documentId = cardData._id;
+  fetch('/api/mongodb/projects/?_id=' + documentId, {
+      method: 'PUT',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(formData),
     })
     .then(response => response.json())
     .then(data => {
       console.log('Got this back', data);
-      console.log()
+      console.log(formData)
       this.setState ({
         newCards: this.state.cards
-      });
-      this.fetchCards();
+      })
+
     });
+}
+
+
+onNewCard = (card ) => {
+  const documentId = card._id;
+  const formData = {
+    slug: '',
+    content: '',
+    isStarred: false
   };
 
-
-  removeCard = (title, index) => {
-    const newCards = this.state.newCards.slice();
-    const availableCards = this.state.availableCards.slice();
-    const newCard = newCards[index];
-
-    availableCards.push(newCard);
-    newCards.splice(index, 1);
-
-    console.log('new card', newCards)
-    this.setState({
-      availableCards: availableCards,
-      newCards: newCards
+  fetch('/api/mongodb/projects/?_id=' + documentId, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(formData),
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Got this back', data);
+    console.log()
+    this.setState ({
+      newCards: this.state.cards
     });
-  };
+    this.fetchCards();
+  });
+};
+
+removeCard = (title, index) => {
+  const newCards = this.state.newCards.slice();
+  const availableCards = this.state.availableCards.slice();
+  const newCard = newCards[index];
+
+  availableCards.push(newCard);
+  newCards.splice(index, 1);
+
+  console.log('new card', newCards)
+  this.setState({
+    availableCards: availableCards,
+    newCards: newCards
+  });
+};
 
 
   render() {
 
     return (
-      <div className="Project">
-        <div className="ProjectNavBar">
-          <Tabs>
-            <TabList>
-              <Tab>project 1</Tab>
-              <Tab>proj 2</Tab>
-            </TabList>
+<div className="Project">
+      <div className="ProjectNavBar">
 
-            <TabPanel>
-              <h2>east bay scenes project</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>east bay scenes </h2>
-            </TabPanel>
-          </Tabs>
 
-          <Button onClick={this.onNewCard}>
-                new card
-          </Button>
-        </div>
+
+  <Tabs>
+    <TabList>
+
+ {/*{this.state.projects.map((project) => (
+    <Tab/>*/}
+
+
+
+{/*))
+
+}*/}
+
+  <TabPanel>
+    <h2>east bay scenes project</h2>
+  </TabPanel>
+  <TabPanel>
+    <h2>east bay scenes </h2>
+  </TabPanel>
+</TabList>
+</Tabs>
+
+
+
+        <Button onClick={this.onNewCard}>
+              new card
+        </Button>
+      </div>
 
         <div className="Project-board">
-          {this.state.cards.map((card, index) => (
-            <Card
-              cardId={card._id}
-              cardSlug={card.slug}
-              cardText={card.content}
-              deleteCard={() => this.deleteCard(card._id)}
-              toggleStar={() => this.toggleStar(card)}
-              isStarred={card.isStarred}
-              
-              className="card--show card"
-              slugValue={this.state.slug}
-              contentValue={this.state.content}
-              
-              onChangeSlug={(ev) => this.onChangeSlug(ev, index)}
-              onClickSend={() => this.sendContent(index)}
-              onChangeContent={(ev) => this.onChangeContent(ev, index)}>                  
-            </Card>
-            ))              
-          }
+
+
+         {this.state.cards.map((card, index) => (
+
+              <Card
+                cardId={card._id}
+                cardSlug={card.slug}
+                cardText={card.content}
+                deleteCard={() => this.deleteCard(card._id)}
+                toggleStar={() => this.toggleStar(card)}
+                isStarred={card.isStarred}
+
+                className="card--show card"
+                slugValue={this.state.slug}
+                contentValue={this.state.content}
+
+                onChangeSlug={(ev) => this.onChangeSlug(ev, index)}
+                onClickSend={() => this.sendContent(index)}
+                onChangeContent={(ev) => this.onChangeContent(ev, index)}>
+              </Card>
+              ))
+            }
         </div>
       </div>
     );
