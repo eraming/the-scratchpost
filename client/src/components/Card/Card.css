@@ -17,12 +17,16 @@
 }
 
 .Project-CardActions > div:first-child {
-  right: 10px;
+  right: 20px;
 }
 
-.Project-CardActions > div:last-child {
-  left: 10px;
+.Project-LowerCardActions {
+  display: inline-block;
 }
+
+
+
+
 
 .starEmpty {
   width: 20px;
