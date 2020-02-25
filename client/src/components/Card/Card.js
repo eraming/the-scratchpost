@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Card.css';
+import {Button} from 'kc-react-widgets';
 import starEmpty from './star_empty.svg';
 import starFilled from './starFilled.svg';
 import trashCan from './trash.svg';
@@ -47,6 +48,10 @@ return (
               className="trashCan" 
               alt="trash" /> 
           </span>
+
+
+
+
         </div>
 
         <div onClick={this.props.toggleStar}>
@@ -54,13 +59,19 @@ return (
             src={starIcon} 
             className="starEmpty" 
             alt="star" />
+
         </div>
 
-        <button
+
+        <Button
+            size="small"
+            depth="shallow"
+            shape="rounded"
+            iconRight={saveFloppy}
             className="save-btn"
             onClick={this.props.onClickSend}>
             Save
-        </button>
+        </Button>
 
         <button
           className="left-btn"
@@ -75,8 +86,9 @@ return (
         </button>
 
 
+
       </div>
-  </div>
+
 
 
 
