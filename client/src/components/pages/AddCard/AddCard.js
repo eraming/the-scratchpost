@@ -17,7 +17,6 @@ class AddCard extends Component {
         console.log('Got data back', data);
         console.log('array length:', data.length);
         callback(data.length);
-        // return data.length;
       });
   }
 
@@ -34,6 +33,7 @@ class AddCard extends Component {
   }
 
   submit = () => {
+    // get the data.length (position) from the callback above and put it in the form
     this.fetchCardsLength((position) => {
 
     const formData = {

@@ -230,27 +230,30 @@ removeCard = (title, index) => {
 
         <div className="Project-board">
 
+          {this.state.cards.map((card, index) => (
+            <Card
+              cardId={card._id}
+              cardSlug={card.slug}
+              cardText={card.content}
+              deleteCard={() => this.deleteCard(card._id)}
+              toggleStar={() => this.toggleStar(card)}
+              isStarred={card.isStarred}
+              
+              className="card--show card"
+              slugValue={this.state.slug}
+              contentValue={this.state.content}
+              
+              onChangeSlug={(ev) => this.onChangeSlug(ev, index)}
+              onClickSend={() => this.sendContent(index)}
+              onChangeContent={(ev) => this.onChangeContent(ev, index)}
+              onLeftMove={() => this.moveCardLeft(card._id)}
+              onRightMove={() => this.moveCardRight(card._id)}
+            >
+              
+            </Card>
+            ))              
+          }
 
-         {this.state.cards.map((card, index) => (
-
-              <Card
-                cardId={card._id}
-                cardSlug={card.slug}
-                cardText={card.content}
-                deleteCard={() => this.deleteCard(card._id)}
-                toggleStar={() => this.toggleStar(card)}
-                isStarred={card.isStarred}
-
-                className="card--show card"
-                slugValue={this.state.slug}
-                contentValue={this.state.content}
-
-                onChangeSlug={(ev) => this.onChangeSlug(ev, index)}
-                onClickSend={() => this.sendContent(index)}
-                onChangeContent={(ev) => this.onChangeContent(ev, index)}>
-              </Card>
-              ))
-            }
         </div>
       </div>
     );
