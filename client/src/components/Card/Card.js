@@ -49,6 +49,10 @@ return (
               className="trashCan"
               alt="trash" />
           </span>
+
+
+
+
         </div>
 
         <div onClick={this.props.toggleStar}>
@@ -56,7 +60,13 @@ return (
             src={starIcon}
             className="starEmpty"
             alt="star" />
+
         </div>
+
+
+
+
+
       </div>
 
         <Button
@@ -68,8 +78,7 @@ return (
             onClick={this.props.onClickSend}>
             Save
         </Button>
-
-
+      
         <button
           className="left-btn"
           onClick={this.props.onLeftMove}>
@@ -83,8 +92,9 @@ return (
         </button>
 
 
+
       </div>
-  </div>
+
 
 
 
