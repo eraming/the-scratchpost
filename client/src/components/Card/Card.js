@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Button} from 'kc-react-widgets';
 import './Card.css';
 import starEmpty from './star_empty.svg';
 import starFilled from './starFilled.svg';
@@ -8,7 +7,7 @@ import saveFloppy from './floppy.svg';
 
 
 class Card extends Component {
-
+  
 render() {
 
   let starIcon = starEmpty;
@@ -26,8 +25,7 @@ return (
       placeholder="INT/EXT LOCATION"
       cols="20"
       rows="2"
-      wrap="hard"
-      />
+      wrap="hard" />
 
     <div className="content">
         <textarea
@@ -43,32 +41,26 @@ return (
 
       <div className="Project-CardActions">
         <div onClick={this.props.deleteCard}>
-          <span alt="delete this">
-            <img
-              src={trashCan}
-              className="trashCan"
-              alt="trash" />
+          <span alt="delete this"> 
+            <img 
+              src={trashCan} 
+              className="trashCan" 
+              alt="trash" /> 
           </span>
         </div>
 
         <div onClick={this.props.toggleStar}>
-          <img
-            src={starIcon}
-            className="starEmpty"
+          <img 
+            src={starIcon} 
+            className="starEmpty" 
             alt="star" />
         </div>
-      </div>
 
-        <Button
-            size="small"
-            depth="shallow"
-            shape="rounded"
-            iconRight={saveFloppy}
+        <button
             className="save-btn"
             onClick={this.props.onClickSend}>
             Save
-        </Button>
-
+        </button>
 
         <button
           className="left-btn"
