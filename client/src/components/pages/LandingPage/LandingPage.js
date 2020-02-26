@@ -8,11 +8,11 @@ class LandingPage extends Component {
       <div className="LandingPage">
         <header className="LandingPage-header">
           <p>
-            the ScratchPost<br />
-            a digital beatsheet organizer for screenwriters
+            <strong> the ScratchPost</strong> <br />
+            a lo-fi digital beatsheet organizer<br />
+            for screenwriters and creatives
           </p>
-          <Link to="/profile/">Projects</Link>
-          <Link to="/write/">Add a beat</Link>
+          <Link to="/profile/">add a project</Link>
         </header>
       </div>
     );
