@@ -6,6 +6,7 @@ import background from './crossline-lines.png'
 import LandingPage from './components/pages/LandingPage/LandingPage.js';
 import Project from './components/pages/Project/Project.js';
 import AddCard from './components/pages/AddCard/AddCard.js';
+import TopNav from './components/TopNav/TopNav.js';
 
 
 class App extends Component {
@@ -34,43 +35,11 @@ onNewCard = (title, index) => {
 };
 
 
-
   render() {
     return (
 
       <div className="App">
-        <nav className="App-navigation">
-          <h1 className="App-title">the scratchPost</h1>
-
-          <Link to="/profile/">
-          <Button>
-                home
-             </Button>
-          </Link>
-
-          <Link to="/">
-          <Button>
-                account
-             </Button>
-          </Link>
-
-          <Link to="/add/">
-          <Button>
-                add beat
-             </Button>
-          </Link>
-
-
-        </nav>
-
-        <div className="App-mainContent">
-
-          <Switch>
-            <Route exact path='/' component={LandingPage} />
-            <Route exact path='/profile/' component={Project} />
-            <Route exact path='/add/' component={AddCard} />
-          </Switch>
-        </div>
+      <TopNav />
 
       </div>
     );
