@@ -8,11 +8,11 @@ class LandingPage extends Component {
       <div className="LandingPage">
         <header className="LandingPage-header">
           <p>
-            Kickstart Coding - Frontend React<br />
-            MERN Starter Project
+            the ScratchPost<br />
+            a digital beatsheet organizer for screenwriters
           </p>
-          <Link to="/blog/">Blog</Link>
-          <Link to="/write/">Write article</Link>
+          <Link to="/profile/">Projects</Link>
+          <Link to="/write/">Add a beat</Link>
         </header>
       </div>
     );
