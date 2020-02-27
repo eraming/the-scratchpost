@@ -17,12 +17,14 @@
 }
 
 .Project-CardActions > div:first-child {
-  right: 10px;
+  right: 20px;
 }
 
-.Project-CardActions > div:last-child {
-  left: 10px;
+.Project-LowerCardActions {
+  display: inline-block;
 }
+
+
 
 .starEmpty {
   width: 20px;
@@ -49,23 +51,13 @@
   transition: all .2s ease-in-out;
 }
 
-.save-btn:active {
-  background-color: rgb(226, 200, 188);
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
-  
-}
 
-.save-btn:hover {
-  background-color: rgb(226, 200, 188);
-  transition: .5s;
-  transform: scale(1.05);
-}
 
 .textarea, input{
   border: none;
   outline: none;
   overflow: auto;
+  resize: none;
 }
 
 
@@ -80,8 +72,9 @@
   outline: none;
   text-transform: uppercase;
   margin-top: 25px;
+  resize: none;
 
- 
+
 }
 
 .Content {
@@ -91,9 +84,7 @@
   color: black;
   width: 150px;
   height: 225px;
-  border: none; 
+  border: none;
   outline: none;
-
+  resize: none;
 }
-
-

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Card.css';
+import {Button} from 'kc-react-widgets';
 import starEmpty from './star_empty.svg';
 import starFilled from './starFilled.svg';
 import trashCan from './trash.svg';
@@ -7,7 +8,7 @@ import saveFloppy from './floppy.svg';
 
 
 class Card extends Component {
-  
+
 render() {
 
   let starIcon = starEmpty;
@@ -18,6 +19,7 @@ render() {
 return (
 
   <div className="Project-card" key={this.props.cardId}>
+
     <textarea
       className="Slug"
       value={this.props.cardSlug}
@@ -40,31 +42,55 @@ return (
     </div>
 
       <div className="Project-CardActions">
+
         <div onClick={this.props.deleteCard}>
-          <span alt="delete this"> 
-            <img 
-              src={trashCan} 
-              className="trashCan" 
-              alt="trash" /> 
+          <span alt="delete this">
+            <img
+              src={trashCan}
+              className="trashCan"
+              alt="trash" />
           </span>
         </div>
 
+
         <div onClick={this.props.toggleStar}>
-          <img 
-            src={starIcon} 
-            className="starEmpty" 
+          <img
+            src={starIcon}
+            className="starEmpty"
             alt="star" />
+
         </div>
 
-        <button
-            className="save-btn"
-            onClick={this.props.onClickSend}>
-            Save
-        </button>
+</div>
+
+
+<div className="Project-LowerCardActions">
+  <button
+    className="left-btn"
+    onClick={this.props.onLeftMove}>
+    ←
+  </button>
+
+  <button
+    className="right-btn"
+    onClick={this.props.onRightMove}>
+    →
+  </button>
+
+
+  <Button
+      size="small"
+      depth="shallow"
+      shape="rounded"
+      iconRight={saveFloppy}
+      className="save-btn"
+      onClick={this.props.onClickSend}>
+      Save
+  </Button>
+</div>
+
 
       </div>
-  </div>
-
 
 
 

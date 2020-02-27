@@ -14,7 +14,6 @@ class NewProject extends Component {
         console.log('Got data back', data);
         console.log('array length:', data.length);
         callback(data.length);
-        // return data.length;
       });
   }
 
@@ -34,8 +33,7 @@ class NewProject extends Component {
 
   submit = () => {
     this.fetchProjectLength((position) => {
-
-    const formData = {
+      const formData = {
       title: this.state.title,
       notes: this.state.notes
     };
