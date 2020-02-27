@@ -42,21 +42,21 @@ onNewCard = (title, index) => {
         <nav className="TopNav-navigation">
           <h1 className="TopNav-title">the scratchPost</h1>
 
-          <Link to="/profile/">
+          <Link to="/projects/">
           <Button>
-                home
+                the post
              </Button>
           </Link>
 
           <Link to="/">
           <Button>
-                account
+                home
              </Button>
           </Link>
 
           <Link to="/add/">
           <Button>
-                add beat
+                add project
              </Button>
           </Link>
 
@@ -67,7 +67,7 @@ onNewCard = (title, index) => {
 
           <Switch>
             <Route exact path='/' component={LandingPage} />
-            <Route exact path='/profile/' component={Project} />
+            <Route exact path='/projects/' component={Project} />
             <Route exact path='/add/' component={AddCard} />
           </Switch>
         </div>
