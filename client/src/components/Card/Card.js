@@ -77,7 +77,9 @@ return (
     →
   </button>
 
+<i className="save-btn">
 
+</i>
   <Button
       size="small"
       depth="shallow"
@@ -85,7 +87,7 @@ return (
       iconRight={saveFloppy}
       className="save-btn"
       onClick={this.props.onClickSend}>
-      Save
+      {/* save */}
   </Button>
 </div>
 

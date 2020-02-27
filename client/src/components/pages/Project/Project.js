@@ -11,15 +11,21 @@ const arrayMove = require('array-move');
 
 
 class Project extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     project: 'project demo',
+  //     stars: [],
+  //     cards: [],
+  //   projectNames: [],
+  //   projects: [],
+  //   selectedProject: ''
+  //   };
   state = {
     cards: [],
     projectNames: [],
-    projects: [
-      'parking-lot',
-      'random',
-      'jokes',
-    ],
-    selectedProject: 'parking-lot'
+    projects: [],
+    selectedProject: 'title should go here'
     
   }
 
@@ -28,14 +34,6 @@ class Project extends Component {
     this.fetchProjects();
 
   }
-
-  // componentDidMount() {
-    
-  //   // TODO:
-  //   // Do fetch (GET) to get all "actualprojects"
-  //   // After fetch, do setState to set the projects list to be
-  //   // the ones that came from the database
-  // }
 
   fetchProjects() {
     console.log('Fetching projects: ');
@@ -48,7 +46,7 @@ class Project extends Component {
         });
       });
   }
-
+  
   selectProject = (projectName) => {
     this.setState({
       selectedProject: projectName,
@@ -56,7 +54,7 @@ class Project extends Component {
   }
 
 
-
+  //fetch cards from DB
   fetchCards() {
    console.log('(log) Fetching data from API');
     fetch('/api/mongodb/projects/')
@@ -69,6 +67,7 @@ class Project extends Component {
       });
   }
 
+  //delete a card entry
   deleteCard(documentId) {
     console.log('Sending DELETE for', documentId);
     // Do the DELETE, using "?_id=" to specify which document we are deleting
@@ -219,6 +218,8 @@ class Project extends Component {
     });
   };
 
+  
+
 
   render() {
 
@@ -226,34 +227,6 @@ class Project extends Component {
       <div className="Project">
 
         <div className="ProjectNavBar">
-
-        {/* <Tabs>
-          <Tab linkClassName={'link-class-0'}>
-            <p>project 0</p>
-        </Tab>
-        <Tab linkClassName={'link-class-1'}>
-          <CustomComponent propA={'foo'} propB={this.handleSomething}/>
-          <p>project 1</p>
-        </Tab>
-        <Tab linkClassName={'link-class-1'}>
-          <CustomComponent propA={'foo'} propB={this.handleSomething}/>
-          <p>project 2</p>
-        </Tab>
-        </Tabs> */}
-
-      {/* <Tabs>
-      <TabList>
-        {
-          this.props.projects.map((projects, index) => (
-            this.props.selectedProject === projects.title? (
-              <Tab>{projects.title}</Tab>
-            ) : (
-              <Tab onClick={() => this.props.onSelectProject(projects.title)} key={index} className="ProjectSelector-project"> {projects.title}</Tab>
-            )
-          ))
-        }
-      </TabList>
-      </Tabs> */}
 
           <Tabs>
 
@@ -264,28 +237,33 @@ class Project extends Component {
               <Tab>
               </Tab>
             </TabList>
-
+         
             {/* <TabPanel>
-              <h2>east bay scenes project</h2>
+              <h2>act I</h2>
             </TabPanel>
             <TabPanel>
-              <h2>east bay scenes </h2>
+              <h2>act II </h2>
             </TabPanel> */}
+
+            <TabPanel>
+            <h2>{this.state.selectedProject}</h2>
+            </TabPanel>
             
           </Tabs>
-
+         
           <Button onClick={this.onNewCard}>
                 new card
           </Button>
         </div>
 
-        {/* <div className="sidebar">
+
+      {/* <div class="sidebar">
         <ProjectSelector
           projects={this.state.projects}
           selectedProject={this.state.selectedProject}
           onSelectProject={this.selectProject} />
         </div> */}
-
+        
         
 
         <div className="Project-board">
@@ -315,6 +293,15 @@ class Project extends Component {
             ))              
           }
         </div>
+
+        {/* <ProjectSelector
+             projects={this.state.projects}
+             selectedProject={this.state.selectedProject}
+             onSelectProject={this.selectProject}
+             onClick={() => this.toggleHidden()}
+             isHidden={!this.state.isHidden} /> */}
+
+
       </div>
     );
   }

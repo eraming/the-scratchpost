@@ -25,6 +25,7 @@ class App extends Component {
             isStarred: true,
             highlight: false,
             textarea: '',
+            isHidden: true
           }
 
           
@@ -40,6 +41,13 @@ class App extends Component {
       <Switch>
         <Route exact path='/' component={LandingPage} />
       </Switch>
+
+      {/* <div class="sidebar">
+        <ProjectSelector
+          projects={this.state.projects}
+          selectedProject={this.state.selectedProject}
+          onSelectProject={this.selectProject} />
+        </div> */}
 
 
       </div>

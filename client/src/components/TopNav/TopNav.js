@@ -18,48 +18,46 @@ class TopNav extends Component {
             isStarred: true,
             highlight: false,
             textarea: '',
-            projects: [
-              'parking-lot',
-              'random',
-              'jokes',
-            ],
-            selectedProject: 'parking-lot'
+            projects: [],
+            selectedProject: '',
+            isHidden: false,
           }
 
-          componentDidMount() {
-            this.fetchProjects();
+    componentDidMount() {
+      this.fetchProjects();
+  
+    }
         
-          }
-        
-          // componentDidMount() {
-            
-          //   // TODO:
-          //   // Do fetch (GET) to get all "actualprojects"
-          //   // After fetch, do setState to set the projects list to be
-          //   // the ones that came from the database
-          // }
-        
-          fetchProjects() {
-            console.log('Fetching projects: ');
-            fetch('/api/mongodb/actualprojects/')
-              .then(response => response.json())
-              .then(data => {
-                console.log('projects back: ', data);
-                this.setState({
-                  projects: data,
-                });
-              });
-          }
-        
-          selectProject = (projectName) => {
-            this.setState({
-              selectedProject: projectName,
-            });
-          }
+    fetchProjects() {
+      console.log('Fetching projects: ');
+      fetch('/api/mongodb/actualprojects/')
+        .then(response => response.json())
+        .then(data => {
+          console.log('projects back: ', data);
+          this.setState({
+            projects: data,
+          });
+        });
+    }
+    
+    //set state of current selected project
+    selectProject = (projectName) => {
+      console.log('selected project: ', projectName)
+      this.setState({
+        selectedProject: projectName,
+      });
+    }
+    
+    //toggle sidebar visibility
+    toggleHidden () {
+      console.log('toggling div');
+      // this.state.isHidden = !this.state.isHidden
+      this.setState({
+        isHidden: !this.state.isHidden
+      })
+  }
 
-
-
-  render() {
+ render() {
     return (
 
       <div className="TopNav">
@@ -67,6 +65,7 @@ class TopNav extends Component {
           <h1 className="TopNav-title">the scratchPost</h1>
 
           <Link to="/projects/">
+
           <Button>
                 the post
              </Button>
@@ -84,13 +83,11 @@ class TopNav extends Component {
              </Button>
           </Link>
 
-
         </nav>
 
         <div className="TopNav-mainContent">
         
-          
-
+      <h2>{this.state.selectedProject}</h2>
           <Switch>
             <Route exact path='/projects/' component={Project} />
             <Route exact path='/add/' component={NewProject} />
@@ -98,10 +95,18 @@ class TopNav extends Component {
         </div>
 
         <div class="sidebar">
-        <ProjectSelector
-          projects={this.state.projects}
-          selectedProject={this.state.selectedProject}
-          onSelectProject={this.selectProject} />
+          {!this.state.isHidden ? 
+             <ProjectSelector
+             projects={this.state.projects}
+             selectedProject={this.state.selectedProject}
+             onSelectProject={this.selectProject}
+             isHidden={this.state.isHidden}
+             onToggleHidden={() => this.toggleHidden()} 
+             />
+          : <button onClick={() => this.toggleHidden()} 
+          className="right-arrow-btn"
+          > →</button>}
+       
         </div>
         
       </div>

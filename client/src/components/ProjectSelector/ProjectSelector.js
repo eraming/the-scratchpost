@@ -4,11 +4,14 @@ import './ProjectSelector.css';
 
 
 class ProjectSelector extends Component {
+  
 
   render() {
     return (
       <div className="ProjectSelector">
-        <div className="ProjectSelector-projectHeader">All Projects</div>
+        <div className="ProjectSelector-projectHeader">
+          All Projects <div onClick={() => this.props.onToggleHidden()}   className="collapse-left-btn">←</div>
+         </div>
         {
           this.props.projects.map((projects, index) => (
             this.props.selectedProject === projects.title? (

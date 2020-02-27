@@ -50,7 +50,7 @@ class NewProject extends Component {
           projects: this.state.projects
         });
         // Redirect to profile
-        this.props.history.push('/profile/');
+        this.props.history.push('/projects/');
        
       });
 
@@ -61,8 +61,9 @@ class NewProject extends Component {
   render() {
     return (
       <div className="NewProject">
-        <h1>new project:</h1>
+        <h1>Title: {this.state.title}</h1>
         <input
+            className="name"
             name="project name"
             placeholder="project name"
             value={this.state.projectName}
@@ -70,12 +71,12 @@ class NewProject extends Component {
           />
         <br />
 
-        <textarea
+        {/* <textarea
             name="notes"
             placeholder="project notes"
             value={this.state.projectNotes}
             onChange={this.onChangeProjectNotes}
-          />
+          /> */}
 
         <br />
 

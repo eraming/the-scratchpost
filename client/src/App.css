@@ -9,66 +9,10 @@
     align-items: stretch;
 }
 
-/* .App-navigation {
-    grid-column: 2;
-    display: flex;
-    font-style: normal;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 10px;
-    color: white;
-} */
-
-/* .App-sidebar {
-    background: rgba(255, 255, 255, 0.9);
-    display: relative;
-    padding: 10px;
+.sidebar {
+  grid-column: 1;
+  grid-row: 1 / span 2;
 }
-
-.App-sidebar img {
-    max-width: 100%;
-}
-
-.App-navigation h1 {
-    font-size: 36pt;
-}
-
-.App-title {
-    font-size: 2em;
-    font-style: italic;
-    font: georgia;
-    text-shadow: 1px 1px 1px #000;
-    text-shadow: -3px 3px 2px #000,
-                 -8px 6px 0px #01cccc,
-                 -10px 10px 0px white;
-
-}
-
-.Article-title {
-    font-size: 2em;
-    font-style: italic;
-    font: georgia;
-}
-
-.App-navigation {
-    grid-column: 2 / span 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-}
-
-.App-navigation a {
-    font-size: 14pt;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5) inset;
-}
-
-.App-mainContent {
-    grid-column: 2;
-} */
 
 body {
   background-image: url("/crossline-lines.png");
