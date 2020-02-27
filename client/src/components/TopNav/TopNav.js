@@ -66,7 +66,6 @@ onNewCard = (title, index) => {
         <div className="TopNav-mainContent">
 
           <Switch>
-            <Route exact path='/' component={LandingPage} />
             <Route exact path='/projects/' component={Project} />
             <Route exact path='/add/' component={AddCard} />
           </Switch>

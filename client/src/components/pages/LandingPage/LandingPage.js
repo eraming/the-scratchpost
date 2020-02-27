@@ -12,7 +12,7 @@ class LandingPage extends Component {
             a lo-fi digital beatsheet organizer<br />
             for screenwriters and creatives
           </p>
-          <Link to="/profile/">add a project</Link>
+          <Link to="/projects/">add a project</Link>
         </header>
       </div>
     );
