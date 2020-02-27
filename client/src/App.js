@@ -10,29 +10,11 @@ import TopNav from './components/TopNav/TopNav.js';
 
 
 class App extends Component {
-          state = {
-            newCards: [],
-            availableCards: [],
-            isStarred: true,
-            highlight: false,
-            textarea: '',
-          }
+  componentDidMount(){
+   document.title = "the scratchPost"
+ }
 
-onNewCard = (title, index) => {
-  console.log('')
-  const newCards = this.state.newCards.slice();
-  const availableCards = this.state.availableCards.slice();
-  const newCard = availableCards[index];
 
-  newCards.push(newCard);
-  availableCards.splice(index, 1)
-  console.log('new card', index, title)
-  this.setState({
-    newCards: newCards,
-    availableCards: availableCards,
-  });
-
-};
 
 
   render() {

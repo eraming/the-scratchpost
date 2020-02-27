@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './AddCard.css';
 
 class AddCard extends Component {
+
+
+
   state = {
     title: '',
     text: '',
