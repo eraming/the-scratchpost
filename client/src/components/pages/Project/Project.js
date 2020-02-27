@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './Project.css';
 import Card from '../../Card/Card.js';
-import Tabs from '../../Tabs/Tabs.js';
-import Tab from '../../Tab/Tab.js';
+// import Tabs from '../../Tabs/Tabs.js';
+// import Tab from '../../Tab/Tab.js';
+import ProjectSelector from '../../ProjectSelector/ProjectSelector.js';
 import {Button} from 'kc-react-widgets';
-// import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 const arrayMove = require('array-move');
 
@@ -13,12 +14,45 @@ class Project extends Component {
   state = {
     cards: [],
     projectNames: [],
+    projects: [
+      'parking-lot',
+      'random',
+      'jokes',
+    ],
+    selectedProject: 'parking-lot'
     
   }
 
   componentDidMount() {
     this.fetchCards();
+    this.fetchProjects();
 
+  }
+
+  // componentDidMount() {
+    
+  //   // TODO:
+  //   // Do fetch (GET) to get all "actualprojects"
+  //   // After fetch, do setState to set the projects list to be
+  //   // the ones that came from the database
+  // }
+
+  fetchProjects() {
+    console.log('Fetching projects: ');
+    fetch('/api/mongodb/actualprojects/')
+      .then(response => response.json())
+      .then(data => {
+        console.log('projects back: ', data);
+        this.setState({
+          projects: data,
+        });
+      });
+  }
+
+  selectProject = (projectName) => {
+    this.setState({
+      selectedProject: projectName,
+    });
   }
 
 
@@ -190,21 +224,22 @@ class Project extends Component {
 
     return (
       <div className="Project">
+
         <div className="ProjectNavBar">
 
-        <Tabs>
-    <Tab linkClassName={'link-class-0'}>
-        <p>project 0</p>
-    </Tab>
-    <Tab linkClassName={'link-class-1'}>
-        {/* <CustomComponent propA={'foo'} propB={this.handleSomething}/> */}
-        <p>project 1</p>
-    </Tab>
-    <Tab linkClassName={'link-class-1'}>
-        {/* <CustomComponent propA={'foo'} propB={this.handleSomething}/> */}
-        <p>project 2</p>
-    </Tab>
-</Tabs>
+        {/* <Tabs>
+          <Tab linkClassName={'link-class-0'}>
+            <p>project 0</p>
+        </Tab>
+        <Tab linkClassName={'link-class-1'}>
+          <CustomComponent propA={'foo'} propB={this.handleSomething}/>
+          <p>project 1</p>
+        </Tab>
+        <Tab linkClassName={'link-class-1'}>
+          <CustomComponent propA={'foo'} propB={this.handleSomething}/>
+          <p>project 2</p>
+        </Tab>
+        </Tabs> */}
 
       {/* <Tabs>
       <TabList>
@@ -220,12 +255,12 @@ class Project extends Component {
       </TabList>
       </Tabs> */}
 
-          {/* <Tabs>
+          <Tabs>
 
             <TabList>
               <Tab
-              >project 1</Tab>
-              <Tab>proj 2</Tab>
+              >Act I</Tab>
+              <Tab>Act II</Tab>
               <Tab>
               </Tab>
             </TabList>
@@ -236,12 +271,17 @@ class Project extends Component {
             <TabPanel>
               <h2>east bay scenes </h2>
             </TabPanel>
-          </Tabs> */}
+          </Tabs>
 
           <Button onClick={this.onNewCard}>
                 new card
           </Button>
         </div>
+
+        <ProjectSelector
+          projects={this.state.projects}
+          selectedProject={this.state.selectedProject}
+          onSelectProject={this.selectProject} />
 
         <div className="Project-board">
           {this.state.cards.map((card, index) => (

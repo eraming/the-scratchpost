@@ -1,19 +1,39 @@
 .ProjectSelector {
-    /* grid-column: 1; */
-    grid-row: 2 / span 3;
+    grid-column: 1;
+    grid-row: 2 / span 2;
     background: rgb(255, 255, 255);
     padding-top: 10px;
-    height: 50px;
     color: #CAB6A9;
     user-select: none;
+    width: 200px;
+    transition: 2s;
 }
+
+.ProjectSelector:hover {
+    width: 5px;
+    transition: width 2s;
+}
+
 
 
 .ProjectSelector-projectHeader {
     font-size: 18pt;
     padding: 10px;
     margin-top: 10px;
+    background: orange;
+    color: white;
+    -webkit-transition: .4s ease-in-out opacity;
+    -moz-transition: .4s ease-in-out opacity;
+    -o-transition: .4s ease-in-out opacity;
+    transition: .4s ease-in-out opacity;
 }
+
+.ProjectSelector-projectHeader:hover {
+    opacity: 0.8;
+}
+
+
+
 
 .ProjectSelector-project {
     font-size: 18pt;
@@ -22,7 +42,12 @@
     margin-top: 10px;
 }
 
+.ProjectSelector-project:hover {
+    background: rgba(255, 166, 0, 0.445);
+    color: white;
+}
+
 .ProjectSelector-project--selected {
-    background: #4C9689;
+    background: rgba(255, 166, 0, 0.733);
     color: white;
 }

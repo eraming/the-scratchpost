@@ -7,6 +7,7 @@ import LandingPage from './components/pages/LandingPage/LandingPage.js'
 import Project from './components/pages/Project/Project.js';
 import NewProject from './components/pages/NewProject/NewProject.js';
 import ProjectSelector from './components/ProjectSelector/ProjectSelector';
+
 import TopNav from './components/TopNav/TopNav.js';
 
 
@@ -26,31 +27,8 @@ class App extends Component {
             textarea: '',
           }
 
-          selectProject = (projectName) => {
-            this.setState({
-              selectedProject: projectName,
-            });
-          }
-  
-  componentDidMount() {
-    this.fetchProjects();
-    // TODO:
-    // Do fetch (GET) to get all "actualprojects"
-    // After fetch, do setState to set the projects list to be
-    // the ones that came from the database
-  }
+          
 
-  fetchProjects() {
-    console.log('Fetching projects: ');
-    fetch('/api/mongodb/actualprojects/')
-      .then(response => response.json())
-      .then(data => {
-        console.log('projects back: ', data);
-        this.setState({
-          projects: data,
-        });
-      });
-  }
           
 
   render() {
@@ -58,45 +36,19 @@ class App extends Component {
 
       <div className="App">
 
-        <nav className="App-navigation">
-          <h1 className="App-title">the scratchPost</h1>
-
-          
-
-          <Link to="/profile/">
-          <Button>
-                home
-             </Button>
-          </Link>
-
-          <Link to="/">
-          <Button>
-                account
-             </Button>
-          </Link>
-
-          <Link to="/add/">
-          <Button>
-                new project
-             </Button>
-          </Link>
-
-
-        </nav>
-
-        <ProjectSelector
+        {/* <ProjectSelector
           projects={this.state.projects}
           selectedProject={this.state.selectedProject}
-          onSelectProject={this.selectProject} />
+          onSelectProject={this.selectProject} /> */}
 
-        <div className="App-mainContent">
+        {/* <div className="App-mainContent">
 
           <Switch>
             <Route exact path='/' component={LandingPage} />
             <Route exact path='/profile/' component={Project} />
             <Route exact path='/add/' component={NewProject} />
           </Switch>
-        </div>
+        </div> */}
 
       <TopNav />
       <Switch>

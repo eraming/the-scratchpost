@@ -9,7 +9,7 @@
     align-items: stretch;
 }
 
-.App-navigation {
+/* .App-navigation {
     grid-column: 2;
     display: flex;
     font-style: normal;
@@ -17,9 +17,9 @@
     align-items: center;
     padding: 10px;
     color: white;
-}
+} */
 
-.App-sidebar {
+/* .App-sidebar {
     background: rgba(255, 255, 255, 0.9);
     display: relative;
     padding: 10px;
@@ -68,7 +68,7 @@
 
 .App-mainContent {
     grid-column: 2;
-}
+} */
 
 body {
   background-image: url("/crossline-lines.png");

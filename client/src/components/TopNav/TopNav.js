@@ -5,7 +5,7 @@ import './TopNav.css';
 
 import LandingPage from '../pages/LandingPage/LandingPage.js';
 import Project from '../pages/Project/Project.js';
-import AddCard from '../pages/AddCard/AddCard.js';
+import NewProject from '../pages/NewProject/NewProject.js';
 
 
 class TopNav extends Component {
@@ -67,7 +67,7 @@ onNewCard = (title, index) => {
 
           <Switch>
             <Route exact path='/projects/' component={Project} />
-            <Route exact path='/add/' component={AddCard} />
+            <Route exact path='/add/' component={NewProject} />
           </Switch>
         </div>
 
