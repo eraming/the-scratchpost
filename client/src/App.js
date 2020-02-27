@@ -43,7 +43,6 @@ class App extends Component {
     fetch('/api/mongodb/actualprojects/')
       .then(response => response.json())
       .then(data => {
-       
         console.log('projects back: ', data);
         this.setState({
           projects: data,

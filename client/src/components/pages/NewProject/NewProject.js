@@ -30,6 +30,8 @@ class NewProject extends Component {
     });
   }
 
+
+
   submit = () => {
     this.fetchProjectLength((position) => {
 
@@ -38,7 +40,6 @@ class NewProject extends Component {
       notes: this.state.notes
     };
 
-
     fetch('/api/mongodb/actualprojects/', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -46,16 +47,13 @@ class NewProject extends Component {
       })
       .then(response => response.json())
       .then(data => {
-        this.fetchProjects();
         console.log('Got this back', data);
         this.setState({
-          projects: data
+          projects: this.state.projects
         });
-
-      
-
         // Redirect to profile
         this.props.history.push('/profile/');
+       
       });
 
     });
@@ -65,7 +63,7 @@ class NewProject extends Component {
   render() {
     return (
       <div className="NewProject">
-        <h1>new project</h1>
+        <h1>new project:</h1>
         <input
             name="project name"
             placeholder="project name"
@@ -83,7 +81,7 @@ class NewProject extends Component {
 
         <br />
 
-        <button onClick={this.submit}>Add project</button>
+        <button onClick={this.submit}>add project</button>
 
       </div>
 

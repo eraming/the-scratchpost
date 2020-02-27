@@ -1,7 +1,21 @@
-.AddCard input,
-.AddCard textarea,
+.NewProject input {
+  background-color: white;
+  width: 700px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 14pt;
+  color: black;
+}
+.NewProject textarea {
+  background-color: white;
+  width: 700px;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 11pt;
+  color: rgb(36, 35, 35);
+}
 
-.AddCard button {
+.NewProject button {
   font-size: 12pt;
   background: none;
   color: white;
@@ -11,7 +25,10 @@
   border: 2px solid white;
 }
 
-.AddCard button {
+.NewProject button {
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+  font-size: 14pt;
   color: black;
   background: #61dafb;
 }

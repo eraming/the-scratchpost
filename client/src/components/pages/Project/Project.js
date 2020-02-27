@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import './Project.css';
-import Card from '../../Card/Card.js'
+import Card from '../../Card/Card.js';
+import Tabs from '../../Tabs/Tabs.js';
+import Tab from '../../Tab/Tab.js';
 import {Button} from 'kc-react-widgets';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+// import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 const arrayMove = require('array-move');
 
@@ -11,6 +13,7 @@ class Project extends Component {
   state = {
     cards: [],
     projectNames: [],
+    
   }
 
   componentDidMount() {
@@ -188,10 +191,43 @@ class Project extends Component {
     return (
       <div className="Project">
         <div className="ProjectNavBar">
-          <Tabs>
+
+        <Tabs>
+    <Tab linkClassName={'link-class-0'}>
+        <p>project 0</p>
+    </Tab>
+    <Tab linkClassName={'link-class-1'}>
+        {/* <CustomComponent propA={'foo'} propB={this.handleSomething}/> */}
+        <p>project 1</p>
+    </Tab>
+    <Tab linkClassName={'link-class-1'}>
+        {/* <CustomComponent propA={'foo'} propB={this.handleSomething}/> */}
+        <p>project 2</p>
+    </Tab>
+</Tabs>
+
+      {/* <Tabs>
+      <TabList>
+        {
+          this.props.projects.map((projects, index) => (
+            this.props.selectedProject === projects.title? (
+              <Tab>{projects.title}</Tab>
+            ) : (
+              <Tab onClick={() => this.props.onSelectProject(projects.title)} key={index} className="ProjectSelector-project"> {projects.title}</Tab>
+            )
+          ))
+        }
+      </TabList>
+      </Tabs> */}
+
+          {/* <Tabs>
+
             <TabList>
-              <Tab>project 1</Tab>
+              <Tab
+              >project 1</Tab>
               <Tab>proj 2</Tab>
+              <Tab>
+              </Tab>
             </TabList>
 
             <TabPanel>
@@ -200,7 +236,7 @@ class Project extends Component {
             <TabPanel>
               <h2>east bay scenes </h2>
             </TabPanel>
-          </Tabs>
+          </Tabs> */}
 
           <Button onClick={this.onNewCard}>
                 new card
