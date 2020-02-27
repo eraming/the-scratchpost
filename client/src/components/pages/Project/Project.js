@@ -265,12 +265,13 @@ class Project extends Component {
               </Tab>
             </TabList>
 
-            <TabPanel>
+            {/* <TabPanel>
               <h2>east bay scenes project</h2>
             </TabPanel>
             <TabPanel>
               <h2>east bay scenes </h2>
-            </TabPanel>
+            </TabPanel> */}
+            
           </Tabs>
 
           <Button onClick={this.onNewCard}>
@@ -278,12 +279,18 @@ class Project extends Component {
           </Button>
         </div>
 
+        {/* <div className="sidebar">
         <ProjectSelector
           projects={this.state.projects}
           selectedProject={this.state.selectedProject}
           onSelectProject={this.selectProject} />
+        </div> */}
+
+        
 
         <div className="Project-board">
+
+        
           {this.state.cards.map((card, index) => (
             <Card
               cardId={card._id}

@@ -36,20 +36,6 @@ class App extends Component {
 
       <div className="App">
 
-        {/* <ProjectSelector
-          projects={this.state.projects}
-          selectedProject={this.state.selectedProject}
-          onSelectProject={this.selectProject} /> */}
-
-        {/* <div className="App-mainContent">
-
-          <Switch>
-            <Route exact path='/' component={LandingPage} />
-            <Route exact path='/profile/' component={Project} />
-            <Route exact path='/add/' component={NewProject} />
-          </Switch>
-        </div> */}
-
       <TopNav />
       <Switch>
         <Route exact path='/' component={LandingPage} />

@@ -7,6 +7,9 @@ import LandingPage from '../pages/LandingPage/LandingPage.js';
 import Project from '../pages/Project/Project.js';
 import NewProject from '../pages/NewProject/NewProject.js';
 
+import ProjectSelector from '../ProjectSelector/ProjectSelector.js'
+import '../ProjectSelector/ProjectSelector.css';
+
 
 class TopNav extends Component {
           state = {
@@ -15,23 +18,44 @@ class TopNav extends Component {
             isStarred: true,
             highlight: false,
             textarea: '',
+            projects: [
+              'parking-lot',
+              'random',
+              'jokes',
+            ],
+            selectedProject: 'parking-lot'
           }
 
-onNewCard = (title, index) => {
-  console.log('')
-  const newCards = this.state.newCards.slice();
-  const availableCards = this.state.availableCards.slice();
-  const newCard = availableCards[index];
-
-  newCards.push(newCard);
-  availableCards.splice(index, 1)
-  console.log('new card', index, title)
-  this.setState({
-    newCards: newCards,
-    availableCards: availableCards,
-  });
-
-};
+          componentDidMount() {
+            this.fetchProjects();
+        
+          }
+        
+          // componentDidMount() {
+            
+          //   // TODO:
+          //   // Do fetch (GET) to get all "actualprojects"
+          //   // After fetch, do setState to set the projects list to be
+          //   // the ones that came from the database
+          // }
+        
+          fetchProjects() {
+            console.log('Fetching projects: ');
+            fetch('/api/mongodb/actualprojects/')
+              .then(response => response.json())
+              .then(data => {
+                console.log('projects back: ', data);
+                this.setState({
+                  projects: data,
+                });
+              });
+          }
+        
+          selectProject = (projectName) => {
+            this.setState({
+              selectedProject: projectName,
+            });
+          }
 
 
 
@@ -64,6 +88,8 @@ onNewCard = (title, index) => {
         </nav>
 
         <div className="TopNav-mainContent">
+        
+          
 
           <Switch>
             <Route exact path='/projects/' component={Project} />
@@ -71,6 +97,13 @@ onNewCard = (title, index) => {
           </Switch>
         </div>
 
+        <div class="sidebar">
+        <ProjectSelector
+          projects={this.state.projects}
+          selectedProject={this.state.selectedProject}
+          onSelectProject={this.selectProject} />
+        </div>
+        
       </div>
     );
   }
