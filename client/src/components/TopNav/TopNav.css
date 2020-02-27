@@ -1,5 +1,5 @@
-.App {
-    background-image: url("/crossline-lines.png");
+.TopNav {
+  
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1 minmax(auto, 800px) 1;
@@ -9,7 +9,7 @@
     align-items: stretch;
 }
 
-.App-navigation {
+.TopNav-navigation {
     grid-column: 2;
     display: flex;
     font-style: normal;
@@ -19,21 +19,21 @@
     color: white;
 }
 
-.App-sidebar {
+.TopNav-sidebar {
     background: rgba(255, 255, 255, 0.9);
     display: relative;
     padding: 10px;
 }
 
-.App-sidebar img {
+.TopNav-sidebar img {
     max-width: 100%;
 }
 
-.App-navigation h1 {
+.TopNav-navigation h1 {
     font-size: 36pt;
 }
 
-.App-title {
+.TopNav-title {
     font-size: 2em;
     font-style: italic;
     font: georgia;
@@ -50,7 +50,7 @@
     font: georgia;
 }
 
-.App-navigation {
+.TopNav-navigation {
     grid-column: 2 / span 1;
     display: flex;
     justify-content: space-between;
@@ -58,7 +58,7 @@
     cursor: pointer;
 }
 
-.App-navigation a {
+.TopNav-navigation a {
     font-size: 14pt;
     text-decoration: none;
     color: white;
@@ -66,10 +66,6 @@
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5) inset;
 }
 
-.App-mainContent {
+.TopNav-mainContent {
     grid-column: 2;
-}
-
-body {
-  background-image: url("/crossline-lines.png");
 }

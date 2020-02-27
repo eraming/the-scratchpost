@@ -61,35 +61,35 @@ return (
 
         </div>
 
-
-        <div className="save-button">
-        <Button
-            size="small"
-            depth="shallow"
-            shape="rounded"
-            iconRight={saveFloppy}
-            className="save-btn"
-            onClick={this.props.onClickSend}>
-            Save
-        </Button>
-        </div>
-
-
-        <button
-          className="left-btn"
-          onClick={this.props.onLeftMove}>
-          ←
-        </button>
-
-        <button
-          className="right-btn"
-          onClick={this.props.onRightMove}>
-          →
-        </button>
-
-
-
 </div>
+
+
+<div className="Project-LowerCardActions">
+  <button
+    className="left-btn"
+    onClick={this.props.onLeftMove}>
+    ←
+  </button>
+
+  <button
+    className="right-btn"
+    onClick={this.props.onRightMove}>
+    →
+  </button>
+
+
+  <Button
+      size="small"
+      depth="shallow"
+      shape="rounded"
+      iconRight={saveFloppy}
+      className="save-btn"
+      onClick={this.props.onClickSend}>
+      Save
+  </Button>
+</div>
+
+
       </div>
 
 
