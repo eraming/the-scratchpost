@@ -218,6 +218,29 @@ class Project extends Component {
     });
   };
 
+  onSaveAllCards = () => {
+    const cards = this.state.cards;
+
+    for (let i = 0; i < cards.length; i++) {
+    
+      const cardToUpdate = cards[i];
+      const newPosition = i;
+      const documentId = cardToUpdate._id;
+
+      const positionSetter = {position: newPosition}
+
+      fetch('/api/mongodb/projects/?_id=' + documentId, {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(positionSetter),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Got this back', cards);
+        });
+    }
+  }
+
   
 
 
@@ -253,6 +276,9 @@ class Project extends Component {
          
           <Button onClick={this.onNewCard}>
                 new card
+          </Button>
+          <Button onClick={this.onSaveAllCards}>
+                save all
           </Button>
         </div>
 
