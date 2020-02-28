@@ -5,6 +5,14 @@ import './ProjectSelector.css';
 
 class ProjectSelector extends Component {
 
+  toggleHidden () {
+    console.log('toggling div');
+    // this.state.isHidden = !this.state.isHidden
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+}
+
   render() {
     return (
       <div className="ProjectSelector">

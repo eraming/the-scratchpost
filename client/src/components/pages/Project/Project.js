@@ -11,15 +11,21 @@ const arrayMove = require('array-move');
 
 
 class Project extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     project: 'project demo',
+  //     stars: [],
+  //     cards: [],
+  //   projectNames: [],
+  //   projects: [],
+  //   selectedProject: ''
+  //   };
   state = {
     cards: [],
     projectNames: [],
-    projects: [
-      'parking-lot',
-      'random',
-      'jokes',
-    ],
-    selectedProject: 'parking-lot'
+    projects: [],
+    selectedProject: 'title should go here'
 
   }
 
@@ -28,14 +34,6 @@ class Project extends Component {
     this.fetchProjects();
 
   }
-
-  // componentDidMount() {
-
-  //   // TODO:
-  //   // Do fetch (GET) to get all "actualprojects"
-  //   // After fetch, do setState to set the projects list to be
-  //   // the ones that came from the database
-  // }
 
   fetchProjects() {
     console.log('Fetching projects: ');
@@ -56,7 +54,7 @@ class Project extends Component {
   }
 
 
-
+  //fetch cards from DB
   fetchCards() {
    console.log('(log) Fetching data from API');
     fetch('/api/mongodb/projects/')
@@ -69,6 +67,7 @@ class Project extends Component {
       });
   }
 
+  //delete a card entry
   deleteCard(documentId) {
     console.log('Sending DELETE for', documentId);
     // Do the DELETE, using "?_id=" to specify which document we are deleting
@@ -220,6 +219,15 @@ class Project extends Component {
   };
 
 
+  toggleHidden () {
+    console.log('toggling div');
+    // this.state.isHidden = !this.state.isHidden
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+}
+
+
   render() {
 
     return (
@@ -234,7 +242,8 @@ class Project extends Component {
            isHidden={this.state.isHidden}
            onToggleHidden={() => this.toggleHidden()}
            />
-        : <button onClick={() => this.toggleHidden()}
+        :
+        <button onClick={() => this.toggleHidden()}
         className="right-arrow-btn"
         > →</button>}
 
@@ -242,42 +251,28 @@ class Project extends Component {
 
         <div className="ProjectNavBar">
 
-        {/* <Tabs>
-          <Tab linkClassName={'link-class-0'}>
-            <p>project 0</p>
-        </Tab>
-        <Tab linkClassName={'link-class-1'}>
-          <CustomComponent propA={'foo'} propB={this.handleSomething}/>
-          <p>project 1</p>
-        </Tab>
-        <Tab linkClassName={'link-class-1'}>
-          <CustomComponent propA={'foo'} propB={this.handleSomething}/>
-          <p>project 2</p>
-        </Tab>
-        </Tabs> */}
+          <Tabs>
 
-      {/* <Tabs>
-      <TabList>
-        {
-          this.props.projects.map((projects, index) => (
-            this.props.selectedProject === projects.title? (
-              <Tab>{projects.title}</Tab>
-            ) : (
-              <Tab onClick={() => this.props.onSelectProject(projects.title)} key={index} className="ProjectSelector-project"> {projects.title}</Tab>
-            )
-          ))
-        }
-      </TabList>
-      </Tabs> */}
+            <TabList>
+              <Tab
+              >Act I</Tab>
+              <Tab>Act II</Tab>
+              <Tab>
+              </Tab>
+            </TabList>
 
-      <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
-         <TabList>
-           <Tab>Title 1</Tab>
-           <Tab>Title 2</Tab>
-         </TabList>
-         <TabPanel></TabPanel>
-         <TabPanel></TabPanel>
-       </Tabs>
+            {/* <TabPanel>
+              <h2>act I</h2>
+            </TabPanel>
+            <TabPanel>
+              <h2>act II </h2>
+            </TabPanel> */}
+
+            <TabPanel>
+            <h2>{this.state.selectedProject}</h2>
+            </TabPanel>
+
+          </Tabs>
 
           <Button onClick={this.onNewCard}>
                 new card
@@ -285,7 +280,18 @@ class Project extends Component {
         </div>
 
 
+      {/* <div class="sidebar">
+        <ProjectSelector
+          projects={this.state.projects}
+          selectedProject={this.state.selectedProject}
+          onSelectProject={this.selectProject} />
+        </div> */}
+
+
+
         <div className="Project-board">
+
+
           {this.state.cards.map((card, index) => (
             <Card
               cardId={card._id}
@@ -310,6 +316,15 @@ class Project extends Component {
             ))
           }
         </div>
+
+        {/* <ProjectSelector
+             projects={this.state.projects}
+             selectedProject={this.state.selectedProject}
+             onSelectProject={this.selectProject}
+             onClick={() => this.toggleHidden()}
+             isHidden={!this.state.isHidden} /> */}
+
+
       </div>
     );
   }
