@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Card.css';
 import {Button} from 'kc-react-widgets';
-import starEmpty from './star_empty.svg';
+import starEmpty from './starEmpty.svg';
 import starFilled from './starFilled.svg';
 import trashCan from './trash.svg';
 import saveFloppy from './floppy.svg';

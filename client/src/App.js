@@ -13,6 +13,10 @@ import TopNav from './components/TopNav/TopNav.js';
 
 
 class App extends Component {
+  componentDidMount(){
+   document.title = "scratchPost"
+ }
+
           state = {
             projects: [
               'parking-lot',
@@ -28,9 +32,9 @@ class App extends Component {
             isHidden: true
           }
 
-          
 
-          
+
+
 
   render() {
     return (
