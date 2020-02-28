@@ -20,7 +20,7 @@ class TopNav extends Component {
             textarea: '',
             projects: [],
             selectedProject: '',
-            isHidden: false,
+            isHidden: true,
           }
 
     componentDidMount() {
