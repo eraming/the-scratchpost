@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './Project.css';
-import Card from '../../Card/Card.js'
+import Card from '../../Card/Card.js';
+// import Tabs from '../../Tabs/Tabs.js';
+// import Tab from '../../Tab/Tab.js';
+import ProjectSelector from '../../ProjectSelector/ProjectSelector.js';
 import {Button} from 'kc-react-widgets';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
@@ -8,14 +11,50 @@ const arrayMove = require('array-move');
 
 
 class Project extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     project: 'project demo',
+  //     stars: [],
+  //     cards: [],
+  //   projectNames: [],
+  //   projects: [],
+  //   selectedProject: ''
+  //   };
   state = {
-    cards: []
+    cards: [],
+    projectNames: [],
+    projects: [],
+    selectedProject: 'title should go here'
+    
   }
 
   componentDidMount() {
     this.fetchCards();
+    this.fetchProjects();
+
   }
 
+  fetchProjects() {
+    console.log('Fetching projects: ');
+    fetch('/api/mongodb/actualprojects/')
+      .then(response => response.json())
+      .then(data => {
+        console.log('projects back: ', data);
+        this.setState({
+          projects: data,
+        });
+      });
+  }
+  
+  selectProject = (projectName) => {
+    this.setState({
+      selectedProject: projectName,
+    });
+  }
+
+
+  //fetch cards from DB
   fetchCards() {
    console.log('(log) Fetching data from API');
     fetch('/api/mongodb/projects/')
@@ -28,6 +67,7 @@ class Project extends Component {
       });
   }
 
+  //delete a card entry
   deleteCard(documentId) {
     console.log('Sending DELETE for', documentId);
     // Do the DELETE, using "?_id=" to specify which document we are deleting
@@ -178,32 +218,57 @@ class Project extends Component {
     });
   };
 
+  
+
 
   render() {
 
     return (
       <div className="Project">
+
         <div className="ProjectNavBar">
+
           <Tabs>
+
             <TabList>
-              <Tab>project 1</Tab>
-              <Tab>proj 2</Tab>
+              <Tab
+              >Act I</Tab>
+              <Tab>Act II</Tab>
+              <Tab>
+              </Tab>
             </TabList>
+         
+            {/* <TabPanel>
+              <h2>act I</h2>
+            </TabPanel>
+            <TabPanel>
+              <h2>act II </h2>
+            </TabPanel> */}
 
             <TabPanel>
-              <h2>east bay scenes project</h2>
+            <h2>{this.state.selectedProject}</h2>
             </TabPanel>
-            <TabPanel>
-              <h2>east bay scenes </h2>
-            </TabPanel>
+            
           </Tabs>
-
+         
           <Button onClick={this.onNewCard}>
                 new card
           </Button>
         </div>
 
+
+      {/* <div class="sidebar">
+        <ProjectSelector
+          projects={this.state.projects}
+          selectedProject={this.state.selectedProject}
+          onSelectProject={this.selectProject} />
+        </div> */}
+        
+        
+
         <div className="Project-board">
+
+        
           {this.state.cards.map((card, index) => (
             <Card
               cardId={card._id}
@@ -228,6 +293,15 @@ class Project extends Component {
             ))              
           }
         </div>
+
+        {/* <ProjectSelector
+             projects={this.state.projects}
+             selectedProject={this.state.selectedProject}
+             onSelectProject={this.selectProject}
+             onClick={() => this.toggleHidden()}
+             isHidden={!this.state.isHidden} /> */}
+
+
       </div>
     );
   }

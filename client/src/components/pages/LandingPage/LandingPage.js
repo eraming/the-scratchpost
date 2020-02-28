@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Floppy from './floppy-disk-2.svg';
 
 import './LandingPage.css';
 class LandingPage extends Component {
@@ -13,6 +14,8 @@ class LandingPage extends Component {
             for screenwriters and creatives
           </p>
           <Link to="/projects/">add a project</Link>
+
+        <img src={Floppy} height="200px" width="auto"></img>
         </header>
       </div>
     );

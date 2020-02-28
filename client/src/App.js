@@ -5,44 +5,50 @@ import './App.css';
 import background from './crossline-lines.png'
 import LandingPage from './components/pages/LandingPage/LandingPage.js'
 import Project from './components/pages/Project/Project.js';
-import AddCard from './components/pages/AddCard/AddCard.js';
+import NewProject from './components/pages/NewProject/NewProject.js';
+import ProjectSelector from './components/ProjectSelector/ProjectSelector';
+
 import TopNav from './components/TopNav/TopNav.js';
+
 
 
 class App extends Component {
           state = {
+            projects: [
+              'parking-lot',
+              'random',
+              'jokes',
+            ],
+            selectedProject: 'parking-lot',
             newCards: [],
             availableCards: [],
             isStarred: true,
             highlight: false,
             textarea: '',
+            isHidden: true
           }
 
-onNewCard = (title, index) => {
-  console.log('')
-  const newCards = this.state.newCards.slice();
-  const availableCards = this.state.availableCards.slice();
-  const newCard = availableCards[index];
+          
 
-  newCards.push(newCard);
-  availableCards.splice(index, 1)
-  console.log('new card', index, title)
-  this.setState({
-    newCards: newCards,
-    availableCards: availableCards,
-  });
-
-};
-
+          
 
   render() {
     return (
 
       <div className="App">
+
       <TopNav />
       <Switch>
         <Route exact path='/' component={LandingPage} />
       </Switch>
+
+      {/* <div class="sidebar">
+        <ProjectSelector
+          projects={this.state.projects}
+          selectedProject={this.state.selectedProject}
+          onSelectProject={this.selectProject} />
+        </div> */}
+
 
       </div>
     );

@@ -5,7 +5,10 @@ import './TopNav.css';
 
 import LandingPage from '../pages/LandingPage/LandingPage.js';
 import Project from '../pages/Project/Project.js';
-import AddCard from '../pages/AddCard/AddCard.js';
+import NewProject from '../pages/NewProject/NewProject.js';
+
+import ProjectSelector from '../ProjectSelector/ProjectSelector.js'
+import '../ProjectSelector/ProjectSelector.css';
 
 
 class TopNav extends Component {
@@ -15,27 +18,46 @@ class TopNav extends Component {
             isStarred: true,
             highlight: false,
             textarea: '',
+            projects: [],
+            selectedProject: '',
+            isHidden: false,
           }
 
-onNewCard = (title, index) => {
-  console.log('')
-  const newCards = this.state.newCards.slice();
-  const availableCards = this.state.availableCards.slice();
-  const newCard = availableCards[index];
+    componentDidMount() {
+      this.fetchProjects();
+  
+    }
+        
+    fetchProjects() {
+      console.log('Fetching projects: ');
+      fetch('/api/mongodb/actualprojects/')
+        .then(response => response.json())
+        .then(data => {
+          console.log('projects back: ', data);
+          this.setState({
+            projects: data,
+          });
+        });
+    }
+    
+    //set state of current selected project
+    selectProject = (projectName) => {
+      console.log('selected project: ', projectName)
+      this.setState({
+        selectedProject: projectName,
+      });
+    }
+    
+    //toggle sidebar visibility
+    toggleHidden () {
+      console.log('toggling div');
+      // this.state.isHidden = !this.state.isHidden
+      this.setState({
+        isHidden: !this.state.isHidden
+      })
+  }
 
-  newCards.push(newCard);
-  availableCards.splice(index, 1)
-  console.log('new card', index, title)
-  this.setState({
-    newCards: newCards,
-    availableCards: availableCards,
-  });
-
-};
-
-
-
-  render() {
+ render() {
     return (
 
       <div className="TopNav">
@@ -43,6 +65,7 @@ onNewCard = (title, index) => {
           <h1 className="TopNav-title">the scratchPost</h1>
 
           <Link to="/projects/">
+
           <Button>
                 the post
              </Button>
@@ -60,17 +83,32 @@ onNewCard = (title, index) => {
              </Button>
           </Link>
 
-
         </nav>
 
         <div className="TopNav-mainContent">
-
+        
+      <h2>{this.state.selectedProject}</h2>
           <Switch>
             <Route exact path='/projects/' component={Project} />
-            <Route exact path='/add/' component={AddCard} />
+            <Route exact path='/add/' component={NewProject} />
           </Switch>
         </div>
 
+        <div class="sidebar">
+          {!this.state.isHidden ? 
+             <ProjectSelector
+             projects={this.state.projects}
+             selectedProject={this.state.selectedProject}
+             onSelectProject={this.selectProject}
+             isHidden={this.state.isHidden}
+             onToggleHidden={() => this.toggleHidden()} 
+             />
+          : <button onClick={() => this.toggleHidden()} 
+          className="right-arrow-btn"
+          > →</button>}
+       
+        </div>
+        
       </div>
     );
   }
