@@ -11,22 +11,16 @@ const arrayMove = require('array-move');
 
 
 class Project extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     project: 'project demo',
-  //     stars: [],
-  //     cards: [],
-  //   projectNames: [],
-  //   projects: [],
-  //   selectedProject: ''
-  //   };
   state = {
     cards: [],
     projectNames: [],
-    projects: [],
-    selectedProject: 'title should go here'
-    
+    projects: [
+      'parking-lot',
+      'random',
+      'jokes',
+    ],
+    selectedProject: 'parking-lot'
+
   }
 
   componentDidMount() {
@@ -34,6 +28,14 @@ class Project extends Component {
     this.fetchProjects();
 
   }
+
+  // componentDidMount() {
+
+  //   // TODO:
+  //   // Do fetch (GET) to get all "actualprojects"
+  //   // After fetch, do setState to set the projects list to be
+  //   // the ones that came from the database
+  // }
 
   fetchProjects() {
     console.log('Fetching projects: ');
@@ -46,7 +48,7 @@ class Project extends Component {
         });
       });
   }
-  
+
   selectProject = (projectName) => {
     this.setState({
       selectedProject: projectName,
@@ -54,7 +56,7 @@ class Project extends Component {
   }
 
 
-  //fetch cards from DB
+
   fetchCards() {
    console.log('(log) Fetching data from API');
     fetch('/api/mongodb/projects/')
@@ -67,7 +69,6 @@ class Project extends Component {
       });
   }
 
-  //delete a card entry
   deleteCard(documentId) {
     console.log('Sending DELETE for', documentId);
     // Do the DELETE, using "?_id=" to specify which document we are deleting
@@ -172,7 +173,7 @@ class Project extends Component {
         console.log(formData)
         this.setState ({
           newCards: this.state.cards
-        })      
+        })
       });
   }
 
@@ -218,57 +219,73 @@ class Project extends Component {
     });
   };
 
-  
-
 
   render() {
 
     return (
       <div className="Project">
 
+      <div class="sidebar">
+        {!this.state.isHidden ?
+           <ProjectSelector
+           projects={this.state.projects}
+           selectedProject={this.state.selectedProject}
+           onSelectProject={this.selectProject}
+           isHidden={this.state.isHidden}
+           onToggleHidden={() => this.toggleHidden()}
+           />
+        : <button onClick={() => this.toggleHidden()}
+        className="right-arrow-btn"
+        > →</button>}
+
+      </div>
+
         <div className="ProjectNavBar">
 
-          <Tabs>
+        {/* <Tabs>
+          <Tab linkClassName={'link-class-0'}>
+            <p>project 0</p>
+        </Tab>
+        <Tab linkClassName={'link-class-1'}>
+          <CustomComponent propA={'foo'} propB={this.handleSomething}/>
+          <p>project 1</p>
+        </Tab>
+        <Tab linkClassName={'link-class-1'}>
+          <CustomComponent propA={'foo'} propB={this.handleSomething}/>
+          <p>project 2</p>
+        </Tab>
+        </Tabs> */}
 
-            <TabList>
-              <Tab
-              >Act I</Tab>
-              <Tab>Act II</Tab>
-              <Tab>
-              </Tab>
-            </TabList>
-         
-            {/* <TabPanel>
-              <h2>act I</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>act II </h2>
-            </TabPanel> */}
+      {/* <Tabs>
+      <TabList>
+        {
+          this.props.projects.map((projects, index) => (
+            this.props.selectedProject === projects.title? (
+              <Tab>{projects.title}</Tab>
+            ) : (
+              <Tab onClick={() => this.props.onSelectProject(projects.title)} key={index} className="ProjectSelector-project"> {projects.title}</Tab>
+            )
+          ))
+        }
+      </TabList>
+      </Tabs> */}
 
-            <TabPanel>
-            <h2>{this.state.selectedProject}</h2>
-            </TabPanel>
-            
-          </Tabs>
-         
+      <Tabs selectedIndex={this.state.tabIndex} onSelect={tabIndex => this.setState({ tabIndex })}>
+         <TabList>
+           <Tab>Title 1</Tab>
+           <Tab>Title 2</Tab>
+         </TabList>
+         <TabPanel></TabPanel>
+         <TabPanel></TabPanel>
+       </Tabs>
+
           <Button onClick={this.onNewCard}>
                 new card
           </Button>
         </div>
 
 
-      {/* <div class="sidebar">
-        <ProjectSelector
-          projects={this.state.projects}
-          selectedProject={this.state.selectedProject}
-          onSelectProject={this.selectProject} />
-        </div> */}
-        
-        
-
         <div className="Project-board">
-
-        
           {this.state.cards.map((card, index) => (
             <Card
               cardId={card._id}
@@ -277,31 +294,22 @@ class Project extends Component {
               deleteCard={() => this.deleteCard(card._id)}
               toggleStar={() => this.toggleStar(card)}
               isStarred={card.isStarred}
-              
+
               className="card--show card"
               slugValue={this.state.slug}
               contentValue={this.state.content}
-              
+
               onChangeSlug={(ev) => this.onChangeSlug(ev, index)}
               onClickSend={() => this.sendContent(index)}
               onChangeContent={(ev) => this.onChangeContent(ev, index)}
               onLeftMove={() => this.moveCardLeft(card._id)}
               onRightMove={() => this.moveCardRight(card._id)}
             >
-              
+
             </Card>
-            ))              
+            ))
           }
         </div>
-
-        {/* <ProjectSelector
-             projects={this.state.projects}
-             selectedProject={this.state.selectedProject}
-             onSelectProject={this.selectProject}
-             onClick={() => this.toggleHidden()}
-             isHidden={!this.state.isHidden} /> */}
-
-
       </div>
     );
   }

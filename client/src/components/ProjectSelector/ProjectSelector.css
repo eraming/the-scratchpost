@@ -8,7 +8,7 @@
     width: 200px;
     height: 1000px;
     transition: 2s;
-    border-top-right-radius: 20px;   
+    border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .ProjectSelector-project {
-    font-size: 18pt;
+    font-size: 14pt;
     cursor: pointer;
     padding: 5px;
     margin-top: 10px;
@@ -49,5 +49,3 @@
     background: #01cccc;
     color: white;
 }
-
-

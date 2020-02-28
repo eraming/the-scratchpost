@@ -1,4 +1,9 @@
 
+.Project {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto; 
+}
 .Project-board {
   background-image: url("/crossline-lines.png");
   display: flex;
@@ -39,4 +44,3 @@
 .starFilled {
   width: 20px;
 }
-

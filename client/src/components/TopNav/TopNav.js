@@ -85,29 +85,16 @@ class TopNav extends Component {
 
         </nav>
 
-        <div className="TopNav-mainContent">
+
 
       <h2>{this.state.selectedProject}</h2>
           <Switch>
             <Route exact path='/projects/' component={Project} />
             <Route exact path='/add/' component={NewProject} />
           </Switch>
-        </div>
+    
 
-        <div class="sidebar">
-          {!this.state.isHidden ?
-             <ProjectSelector
-             projects={this.state.projects}
-             selectedProject={this.state.selectedProject}
-             onSelectProject={this.selectProject}
-             isHidden={this.state.isHidden}
-             onToggleHidden={() => this.toggleHidden()}
-             />
-          : <button onClick={() => this.toggleHidden()}
-          className="right-arrow-btn"
-          > →</button>}
 
-        </div>
 
       </div>
     );
