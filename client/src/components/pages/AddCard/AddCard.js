@@ -3,14 +3,13 @@ import './AddCard.css';
 
 class AddCard extends Component {
 
-
-
   state = {
     title: '',
     text: '',
     isStarred: false,
     position: null
   }
+
 
   fetchCardsLength(callback) {
     console.log('Fetching data from API');
@@ -63,9 +62,9 @@ class AddCard extends Component {
     });
   }
 
-
   render() {
     return (
+
       <div className="AddCard">
         <h1>add a beat</h1>
         <input
@@ -85,7 +84,7 @@ class AddCard extends Component {
 
         <br />
 
-        <button onClick={this.submit}>Add to project</button>
+        <button onClick={this.submit}>Add project</button>
 
       </div>
 

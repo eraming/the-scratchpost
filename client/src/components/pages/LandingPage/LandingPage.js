@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
+import Cat from './ceres.png';
 
 import './LandingPage.css';
 class LandingPage extends Component {
@@ -13,7 +14,12 @@ class LandingPage extends Component {
             for screenwriters and creatives
           </p>
           <Link to="/projects/">add a project</Link>
+
+          <img src={Cat} height="200px" width="400px"></img>
+
         </header>
+
+
       </div>
     );
   }
