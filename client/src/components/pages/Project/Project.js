@@ -295,7 +295,10 @@ class Project extends Component {
         <div className="Project-board">
 
         
-          {this.state.cards.map((card, index) => (
+          {this.state.cards.slice()
+            .sort((a, b) => a.position > b.position)
+            .map((card, index) => (
+
             <Card
               cardId={card._id}
               cardSlug={card.slug}
