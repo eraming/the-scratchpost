@@ -22,7 +22,7 @@ a:active {
   color: black;
 }
 
-img:hover {
+.cat:hover {
   transform: perspective(500px) translate3d(10px, 0, 0px);
   filter: hue-rotate(100deg);
   animation-name: bounce-4;
