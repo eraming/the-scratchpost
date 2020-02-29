@@ -179,38 +179,49 @@ class Project extends Component {
 
 
 //update card title
-  onChangeSlug = (ev, index) => {
+  onChangeSlug = (ev, documentId) => {
     let value = ev.target.value;
     console.log('getting a new title', value);
     const cardsCopy = this.state.cards.slice();
-    cardsCopy[index].slug = value;
+
+    const cardToUpdate = cardsCopy.filter(card => card._id === documentId)[0];
+
+    cardToUpdate.slug = value;
+
     this.setState({
       cards: cardsCopy,
     });
   }
 
 //update card content
-  onChangeContent = (ev, index) => {
+  onChangeContent = (ev, documentId) => {
     let value = ev.target.value;
     console.log('getting a new value!', value);
     const cardsCopy = this.state.cards.slice();
-    cardsCopy[index].content = value;
+
+    const cardToUpdate = cardsCopy.filter(card => card._id === documentId)[0];
+
+    cardToUpdate.content = value;
+
     this.setState({
       cards: cardsCopy,
     });
   }
 
 //save card's title and content
-  sendContent = (index) => {
-    const cardData = this.state.cards[index];
+  sendContent = (documentId) => {
+    const cardsCopy = this.state.cards.slice();
+
+    const cardToUpdate = cardsCopy.filter(card => card._id === documentId)[0];
+
     const formData = {
-      slug: cardData.slug,
-      content: cardData.content,
-      isStarred: cardData.isStarred,
-      position: cardData.position
+      slug: cardToUpdate.slug,
+      content: cardToUpdate.content,
+      isStarred: cardToUpdate.isStarred,
+      position: cardToUpdate.position
     };
 
-    const documentId = cardData._id;
+    // const documentId = cardData._id;
     fetch('/api/mongodb/projects/?_id=' + documentId, {
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
@@ -221,8 +232,9 @@ class Project extends Component {
         console.log('Got this back', data);
         console.log(formData)
         this.setState ({
-          newCards: this.state.cards
-        })
+          cards: cardsCopy
+        });
+        this.fetchCards();
       });
   }
 
@@ -323,7 +335,7 @@ class Project extends Component {
         
           {this.state.cards.slice()
             .sort((a, b) => a.position - b.position)
-            .map((card, index) => (
+            .map((card) => (
 
             <Card
               cardId={card._id}onSaveAllCards
@@ -336,9 +348,9 @@ class Project extends Component {
               slugValue={this.state.slug}
               contentValue={this.state.content}
 
-              onChangeSlug={(ev) => this.onChangeSlug(ev, index)}
-              onClickSend={() => this.sendContent(index)}
-              onChangeContent={(ev) => this.onChangeContent(ev, index)}
+              onChangeSlug={(ev) => this.onChangeSlug(ev, card._id)}
+              onClickSend={() => this.sendContent(card._id)}
+              onChangeContent={(ev) => this.onChangeContent(ev, card._id)}
               onLeftMove={() => this.moveCardLeft(card._id)}
               onRightMove={() => this.moveCardRight(card._id)}
             >

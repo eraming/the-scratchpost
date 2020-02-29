@@ -16,9 +16,9 @@ class TopNav extends Component {
         <nav className="TopNav-navigation">
           <h1 className="TopNav-title">the scratchPost</h1>
 
+        <div className="nav-btns">
           <Link to="/projects/">
-
-          <Button>
+        <Button>
                 the post
              </Button>
           </Link>
@@ -34,6 +34,8 @@ class TopNav extends Component {
                 add project
              </Button>
           </Link>
+
+          </div>
 
         </nav>
 

@@ -1,38 +1,23 @@
-.TopNav {
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1 minmax(auto, 800px) 1;
-    grid-template-rows: 100px auto;
-    align-items: stretch;
-}
 
 .TopNav-navigation {
-    grid-column: 2;
     display: flex;
+    justify-content: space-between;
     font-style: normal;
-    justify-content: space-evenly;
     align-items: center;
     padding: 10px;
     color: white;
 }
 
 
-
-.TopNav-sidebar {
-    background: rgba(255, 255, 255, 0.9);
-    display: relative;
-    padding: 10px;
-}
-
-.TopNav-sidebar img {
-    max-width: 100%;
-}
-
 .TopNav-navigation h1 {
     font-size: 36pt;
+    margin: 10px;
 }
 
 .TopNav-title {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25px;
     font-size: 2em;
     font-style: italic;
     font: georgia;
@@ -43,33 +28,22 @@
 
 }
 
-.Article-title {
-    font-size: 2em;
-    font-style: italic;
-    font: georgia;
+.nav-btns {
+    margin-top: 20px;
 }
 
-.TopNav-navigation {
-    grid-column: 2 / span 1;
-    display: flex;
-    justify-content: space-between;
-    float: left;
-    display: inline-flex;
-
-}
 
 .TopNav-navigation a {
+    padding-right: 50px;
     font-size: 14pt;
     text-decoration: none;
     color: white;
     font-weight: bold;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5) inset;
-
+    margin: 20px;
+   
 }
 
-.TopNav-mainContent {
-    grid-column: 2;
-}
 
 
 
