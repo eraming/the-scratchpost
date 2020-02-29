@@ -1,12 +1,12 @@
 .NewProject input {
   background-color: white;
-  
+
   width: 300px;
   font-family: 'Courier New', Courier, monospace;
   font-weight: bold;
   font-size: 14pt;
   color: black;
-  border: 3px dashed;
+  border: 1px dashed;
 }
 
 .NewProject input.projectname {
@@ -32,8 +32,16 @@
   width: 300px;
   color: black;
   background: #01cccc;
-  border: 5px dashed;
+  border: 2px dashed;
   display: block;
-  padding: 10px;
+  padding: 5px;
   outline: none;
+}
+
+button:active {
+  background-color: white;
+}
+
+input {
+  text-align: center;
 }

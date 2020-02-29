@@ -5,8 +5,9 @@
     padding-top: 10px;
     color: rgb(133, 122, 115);
     user-select: none;
-    width: 200px;
-    height: 1000px;
+    
+    max-width: 200px;
+    height: 700px;
     transition: 1.5s;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -37,7 +38,7 @@
 .ProjectSelector-project {
     font-size: 14pt;
     font-family: 'Courier New', Courier, monospace;
-    font-weight: bold; 
+    font-weight: bold;
 
     cursor: pointer;
     padding: 5px;
