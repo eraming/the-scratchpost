@@ -84,25 +84,81 @@ class Project extends Component {
 
 // use arrayMove
   moveCardLeft(documentId) {
-    const cards = this.state.cards;
-    const fromIndex = cards.findIndex(card => card._id === documentId);
-    const toIndex = Number(fromIndex) - 1;
-    const newCards = arrayMove(cards, fromIndex, toIndex);
-    this.setState({
-      cards: newCards,
-    });
+    const cards = this.state.cards.slice();
 
+    const cardToMove = cards.filter(card => card._id === documentId)[0];
+
+    const currentPosition = cardToMove.position;
+    let newPosition;
+    
+    if (currentPosition === 0) {
+      newPosition = cards.length - 1;
+    } else {
+      newPosition = currentPosition - 1;
+    }
+
+    const displacedCard = cards.filter(card => card.position === newPosition)[0];
+    const displacedCardId = displacedCard._id;
+
+    console.log('moving right: ',cardToMove);
+    console.log('from ', currentPosition, ' to ', newPosition);
+    console.log('card displaced: ', displacedCard);
+
+    fetch('/api/mongodb/projects/?_id=' + documentId, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({position: newPosition}),
+      })
+      .then(response => response.json())
+
+    fetch('/api/mongodb/projects/?_id=' + displacedCardId, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({position: currentPosition}),
+      })
+      .then(response => response.json())
+
+    this.fetchCards();
+    
   }
 
 // use arrayMove
   moveCardRight(documentId) {
-    const cards = this.state.cards;
-    const fromIndex = cards.findIndex(card => card._id === documentId);
-    const toIndex = Number(fromIndex) + 1;
-    const newCards = arrayMove(cards, fromIndex, toIndex);
-    this.setState({
-      cards: newCards,
-    });
+    const cards = this.state.cards.slice();
+
+    const cardToMove = cards.filter(card => card._id === documentId)[0];
+
+    const currentPosition = cardToMove.position;
+    let newPosition;
+
+    if ((currentPosition + 1) === cards.length) {
+      newPosition = 0;
+    } else {
+      newPosition = currentPosition + 1;
+    }
+
+    const displacedCard = cards.filter(card => card.position === newPosition)[0];
+    const displacedCardId = displacedCard._id;
+
+    console.log('moving right: ',cardToMove);
+    console.log('from ', currentPosition, ' to ', newPosition);
+    console.log('card displaced: ', displacedCard);
+
+    fetch('/api/mongodb/projects/?_id=' + documentId, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({position: newPosition}),
+      })
+      .then(response => response.json())
+
+    fetch('/api/mongodb/projects/?_id=' + displacedCardId, {
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({position: currentPosition}),
+      })
+      .then(response => response.json())
+
+    this.fetchCards();
   }
 
   //method to toggle stars
@@ -220,7 +276,6 @@ class Project extends Component {
 
 
 
-
   render() {
 
     return (
@@ -255,6 +310,7 @@ class Project extends Component {
           <Button onClick={this.onNewCard}>
                 new card
           </Button>
+
         </div>
 
 
@@ -268,11 +324,13 @@ class Project extends Component {
 
 
         <div className="Project-board">
+        
+          {this.state.cards.slice()
+            .sort((a, b) => a.position - b.position)
+            .map((card, index) => (
 
-
-          {this.state.cards.map((card, index) => (
             <Card
-              cardId={card._id}
+              cardId={card._id}onSaveAllCards
               cardSlug={card.slug}
               cardText={card.content}
               deleteCard={() => this.deleteCard(card._id)}
