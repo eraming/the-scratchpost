@@ -21,3 +21,18 @@
 a:active {
   color: black;
 }
+
+img:hover {
+  transform: perspective(500px) translate3d(10px, 0, 0px);
+  filter: hue-rotate(100deg);
+  animation-name: bounce-4;
+  animation-timing-function: ease;
+}
+
+@keyframes bounce-4 {
+      0%   { transform: scale(1,1)    translateY(0); }
+      10%  { transform: scale(1.1,.9) translateY(0); }
+      30%  { transform: scale(.9,1.1) translateY(-100px); }
+      50%  { transform: scale(1,1)    translateY(0); }
+      100% { transform: scale(1,1)    translateY(0); }
+  }

@@ -51,7 +51,7 @@ class NewProject extends Component {
         });
         // Redirect to profile
         this.props.history.push('/projects/');
-       
+
       });
 
     });
@@ -72,7 +72,7 @@ class NewProject extends Component {
         <br />
         <br />
 
-        <button onClick={this.submit}>add project</button>
+        <button onClick={this.submit}>scratch the post</button>
 
       </div>
 
