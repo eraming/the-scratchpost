@@ -15,19 +15,16 @@ class TopNav extends Component {
           state = {
             newCards: [],
             availableCards: [],
-            isStarred: true,
-            highlight: false,
-            textarea: '',
             projects: [],
             selectedProject: '',
-            isHidden: false,
+            isHidden: true,
           }
 
     componentDidMount() {
       this.fetchProjects();
-  
+
     }
-        
+
     fetchProjects() {
       console.log('Fetching projects: ');
       fetch('/api/mongodb/actualprojects/')
@@ -39,7 +36,7 @@ class TopNav extends Component {
           });
         });
     }
-    
+
     //set state of current selected project
     selectProject = (projectName) => {
       console.log('selected project: ', projectName)
@@ -47,7 +44,7 @@ class TopNav extends Component {
         selectedProject: projectName,
       });
     }
-    
+
     //toggle sidebar visibility
     toggleHidden () {
       console.log('toggling div');
@@ -86,7 +83,7 @@ class TopNav extends Component {
         </nav>
 
         <div className="TopNav-mainContent">
-        
+
       <h2>{this.state.selectedProject}</h2>
           <Switch>
             <Route exact path='/projects/' component={Project} />
@@ -95,20 +92,20 @@ class TopNav extends Component {
         </div>
 
         <div class="sidebar">
-          {!this.state.isHidden ? 
+          {!this.state.isHidden ?
              <ProjectSelector
              projects={this.state.projects}
              selectedProject={this.state.selectedProject}
              onSelectProject={this.selectProject}
              isHidden={this.state.isHidden}
-             onToggleHidden={() => this.toggleHidden()} 
+             onToggleHidden={() => this.toggleHidden()}
              />
-          : <button onClick={() => this.toggleHidden()} 
+          : <button onClick={() => this.toggleHidden()}
           className="right-arrow-btn"
           > →</button>}
-       
+
         </div>
-        
+
       </div>
     );
   }

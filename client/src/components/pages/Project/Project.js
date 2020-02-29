@@ -25,8 +25,8 @@ class Project extends Component {
     cards: [],
     projectNames: [],
     projects: [],
-    selectedProject: 'title should go here'
-    
+    selectedProject: ''
+
   }
 
   componentDidMount() {
@@ -46,7 +46,7 @@ class Project extends Component {
         });
       });
   }
-  
+
   selectProject = (projectName) => {
     this.setState({
       selectedProject: projectName,
@@ -228,7 +228,7 @@ class Project extends Component {
         console.log(formData)
         this.setState ({
           newCards: this.state.cards
-        })      
+        })
       });
   }
 
@@ -273,7 +273,7 @@ class Project extends Component {
       newCards: newCards
     });
   };
- 
+
 
 
   render() {
@@ -290,9 +290,10 @@ class Project extends Component {
               >Act I</Tab>
               <Tab>Act II</Tab>
               <Tab>
+                Act III
               </Tab>
             </TabList>
-         
+
             {/* <TabPanel>
               <h2>act I</h2>
             </TabPanel>
@@ -303,9 +304,9 @@ class Project extends Component {
             <TabPanel>
             <h2>{this.state.selectedProject}</h2>
             </TabPanel>
-            
+
           </Tabs>
-         
+
           <Button onClick={this.onNewCard}>
                 new card
           </Button>
@@ -319,11 +320,10 @@ class Project extends Component {
           selectedProject={this.state.selectedProject}
           onSelectProject={this.selectProject} />
         </div> */}
-        
-        
+
+
 
         <div className="Project-board">
-
         
           {this.state.cards.slice()
             .sort((a, b) => a.position - b.position)
@@ -336,20 +336,20 @@ class Project extends Component {
               deleteCard={() => this.deleteCard(card._id)}
               toggleStar={() => this.toggleStar(card)}
               isStarred={card.isStarred}
-              
+
               className="card--show card"
               slugValue={this.state.slug}
               contentValue={this.state.content}
-              
+
               onChangeSlug={(ev) => this.onChangeSlug(ev, index)}
               onClickSend={() => this.sendContent(index)}
               onChangeContent={(ev) => this.onChangeContent(ev, index)}
               onLeftMove={() => this.moveCardLeft(card._id)}
               onRightMove={() => this.moveCardRight(card._id)}
             >
-              
+
             </Card>
-            ))              
+            ))
           }
         </div>
 

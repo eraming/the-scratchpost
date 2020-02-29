@@ -1,13 +1,17 @@
 {
-  "name": "mernstarter",
+  "name": "the-scratchpost",
+  "homepage": ".",
   "version": "1.0.0",
-  "description": "",
+  "description": "a beatsheet organizer",
   "author": "",
   "license": "MIT",
   "scripts": {
     "postinstall": "bash ./client/build.sh",
     "start": "node server.js"
   },
+  "engines": {
+  "node": "12.10.0"
+},
   "cacheDirectories": [
     "client/node_modules",
     "node_modules"

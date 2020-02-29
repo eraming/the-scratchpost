@@ -7,8 +7,8 @@
     user-select: none;
     width: 200px;
     height: 1000px;
-    transition: 2s;
-    border-top-right-radius: 20px;   
+    transition: 1.5s;
+    border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
 
@@ -19,6 +19,7 @@
 
 .ProjectSelector-projectHeader {
     font-size: 18pt;
+    font-family: georgia;
     padding: 10px;
     margin-top: 20px;
     background: black;
@@ -34,14 +35,17 @@
 }
 
 .ProjectSelector-project {
-    font-size: 18pt;
+    font-size: 14pt;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold; 
+
     cursor: pointer;
     padding: 5px;
     margin-top: 10px;
 }
 
 .ProjectSelector-project:hover {
-    background: rgba(128, 128, 128, 0.575);
+    background: #01cccc;
     color: white;
 }
 
@@ -49,5 +53,3 @@
     background: #01cccc;
     color: white;
 }
-
-
