@@ -6,8 +6,8 @@
     color: rgb(133, 122, 115);
     user-select: none;
     
-    max-width: 200px;
-    height: 700px;
+    width: 200px;
+    height: 880px;
     transition: 1.5s;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
