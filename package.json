@@ -2,7 +2,11 @@
   "name": "the-scratchpost",
   "homepage": ".",
   "version": "1.0.0",
-  "description": "",
+  "description": "a beatsheet organizer",
+  "engines": {
+    "node": "12.10.0"
+    
+  }
   "author": "",
   "license": "MIT",
   "scripts": {
