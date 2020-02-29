@@ -84,25 +84,70 @@ class Project extends Component {
 
 // use arrayMove
   moveCardLeft(documentId) {
-    const cards = this.state.cards;
+    console.log('moving card left');
+    const cards = this.state.cards.slice();
     const fromIndex = cards.findIndex(card => card._id === documentId);
     const toIndex = Number(fromIndex) - 1;
     const newCards = arrayMove(cards, fromIndex, toIndex);
+
+    console.log('new cards:', newCards);
+
+    for (let i = 0; i < newCards.length; i++) {
+    
+      const cardToUpdate = newCards[i];
+      const newPosition = i;
+      const newCardId = cardToUpdate._id;
+
+      const positionSetter = {position: newPosition}
+
+      fetch('/api/mongodb/projects/?_id=' + newCardId, {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(positionSetter),
+        })
+        .then(response => response.json())
+      }
+
     this.setState({
-      cards: newCards,
+      cards: newCards
     });
 
+    this.fetchCards();
+    
   }
 
 // use arrayMove
   moveCardRight(documentId) {
+    console.log('moving card right');
     const cards = this.state.cards;
     const fromIndex = cards.findIndex(card => card._id === documentId);
     const toIndex = Number(fromIndex) + 1;
     const newCards = arrayMove(cards, fromIndex, toIndex);
+
+    console.log('new cards:', newCards);
+
+    for (let i = 0; i < newCards.length; i++) {
+    
+      const cardToUpdate = newCards[i];
+      const newPosition = i;
+      const newCardId = cardToUpdate._id;
+
+      const positionSetter = {position: newPosition}
+
+      fetch('/api/mongodb/projects/?_id=' + newCardId, {
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(positionSetter),
+        })
+        .then(response => response.json())
+      }
+
     this.setState({
-      cards: newCards,
+      cards: newCards
     });
+
+    this.fetchCards();
+
   }
 
   //method to toggle stars
@@ -218,28 +263,28 @@ class Project extends Component {
     });
   };
 
-  onSaveAllCards = () => {
-    const cards = this.state.cards;
+  // onSaveAllCards = () => {
+  //   const cards = this.state.cards;
 
-    for (let i = 0; i < cards.length; i++) {
+  //   for (let i = 0; i < cards.length; i++) {
     
-      const cardToUpdate = cards[i];
-      const newPosition = i;
-      const documentId = cardToUpdate._id;
+  //     const cardToUpdate = cards[i];
+  //     const newPosition = i;
+  //     const documentId = cardToUpdate._id;
 
-      const positionSetter = {position: newPosition}
+  //     const positionSetter = {position: newPosition}
 
-      fetch('/api/mongodb/projects/?_id=' + documentId, {
-          method: 'PUT',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify(positionSetter),
-        })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Got this back', cards);
-        });
-    }
-  }
+  //     fetch('/api/mongodb/projects/?_id=' + documentId, {
+  //         method: 'PUT',
+  //         headers: {'Content-Type': 'application/json'},
+  //         body: JSON.stringify(positionSetter),
+  //       })
+  //       .then(response => response.json())
+  //       .then(data => {
+  //         console.log('Got this back', cards);
+  //       });
+  //   }
+  // }
 
   
 
@@ -296,11 +341,11 @@ class Project extends Component {
 
         
           {this.state.cards.slice()
-            .sort((a, b) => a.position > b.position)
+            .sort((a, b) => a.position - b.position)
             .map((card, index) => (
 
             <Card
-              cardId={card._id}
+              cardId={card._id}onSaveAllCards
               cardSlug={card.slug}
               cardText={card.content}
               deleteCard={() => this.deleteCard(card._id)}
