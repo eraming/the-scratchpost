@@ -87,7 +87,7 @@ return (
       iconRight={saveFloppy}
       className="save-btn"
       onClick={this.props.onClickSend}>
-      {/* save */}
+       save
   </Button>
 </div>
 

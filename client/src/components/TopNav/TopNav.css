@@ -1,4 +1,4 @@
-.TopNav { 
+.TopNav {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1 minmax(auto, 800px) 1;
@@ -56,8 +56,9 @@
     grid-column: 2 / span 1;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
+    float: left;
+    display: inline-flex;
+
 }
 
 .TopNav-navigation a {
@@ -66,6 +67,7 @@
     color: white;
     font-weight: bold;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5) inset;
+
 }
 
 .TopNav-mainContent {
@@ -81,7 +83,7 @@
     background-color: white;
     font-size: 18pt;
     padding-bottom: 895px;
-    border-top-right-radius: 20px;   
+    border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
     color: black;
     height: 1000px;

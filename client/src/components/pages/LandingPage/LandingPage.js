@@ -13,7 +13,8 @@ class LandingPage extends Component {
             a lo-fi digital beatsheet organizer<br />
             for screenwriters and creatives
           </p>
-          <Link to="/projects/">add a project</Link>
+          <Link to="/projects/">go to projects</Link>
+          <br /> 
 
         <img src={Floppy} height="200px" width="auto"></img>
         </header>
