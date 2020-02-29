@@ -20,7 +20,7 @@ class LandingPage extends Component {
 
           <div class="bounce-4">
         <img src={Cat} height="400px" width="666px"></img>
-        </div> 
+        </div>
         </header>
       </div>
     );
