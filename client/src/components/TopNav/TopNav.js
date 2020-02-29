@@ -15,9 +15,6 @@ class TopNav extends Component {
           state = {
             newCards: [],
             availableCards: [],
-            isStarred: true,
-            highlight: false,
-            textarea: '',
             projects: [],
             selectedProject: '',
             isHidden: true,

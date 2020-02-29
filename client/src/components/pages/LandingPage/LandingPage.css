@@ -17,3 +17,7 @@
 .LandingPage a {
   color: #01c0c0;
 }
+
+a:active {
+  color: black;
+}
