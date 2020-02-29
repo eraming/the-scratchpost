@@ -2,7 +2,7 @@
 .Project {
   display: grid;
   grid-template-columns: 1fr auto;
-  grid-template-rows: auto; 
+  grid-template-rows: auto;
 }
 .Project-board {
   background-image: url("/crossline-lines.png");
@@ -43,4 +43,8 @@
 
 .starFilled {
   width: 20px;
+}
+
+.ProjectNavBar {
+  max height: 186px; 
 }

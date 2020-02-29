@@ -47,13 +47,6 @@ class Project extends Component {
       });
   }
 
-  selectProject = (projectName) => {
-    this.setState({
-      selectedProject: projectName,
-    });
-  }
-
-
   //fetch cards from DB
   fetchCards() {
    console.log('(log) Fetching data from API');
@@ -226,6 +219,13 @@ class Project extends Component {
       isHidden: !this.state.isHidden
     })
 }
+
+selectProject = (projectName) => {
+  this.setState({
+    selectedProject: projectName,
+  });
+}
+
 
 
   render() {
