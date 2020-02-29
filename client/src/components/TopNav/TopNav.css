@@ -2,10 +2,7 @@
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1 minmax(auto, 800px) 1;
-    /* grid-template-columns: 200px, 600px; */
     grid-template-rows: 100px auto;
-    grid-row-gap: 10px;
-    grid-column-gap: 10px;
     align-items: stretch;
 }
 
@@ -74,23 +71,5 @@
     grid-column: 2;
 }
 
-.sidebar {
-    grid-column: 1;
-    grid-row: 1 / span 2;
-}
 
-.right-arrow-btn {
-    background-color: white;
-    font-size: 18pt;
-    padding-bottom: 895px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    color: black;
-    height: 1000px;
-    outline: none;
 
-}
-
-.menu-btn {
-    padding-top: 10px;
-}

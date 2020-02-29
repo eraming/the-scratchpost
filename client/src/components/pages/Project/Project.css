@@ -1,6 +1,5 @@
 
 .Project-board {
-  background-image: url("/crossline-lines.png");
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -40,3 +39,27 @@
   width: 20px;
 }
 
+.Project {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto;
+  grid-column-gap: 5px;
+
+  
+}
+
+.right-arrow-btn {
+  background-color: white;
+  font-size: 18pt;
+  padding-bottom: 895px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  color: black;
+  height: 1000px;
+  outline: none;
+
+}
+
+.menu-btn {
+    padding-top: 10px;
+}

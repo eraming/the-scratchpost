@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import './Project.css';
 import Card from '../../Card/Card.js';
-// import Tabs from '../../Tabs/Tabs.js';
-// import Tab from '../../Tab/Tab.js';
 import ProjectSelector from '../../ProjectSelector/ProjectSelector.js';
 import {Button} from 'kc-react-widgets';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
+import Menu from './menu.png';
+
 const arrayMove = require('array-move');
+
 
 
 class Project extends Component {
@@ -264,6 +265,11 @@ class Project extends Component {
     });
   };
 
+  toggleHidden () {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
 
 
   render() {
@@ -271,10 +277,23 @@ class Project extends Component {
     return (
       <div className="Project">
 
+      <div class="sidebar">
+          {!this.state.isHidden ?
+             <ProjectSelector
+             projects={this.state.projects}
+             selectedProject={this.state.selectedProject}
+             onSelectProject={this.selectProject}
+             isHidden={this.state.isHidden}
+             onToggleHidden={() => this.toggleHidden()}
+             />
+          : <button onClick={() => this.toggleHidden()}
+          className="right-arrow-btn"
+          ><img src={Menu} className="menu-btn"></img> </button>}
+        </div>
+
         <div className="ProjectNavBar">
 
           <Tabs>
-
             <TabList>
               <Tab
               >Act I</Tab>
@@ -283,35 +302,16 @@ class Project extends Component {
                 Act III
               </Tab>
             </TabList>
-
-            {/* <TabPanel>
-              <h2>act I</h2>
-            </TabPanel>
-            <TabPanel>
-              <h2>act II </h2>
-            </TabPanel> */}
-
-            <TabPanel>
-            <h2>{this.state.selectedProject}</h2>
-            </TabPanel>
-
           </Tabs>
+
+
+          <h2>{this.state.selectedProject}</h2>
 
           <Button onClick={this.onNewCard}>
                 new card
           </Button>
 
         </div>
-
-
-      {/* <div class="sidebar">
-        <ProjectSelector
-          projects={this.state.projects}
-          selectedProject={this.state.selectedProject}
-          onSelectProject={this.selectProject} />
-        </div> */}
-
-
 
         <div className="Project-board">
         
@@ -327,7 +327,6 @@ class Project extends Component {
               toggleStar={() => this.toggleStar(card)}
               isStarred={card.isStarred}
 
-              className="card--show card"
               slugValue={this.state.slug}
               contentValue={this.state.content}
 
@@ -342,15 +341,6 @@ class Project extends Component {
             ))
           }
         </div>
-
-        {/* <ProjectSelector
-             projects={this.state.projects}
-             selectedProject={this.state.selectedProject}
-             onSelectProject={this.selectProject}
-             onClick={() => this.toggleHidden()}
-             isHidden={!this.state.isHidden} /> */}
-
-
       </div>
     );
   }
