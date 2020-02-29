@@ -101,15 +101,17 @@ class Project extends Component {
         body: JSON.stringify({position: newPosition}),
       })
       .then(response => response.json())
+      .then(
+        fetch('/api/mongodb/projects/?_id=' + displacedCardId, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({position: currentPosition}),
+          })
+          .then(response => response.json())
+        )
+      .then(this.fetchCards())
 
-    fetch('/api/mongodb/projects/?_id=' + displacedCardId, {
-        method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({position: currentPosition}),
-      })
-      .then(response => response.json())
-
-    this.fetchCards();
+      
     
   }
 
@@ -141,15 +143,15 @@ class Project extends Component {
         body: JSON.stringify({position: newPosition}),
       })
       .then(response => response.json())
-
-    fetch('/api/mongodb/projects/?_id=' + displacedCardId, {
-        method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({position: currentPosition}),
-      })
-      .then(response => response.json())
-
-    this.fetchCards();
+      .then(
+        fetch('/api/mongodb/projects/?_id=' + displacedCardId, {
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({position: currentPosition}),
+          })
+          .then(response => response.json())
+        )
+      .then(this.fetchCards())
   }
 
   //method to toggle stars
@@ -205,6 +207,7 @@ class Project extends Component {
       slug: cardData.slug,
       content: cardData.content,
       isStarred: cardData.isStarred,
+      position: cardData.position
     };
 
     const documentId = cardData._id;
@@ -227,11 +230,14 @@ class Project extends Component {
 //function to generate a new card
   onNewCard = (card ) => {
     const documentId = card._id;
+    const cardPosition = this.state.cards.length;
     const formData = {
       slug: '',
       content: '',
-      isStarred: false
+      isStarred: false,
+      position: cardPosition
     };
+    console.log('new card', formData);
 
     fetch('/api/mongodb/projects/?_id=' + documentId, {
       method: 'POST',
