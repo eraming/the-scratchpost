@@ -70,14 +70,6 @@ class NewProject extends Component {
             onChange={this.onChangeProjectName}
           />
         <br />
-
-        {/* <textarea
-            name="notes"
-            placeholder="project notes"
-            value={this.state.projectNotes}
-            onChange={this.onChangeProjectNotes}
-          /> */}
-
         <br />
 
         <button onClick={this.submit}>add project</button>

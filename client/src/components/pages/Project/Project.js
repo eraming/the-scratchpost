@@ -11,16 +11,6 @@ const arrayMove = require('array-move');
 
 
 class Project extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     project: 'project demo',
-  //     stars: [],
-  //     cards: [],
-  //   projectNames: [],
-  //   projects: [],
-  //   selectedProject: ''
-  //   };
   state = {
     cards: [],
     projectNames: [],

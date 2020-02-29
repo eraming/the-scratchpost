@@ -3,20 +3,16 @@ import { Link, Switch, Route } from 'react-router-dom'
 import {Button} from 'kc-react-widgets';
 import './TopNav.css';
 
-import LandingPage from '../pages/LandingPage/LandingPage.js';
 import Project from '../pages/Project/Project.js';
 import NewProject from '../pages/NewProject/NewProject.js';
 
 import ProjectSelector from '../ProjectSelector/ProjectSelector.js'
 import '../ProjectSelector/ProjectSelector.css';
+import Menu from './menu.png';
 
 
 class TopNav extends Component {
           state = {
-            newCards: [],
-            availableCards: [],
-            projects: [],
-            selectedProject: '',
             isHidden: true,
           }
 
@@ -26,11 +22,9 @@ class TopNav extends Component {
     }
 
     fetchProjects() {
-      console.log('Fetching projects: ');
       fetch('/api/mongodb/actualprojects/')
         .then(response => response.json())
         .then(data => {
-          console.log('projects back: ', data);
           this.setState({
             projects: data,
           });
@@ -39,7 +33,6 @@ class TopNav extends Component {
 
     //set state of current selected project
     selectProject = (projectName) => {
-      console.log('selected project: ', projectName)
       this.setState({
         selectedProject: projectName,
       });
@@ -47,12 +40,10 @@ class TopNav extends Component {
 
     //toggle sidebar visibility
     toggleHidden () {
-      console.log('toggling div');
-      // this.state.isHidden = !this.state.isHidden
       this.setState({
         isHidden: !this.state.isHidden
       })
-  }
+    }
 
  render() {
     return (
@@ -102,8 +93,7 @@ class TopNav extends Component {
              />
           : <button onClick={() => this.toggleHidden()}
           className="right-arrow-btn"
-          > →</button>}
-
+          ><img src={Menu} className="menu-btn"></img> </button>}
         </div>
 
       </div>
