@@ -35,3 +35,7 @@ As of now, card information is seperate from Project title. Future development w
 ## Screenshot
 
 ![Screen Shot 2020-03-03 at 5 26 14 PM](https://user-images.githubusercontent.com/40274451/75836382-92e18a00-5d76-11ea-9a47-498c6b86714c.png)
+
+## Attribution 
+
+Icons used are attributed to [Freepik](https://www.flaticon.com/authors/freepik) and [Kiranshastry](https://www.flaticon.com/authors/kiranshastry)
