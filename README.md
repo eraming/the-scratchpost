@@ -1,8 +1,10 @@
 # the ScratchPost
 
-**The ScratchPost** is a version 1.0 MERN prototype single page web app for editing and re-arranging digital cards or "beats" in a screenplay. Based on kickstartcoding's [react-MERN-prototyping-starter](https://github.com/kickstartcoding/react-mern-prototyping-starter) and front-end built with [Create React App](https://github.com/facebook/create-react-app).
-
 [Demo](http://the-scratchpost.herokuapp.com/)
+
+**The ScratchPost** is a version 1.0 MERN prototype single page web app for editing and re-arranging digital cards or "beats" in a screenplay. Lo-fi without the bells and whistles of pay-to-play software. 
+
+Based on kickstartcoding's [react-MERN-prototyping-starter](https://github.com/kickstartcoding/react-mern-prototyping-starter) and front-end built with [Create React App](https://github.com/facebook/create-react-app).
 
 **DO NOT** use this project in production. It exposes an API to MongoDB without
 any sort of security. For prototype purposes only.
@@ -25,6 +27,10 @@ The following npm components and dependencies were used:
 
 ## Database
 Database is provided by MongoDB.
+
+## Future Development
+
+As of now, card information is seperate from Project title. Future development will connect card content to project names and can be sorted by Acts. We intend to add to our current features by incorporating [React Drag and Drop](https://react-dnd.github.io/react-dnd/about) and [Copy to Clipboard](https://www.npmjs.com/package/react-copy-to-clipboard). 
 
 ## Screenshot
 
