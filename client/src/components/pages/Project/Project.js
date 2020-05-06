@@ -76,12 +76,11 @@ class Project extends Component {
 // use arrayMove
   moveCardLeft(documentId) {
     const cards = this.state.cards.slice();
-
     const cardToMove = cards.filter(card => card._id === documentId)[0];
 
     const currentPosition = cardToMove.position;
     let newPosition;
-    
+
     if (currentPosition === 0) {
       newPosition = cards.length - 1;
     } else {
@@ -111,8 +110,8 @@ class Project extends Component {
         )
       .then(this.fetchCards())
 
-      
-    
+
+
   }
 
 // use arrayMove
@@ -218,7 +217,7 @@ class Project extends Component {
       slug: cardToUpdate.slug,
       content: cardToUpdate.content,
       isStarred: cardToUpdate.isStarred,
-      position: cardToUpdate.position
+      position: cardToUpdate.position,
     };
 
     // const documentId = cardData._id;
@@ -240,7 +239,7 @@ class Project extends Component {
 
 
 //function to generate a new card
-  onNewCard = (card ) => {
+  onNewCard = (card) => {
     const documentId = card._id;
     const cardPosition = this.state.cards.length;
     const formData = {
@@ -332,7 +331,7 @@ class Project extends Component {
         </div>
 
         <div className="Project-board">
-        
+
           {this.state.cards.slice()
             .sort((a, b) => a.position - b.position)
             .map((card) => (

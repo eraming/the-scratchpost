@@ -31,13 +31,14 @@
   width: 20px;
 }
 
-.starFilled {
-  width: 50px;
-}
-
 
 .trashCan {
   width: 18px;
+  opacity: 30%;
+}
+
+.trashCan:hover {
+  opacity: 100%;
 }
 
 .save-btn {
